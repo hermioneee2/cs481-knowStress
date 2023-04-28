@@ -1,24 +1,33 @@
 import { Affix } from "antd";
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-const HeaderPresenter = () => {
+const Header = () => {
+  const [activeTab, setActiveTab] = useState("");
+
+  const handleTabClick = (tab) => {
+    setActiveTab(tab);
+  };
+
   return (
     <Affix offsetTop={0}>
-      <Header>
-        <Link to="/">
+      <HeaderWrapper>
+        <Link to="/" onClick={() => handleTabClick("my-stress-pattern")}>
           <Logo>knowstress</Logo>
         </Link>
         <TabWrapper>
-          <Link to="/">
-            <Tab>
+          <Link to="/" onClick={() => handleTabClick("my-stress-pattern")}>
+            <Tab active={activeTab === "my-stress-pattern"}>
               <span class="material-symbols-rounded">person_celebrate</span>
               <TabTitle>My Stress Pattern</TabTitle>
             </Tab>
           </Link>
-          <Link to="/meAndOthers">
-            <Tab>
+          <Link
+            to="/meAndOthers"
+            onClick={() => handleTabClick("me-and-others")}
+          >
+            <Tab active={activeTab === "me-and-others"}>
               <span class="material-symbols-rounded">diversity_3</span>
               <TabTitle>Me & Others</TabTitle>
             </Tab>
@@ -28,7 +37,7 @@ const HeaderPresenter = () => {
           <span class="material-symbols-rounded">calendar_today</span>{" "}
           <Date>04.10.23 - 04.16.23</Date>
         </DateWrapper>
-      </Header>
+      </HeaderWrapper>
     </Affix>
   );
 };
@@ -41,7 +50,7 @@ const Logo = styled.div`
   margin-left: 30px;
 `;
 
-const Header = styled.div`
+const HeaderWrapper = styled.div`
   background-color: ${(props) => props.theme.colors.white};
   width: 100%;
   height: 65px;
@@ -75,7 +84,8 @@ const Tab = styled.div`
   color: ${(props) => props.theme.colors.grayKS};
   height: 55px;
   border-style: none none solid;
-  border-color: ${(props) => props.theme.colors.stress1};
+  border-color: ${(props) =>
+    props.active ? props.theme.colors.stress1 : "transparent"};
   border-width: 4px;
   box-sizing: border-box;
 `;
@@ -106,4 +116,4 @@ const Date = styled.div`
   margin-left: 10px;
 `;
 
-export default HeaderPresenter;
+export default Header;

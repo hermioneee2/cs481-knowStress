@@ -29,8 +29,8 @@ const DashboardContainer = styled(Layout.Content)`
 const DashboardTitle = styled(Layout.Content)`
   color: ${(props) => props.theme.colors.stress6};
   font-family: "Open Sans";
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 400;
   margin-bottom: 10px;
 `;
 

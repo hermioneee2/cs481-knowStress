@@ -4,7 +4,6 @@ import { Layout } from "antd";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 
 import Header from "./components/Header";
-import BgColor from "./components/BgColor";
 import MyStressPattern from "./routes/MyStressPattern";
 import MeAndOthers from "./routes/MeAndOthers";
 
@@ -14,7 +13,6 @@ function App() {
       <BrowserRouter>
         <Layout>
           <Header />
-          {/* <BgColor /> */}
           <Routes>
             <Route exact path="/" element={<MyStressPattern />} />
             <Route path="/meAndOthers" element={<MeAndOthers />} />
