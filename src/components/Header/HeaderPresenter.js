@@ -1,21 +1,28 @@
 import { Affix } from "antd";
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const HeaderPresenter = () => {
   return (
     <Affix offsetTop={0}>
       <Header>
-        <Logo>knowstress</Logo>
+        <Link to="/">
+          <Logo>knowstress</Logo>
+        </Link>
         <TabWrapper>
-          <Tab>
-            <span class="material-symbols-rounded">person_celebrate</span>
-            <TabTitle>My Stress Pattern</TabTitle>
-          </Tab>
-          <Tab>
-            <span class="material-symbols-rounded">diversity_3</span>
-            <TabTitle>Me & Others</TabTitle>
-          </Tab>
+          <Link to="/">
+            <Tab>
+              <span class="material-symbols-rounded">person_celebrate</span>
+              <TabTitle>My Stress Pattern</TabTitle>
+            </Tab>
+          </Link>
+          <Link to="/meAndOthers">
+            <Tab>
+              <span class="material-symbols-rounded">diversity_3</span>
+              <TabTitle>Me & Others</TabTitle>
+            </Tab>
+          </Link>
         </TabWrapper>
         <DateWrapper>
           <span class="material-symbols-rounded">calendar_today</span>{" "}
