@@ -23,6 +23,6 @@ yarn-debug.log*
 yarn-error.log*
 
 #csv
-.csv
-esm_data.csv
-user_info.csv
+*.csv
+*.xlsx
+/data_processing/data

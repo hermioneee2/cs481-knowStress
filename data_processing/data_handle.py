@@ -1,15 +1,7 @@
 import csv
+
 user_dict = dict()
 user_data_dict=dict()
-
-with open('user_info.csv') as user_info:
-    reader = csv.reader(user_info)
-    for line in reader:
-        try:
-            user_dict[int(line[0])] = {"Age": int(line[-2]), "Gender": line[-1]}
-            user_data_dict[int(line[0])]=[]
-        except:continue
-print(user_dict)
 
 def time_parser(s):
     #2019-04-29T13:06:20.000+09:00 -> year:2019, month:04, day:29, hour:13, minute: 06, second:20
@@ -30,9 +22,17 @@ class ESM_data:
         self.year, self.month, self.day, self.hour, self.minute, self.second = L
     
     def __str__(self):
-        return f"User: {self.user}\nStress: {self.stress}\nTime: {self.year}.{self.month}.{self.day} {self.hour}:{self.minute}:{self.second}\n"
+        return f"User: {self.user}\nStress: {self.stress}\nTime: {self.year}.{self.month}.{self.day} {'0'*(self.hour<10)}{self.hour}:{'0'*(self.minute<10)}{self.minute}:{'0'*(self.second<10)}{self.second}\n"
 
-with open('esm_data.csv') as esm:
+with open('data_processing/data/user_info.csv') as user_info:
+    reader = csv.reader(user_info)
+    for line in reader:
+        try:
+            user_dict[int(line[0])] = {"Age": int(line[-2]), "Gender": line[-1]}
+            user_data_dict[int(line[0])]=[]
+        except:continue
+
+with open('data_processing/data/esm_data.csv') as esm:
     reader = csv.reader(esm)
     for line in reader:
         try:
@@ -42,6 +42,3 @@ with open('esm_data.csv') as esm:
             esm_data = ESM_data(user, time_string, stress)
             user_data_dict[user].append(esm_data)
         except:continue
-for user in user_data_dict:
-    print(user)
-    for dt in user_data_dict[user]:print(dt)
