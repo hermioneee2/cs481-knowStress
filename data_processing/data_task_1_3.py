@@ -18,30 +18,30 @@ try:
 
 
     user_data = user_data_dict[user]
-    file_list = glob.glob(f"data_processing/data/P{'0'*(user<1000)}{user}/AppUsageStatEntity*")
+    file_list = glob.glob(f"data_processing/data/P{'0'*(user<1000)}{user}/LocationEntity*")
 
-    app_dict = dict()
+    loc_dict = dict()
     for file in file_list:
         file=file.replace('\\', '/')
         with open(file, encoding='UTF8') as f:
             reader = csv.reader(f)
             for line in reader:
                 try:
-                    app_name = line[1]
-                    if app_name == "시스템 UI" or app_name == 'ABC Logger':continue
-                    #todo: 더미들, 빼야 할 다른 앱들 추가 확인
-                    start_time, end_time = int(line[5]), int(line[6])
-                    if app_name not in app_dict:app_dict[app_name] = [0, 0]
+                    now_time = int(line[0])
+                    lon, lat, alt=float(line[2]), float(line[3]), float(line[1])
+                    location = (lon, lat, alt)
+                    if location not in loc_dict:loc_dict[location]=[0,0]
                     for timestamp in user_data_by_time:
-                        if start_time <= timestamp*1000 <= end_time:
-                            app_dict[app_name][0] += user_data_by_time[timestamp]
-                            app_dict[app_name][1] += 1
+                        if (timestamp-60)*1000 <= now_time <= (timestamp+60)*1000:
+                            loc_dict[location][0] += user_data_by_time[timestamp]
+                            loc_dict[location][1] += 1
                 except:continue
-    with open(f'data_processing/{user}_stress_by_app_using.csv', 'w', newline='') as f:
+    print(loc_dict)
+    with open(f'data_processing/{user}_stress_by_location.csv', 'w', newline='') as f:
         writer = csv.writer(f)
-        for app in app_dict:
-            stress, count = app_dict[app]
-            if count>0:writer.writerow([app, stress/count])
+        for loc in loc_dict:
+            stress, count = loc_dict[loc]
+            if count>0:writer.writerow([loc, stress/count])
     
-    #todo: 카테고리 별 분류
+    #todo: location to map/adress
 except:pass
