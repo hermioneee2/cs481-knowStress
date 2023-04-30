@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 const Header = () => {
-  const [activeTab, setActiveTab] = useState("");
+  const [activeTab, setActiveTab] = useState("my-stress-pattern");
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
