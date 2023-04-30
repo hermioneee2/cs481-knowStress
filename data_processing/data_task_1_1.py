@@ -1,4 +1,4 @@
-from data_handle import user_data_dict, user_dict
+from data_handle import user_data_dict
 import csv
 import datetime
 
@@ -7,6 +7,7 @@ import datetime
 #     for j in user_data_dict[user]:print(j)
 
 user=int(input())
+#user uid를 입력하면 csv파일이 나오는 형식. data_processing 파일 안에 data라는 파일과 그 안에 데이터들이 있어야 작동.
 user_data = user_data_dict[user]
 
 #일단은 지금 figma에 있는 형식 그대로 2차원 list를 만들고, 이걸 csv로 저장하는 식으로 만들었습니다.
