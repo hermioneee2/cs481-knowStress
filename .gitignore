@@ -21,3 +21,8 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+#csv
+.csv
+esm_data.csv
+user_info.csv
