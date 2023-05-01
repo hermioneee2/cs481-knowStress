@@ -43,5 +43,5 @@ try:
             stress, count = app_dict[app]
             if count>0:writer.writerow([app, stress/count])
     
-    #todo: 카테고리 별 분류
+    #todo: 앱 카테고리 별 분류
 except:pass
