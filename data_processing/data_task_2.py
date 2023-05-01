@@ -1,4 +1,11 @@
-from data_handle import user_dict
+import csv
+
+user_dict=dict()
+
+with open('data_processing/data/modified_user_info.csv') as f:
+    reader = csv.DictReader(f)
+    for row in reader:
+        user_dict[int(row['user_id'])] = row
 
 act_min = 10**20
 act_max = 1
@@ -9,8 +16,8 @@ def range_convert(mn, mx, start, end):
     d=mx-mn
     return (mn+d*start/100, mn+d*end/100)
 for user in user_dict:
-    app_time = user_dict[user]['app_time']
-    activity = user_dict[user]['activity']
+    app_time = float(user_dict[user]['app_time'])
+    activity = float(user_dict[user]['activity'])
     
     if activity: act_min=min(activity, act_min)
     act_max=max(activity, act_max)
@@ -28,9 +35,9 @@ age_from, age_until, app_from, app_until, act_from, act_until = map(int,input().
 selected_user = []
 selected_user_stress = []
 for user in user_dict:
-    age = user_dict[user]['Age']
-    app_time = user_dict[user]['app_time']
-    activity = user_dict[user]['activity']
+    age = int(user_dict[user]['Age'])
+    app_time = float(user_dict[user]['app_time'])
+    activity = float(user_dict[user]['activity'])
     if age<age_from or age>age_until: continue
     if (app_from, app_until) != (0, 100):
         st, ed = range_convert(app_min, app_max, app_from, app_until)
@@ -39,7 +46,7 @@ for user in user_dict:
         st, ed = range_convert(act_min, act_max, act_from, act_until)
         if activity<st or activity>ed:continue
     selected_user.append(user)
-    selected_user_stress.append(user_dict[user]['avg_stress'])
+    selected_user_stress.append(float(user_dict[user]['avg_stress']))
 
 selected_user_stress.sort()
 
@@ -50,7 +57,7 @@ elif len(selected_user)==0:
 else:
     ct = 0
     for i in selected_user_stress[::-1]:
-        if i>user_dict[user_id]['avg_stress']:
+        if i>float(user_dict[user_id]['avg_stress']):
             ct+=1
         else:break
 
