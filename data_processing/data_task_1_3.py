@@ -1,9 +1,17 @@
 from data_handle import user_data_dict
 import glob
 import csv
+from geopy.geocoders import Nominatim
 
 user=int(input())
 #user uid를 입력하면 csv파일이 나오는 형식. data_processing 파일 안에 data라는 파일과 그 안에 데이터들이 있어야 작동.
+
+def geocoding_reverse(lat, lng):
+    print(lat, lng)
+    geolocoder = Nominatim(user_agent = 'South Korea', timeout=None)
+    address = geolocoder.reverse(f"{lat}, {lng}")
+    print(address)
+    return address
 
 try:
     user_data_by_time = dict()
@@ -29,19 +37,19 @@ try:
                 try:
                     now_time = int(line[0])
                     lon, lat, alt=float(line[2]), float(line[3]), float(line[1])
-                    location = (lon, lat, alt)
-                    if location not in loc_dict:loc_dict[location]=[0,0]
+                    # addr = geocoding_reverse(lat, lon)
+                    addr = (lon, lat, alt)
+                    if addr not in loc_dict:loc_dict[addr]=[0,0]
                     for timestamp in user_data_by_time:
                         if (timestamp-60)*1000 <= now_time <= (timestamp+60)*1000:
-                            loc_dict[location][0] += user_data_by_time[timestamp]
-                            loc_dict[location][1] += 1
+                            loc_dict[addr][0] += user_data_by_time[timestamp]
+                            loc_dict[addr][1] += 1
                 except:continue
-    print(loc_dict)
     with open(f'data_processing/{user}_stress_by_location.csv', 'w', newline='') as f:
         writer = csv.writer(f)
         for loc in loc_dict:
             stress, count = loc_dict[loc]
             if count>0:writer.writerow([loc, stress/count])
+            # if count>0:writer.writerow([geocoding_reverse(loc[1], loc[0]), stress/count])
     
-    #todo: location to map/adress
 except:pass

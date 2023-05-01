@@ -28,7 +28,10 @@ try:
             for line in reader:
                 try:
                     app_name = line[1]
-                    if app_name == "시스템 UI" or app_name == 'ABC Logger':continue
+                    if app_name in ["시스템 UI", "빅스비 홈", "파인더", "내 파일", 
+                                    "Wi-Fi 다이렉트", "블루투스", "Logger","시계",'ABC Logger',
+                                    "삼성 키보드", "설정", "디바이스 관리", "안드로이드 시스템",
+                                    "패키지 설치 프로그램", ""]:continue
                     #todo: 더미들, 빼야 할 다른 앱들 추가 확인
                     start_time, end_time = int(line[5]), int(line[6])
                     if app_name not in app_dict:app_dict[app_name] = [0, 0]
