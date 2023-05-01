@@ -12,7 +12,7 @@ def geocoding_reverse(lat, lng):
     address = geolocoder.reverse(f"{lat}, {lng}")
     print(address)
     return address
-
+#주소변환 하기에는 주어진 좌표가 정확하지 않은 편인 거 같아서, 다른 방법을 찾는 게 아니면 사용하지 않는 쪽이 될 것 같습니다.
 try:
     user_data_by_time = dict()
     with open('data_processing/data/esm_data.csv') as esm:
