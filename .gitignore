@@ -24,5 +24,4 @@ yarn-error.log*
 
 #csv
 *.csv
-*.xlsx
 /data_processing/data

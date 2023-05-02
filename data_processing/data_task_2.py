@@ -32,6 +32,8 @@ user_id = int(input())
 #모든 경우에 대해서 다 하는 건 사실상 불가능해서, 일단은 입력 받고 출력하는 식으로
 age_from, age_until, app_from, app_until, act_from, act_until = map(int,input().split())
 
+lon, lat, rad = map(int,input().split())
+
 selected_user = []
 selected_user_stress = []
 for user in user_dict:

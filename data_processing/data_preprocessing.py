@@ -1,9 +1,20 @@
 import csv
 import glob
 from data_handle import user_dict
+import pandas as pd
+
+app_category_dict = dict()
+category = pd.read_excel('data_processing/앱 분류 리스트.xlsx')
+for row in category.iterrows():
+    app_category_dict[row[1]['앱 이름']] = row[1]['분류']
+
 #app usage
+category = ['', 'Social media', 'Game', 'Messenger',
+            'Video/Contents', 'Utility', 'etc']
 for user in user_dict:
     user_dict[user]['app_time'] = 0
+    for i in range(1, 7):
+        user_dict[user][f'{category[i]} app time'] = 0
     file_list = glob.glob(f"data_processing/data/P{'0'*(user<1000)}{user}/AppUsageStatEntity*")
     for file in file_list:
         file=file.replace('\\', '/')
@@ -12,9 +23,10 @@ for user in user_dict:
             for line in reader:
                 try:
                     app_name = line[1]
-                    if app_name == "시스템 UI" or app_name == 'ABC Logger':continue
+                    if app_name not in app_category_dict or app_category_dict[app_name] == 7:continue
                     tot_time = int(line[-1])
                     user_dict[user]['app_time']+=tot_time
+                    user_dict[user][f'{category[app_category_dict[app_name]]} app time'] += tot_time
                 except:continue
 
 #moved distance/activities
@@ -49,7 +61,8 @@ for user in user_dict:
     try:
         user_dict[user]['avg_stress'] = user_dict[user]['tot_stress']/user_dict[user]['stress_ct']
     except:continue
-labels = ['user_id',"Age", 'Gender', 'tot_stress', 'stress_ct', 'app_time', 'activity', 'avg_stress']
+labels = ['user_id',"Age", 'Gender', 'tot_stress', 'stress_ct', 'activity', 'avg_stress', 'app_time']
+for i in range(1, 7):labels.append(f'{category[i]} app time')
 with open('data_processing/data/modified_user_info.csv', 'w', newline='') as f:
     writer = csv.DictWriter(f, fieldnames=labels)
     writer.writeheader()
