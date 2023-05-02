@@ -1,8 +1,7 @@
-from data_handle import user_data_dict
+from data_handle import user_data_dict, distance
 import glob
 import csv
 from geopy.geocoders import Nominatim
-from haversine import haversine
 
 user=int(input())
 #user uid를 입력하면 csv파일이 나오는 형식. data_processing 파일 안에 data라는 파일과 그 안에 데이터들이 있어야 작동.
@@ -15,8 +14,7 @@ def geocoding_reverse(lat, lng):
     return address
 #주소변환 하기에는 주어진 좌표가 정확하지 않은 편인 거 같아서, 다른 방법을 찾는 게 아니면 사용하지 않는 쪽이 될 것 같습니다.
 
-def distance(lat1, lon1, lat2, lon2):
-    return(haversine((lat1, lon1), (lat2, lon2)))
+
 
 try:
     user_data_by_time = dict()

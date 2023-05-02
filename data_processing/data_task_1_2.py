@@ -60,10 +60,10 @@ try:
                 except:continue
     with open(f'data_processing/{user}_stress_by_app_using.csv', 'w', newline='') as f:
         writer = csv.writer(f)
-        for app in app_dict:
-            stress, count = app_dict[app]
-            if count>0:writer.writerow([app, stress/count])
         for i in range(1, 7):
             stress, count = app_time_by_category[i-1]
             writer.writerow([category_list[i], stress/count if count else -1])
+        for app in app_dict:
+            stress, count = app_dict[app]
+            if count>0:writer.writerow([app, stress/count])
 except:pass

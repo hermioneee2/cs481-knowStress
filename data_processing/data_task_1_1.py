@@ -25,8 +25,14 @@ with open(f'data_processing/{user}_stress_by_day_time.csv', 'w', newline='') as 
     writer = csv.writer(f)
     for i in range(7):
         row=[]
+        dailyst=0
+        dailyct=0
         for j in range(12):
             stress, ct = stress_table[i][j]
+            dailyst+=stress
+            dailyct+=ct
             if ct==0:row.append(-1) #null
             else:row.append(stress/ct)
+        if dailyct==0:row.append(-1) #null for one day
+        else:row.append(dailyst/dailyct)
         writer.writerow(row)

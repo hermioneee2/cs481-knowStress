@@ -1,7 +1,11 @@
 import csv
+from haversine import haversine
 
 user_dict = dict()
 user_data_dict=dict()
+
+def distance(lat1, lon1, lat2, lon2):
+    return(haversine((lat1, lon1), (lat2, lon2)))
 
 def time_parser(s):
     #2019-04-29T13:06:20.000+09:00 -> year:2019, month:04, day:29, hour:13, minute: 06, second:20

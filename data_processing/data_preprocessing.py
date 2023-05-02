@@ -57,11 +57,31 @@ for user in user_dict:
                     user_dict[user]['activity']+=tot_time
                 except:continue
 
+#avg location
+for user in user_dict:
+    count = 0
+    user_dict[user]['longitude'] = 0
+    user_dict[user]['latitude'] = 0
+    file_list = glob.glob(f"data_processing/data/P{'0'*(user<1000)}{user}/LocationEntity*")
+    for file in file_list:
+        with open(file, encoding='UTF8') as f:
+            reader = csv.reader(f)
+            for line in reader:
+                try:
+                    now_time = int(line[0])
+                    lon, lat, alt=float(line[2]), float(line[3]), float(line[1])
+                    count+=1
+                    user_dict[user]['longitude'] += lon
+                    user_dict[user]['latitude'] += lat
+                except:continue
+    if count:
+        user_dict[user]['longitude'] /= count
+        user_dict[user]['latitude'] /= count
 for user in user_dict:
     try:
         user_dict[user]['avg_stress'] = user_dict[user]['tot_stress']/user_dict[user]['stress_ct']
     except:continue
-labels = ['user_id',"Age", 'Gender', 'tot_stress', 'stress_ct', 'activity', 'avg_stress', 'app_time']
+labels = ['user_id',"Age", 'Gender', 'tot_stress', 'stress_ct', 'activity', 'avg_stress', 'app_time', 'longitude', 'latitude']
 for i in range(1, 7):labels.append(f'{category[i]} app time')
 with open('data_processing/data/modified_user_info.csv', 'w', newline='') as f:
     writer = csv.DictWriter(f, fieldnames=labels)
