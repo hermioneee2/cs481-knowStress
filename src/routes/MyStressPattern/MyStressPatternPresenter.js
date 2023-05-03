@@ -7,7 +7,7 @@ const MyStressPatternPresenter = () => {
   return (
     <ContentContainer>
       <Dashboard title="test" dashboardNum={1} />
-      <Dashboard title="test2" dashboardNum={2} />
+      <Dashboard title="Average Stress Level By Application" dashboardNum={2} />
       <Dashboard title="test3" dashboardNum={3} />
     </ContentContainer>
   );

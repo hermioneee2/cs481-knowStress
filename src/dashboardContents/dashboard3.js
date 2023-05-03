@@ -10,8 +10,8 @@ const Dashboard3 = () => {
   );
 };
 
-const ContentContainer = styled(Layout.Content)`
-  background-color: ${(props) => props.theme.colors.mainBgLightGray};
-`;
+// const ContentContainer = styled(Layout.Content)`
+//   background-color: ${(props) => props.theme.colors.mainBgLightGray};
+// `;
 
 export default Dashboard3;
