@@ -1,3 +1,4 @@
+import React from "react";
 import { theme } from "./styles/Theme";
 import { ThemeProvider } from "styled-components";
 import { Layout } from "antd";
