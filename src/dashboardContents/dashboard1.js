@@ -16,14 +16,16 @@ const {Content, Sider } = Layout;
 const Dashboard1 = () => {
 
   const dailyValues = [3, 3.2, 3.5, 3.7, 4, 4.9, 5]
-  // const dailyValues = [[3, Mon], [3.2, Tue], [3.5, 3.7, 4, 4.9, 5]
   const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-  // var ddValues = dailyValues.map(function(e, i) {
-  //   return [e, days[i]]
-  // })
   const weeklyValues = 2.6
-  const hourlyValues = [[3, 3.2, 3.5, 3.7, 4, 4.9, 5, 3, 2, 2, 2, 2],[-1, 3.2, 3.5, 3.7, 4, 4.9, 5, -1, 2, 2, 2, 2],[-1, 3.2, 3.5, 3.7, 4, 4.9, 5, -1, 2, 2, 2, 2],[-1, 3.2, 3.5, 3.7, 4, 4.9, 5, -1, 2, 2, 2, 2],[-1, 3.2, 3.5, 3.7, 4, 4.9, 5, -1, 2, 2, 2, 2],[-1, 3.2, 3.5, 3.7, 4, 4.9, 5, -1, 2, 2, 2, 2],[-1, 3.2, 3.5, 3.7, 4, 4.9, 5, -1, 2, 2, 2, 2]]
-
+  const hourlyValues = 
+  [[-1,-1,-1,3.5,4.666666666666667,3.0,1.0,3.0,2.6666666666666665,3.0,1.0,3.0,3.0625],
+  [3.0,3.0,4.0,-1,-1,4.0,-1,5.0,3.5,5.0,-1,3.0,3.6153846153846154],
+  [4.0,4.0,4.0,-1,4.0,-1,4.0,5.0,3.0,-1,-1,5.5,4.2727272727272725],
+  [5.0,2.0,4.0,4.0,-1,4.5,-1,6.0,2.0,1.0,3.0,5.0,3.9166666666666665],
+  [1.0,-1,4.0,1.0,4.0,-1,5.0,-1,5.0,2.0,3.0,-1,3.2222222222222223],
+  [5.0,-1,3.0,3.0,-1,1.0,3.0,-1,-1,4.0,3.0,2.5,3.0],
+  [-1,-1,2.0,3.0,5.0,-1,2.0,3.0,3.0,4.0,4.0,4.0,3.3333333333333335],]
   var titleStyle = {
     marginBottom: 10,
     // fontWeight: 'bold',
@@ -37,12 +39,6 @@ const Dashboard1 = () => {
     fontWeight: 'bold',
   }
 
-  // var axisLabel = {
-  //   display: 'flex',
-  //   flexDirection: 'column',
-  //   justifyContent: 'space-between',
-  // }
-
   var xLabel = {
     color: theme.colors.grayKS,
     fontWeight: 'lighter',
@@ -53,26 +49,18 @@ const Dashboard1 = () => {
   }
 
   var yLabel = {
-    // display: 'flex',
-    // alignItems: 'right',
     color: theme.colors.grayKS,
     fontWeight: 'lighter',
     fontSize: '11px',
     width: 10,
-    // textAlign: 'right',
     paddingTop: 2,
     marginTop: 5,
     paddingRight: 35,
-    // marginLeft: 5,
-    // marginTop: -1,
-    // paddingTop: -1,
   }
 
   const Daily = dailyValues.map((item) => (
-    // <li key={item.id}>{item.name}</li>
     <div key={item.id} style={{display: 'block'}}>
       <SquareIcon sx={{color: getColor(item), margin:-0.3, fontSize:'30px'}} />
-      {/* <text style={yLabel}>{item[1]}</text> */}
     </div>
     
   ));
@@ -139,15 +127,7 @@ const Dashboard1 = () => {
   );
 };
 
-// const TitleStyle = styled.text`
-//   marginBottom: 10;
-//   fontSize: '15px';
-//   display: 'block';
-// `
-// ;
 
 
 export default Dashboard1;
 
-
-// https://codesandbox.io/s/zkhno9?file=/app/main.jsx

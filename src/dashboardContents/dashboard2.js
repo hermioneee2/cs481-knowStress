@@ -4,18 +4,39 @@ import Button from '@mui/material/Button';
 import {theme} from '../styles/Theme'
 import { alpha } from "@mui/material";
 
-// import colors from theme;
-
 import styled from "styled-components";
 import { Layout } from "antd";
 const {Content, Sider } = Layout;
-// import { theme } from "antd";
 
 
 const Dashboard2 = () => {
 
+  // let arrColor = []
+
+  // const getCategoryColor = arr.map((item) => {
+  //   if (item.category === "SocialMedia") {
+  //     arrColor.push(theme.colors.socialMedia)
+  //   } else if (item === "Game") {
+  //     arrColor.push(theme.colors.game)
+  //   } else if (item === "Messenger") {
+  //     arrColor.push(theme.colors.communication)
+  //   } else if (item === "videoStreaming") {
+  //     arrColor.push(theme.colors.videoStreaming)
+  //   } else if (item === "utility") {
+  //     arrColor.push(theme.colors.utility)
+  //   } else if (item === "etc") {
+  //     arrColor.push(theme.colors.etc)
+  //   } 
+  //   return 
+  // });
+
+  // const changeColor = (categ) = arr.map((item, i) => {
+  //   if (item.category !== categ) {
+  //     arrColor[i] = alpha(arrColor[i], 0.1)
+  //   } 
+  // });
   
-  
+
   const data = [
     {
       x: [4, 5, 6, 1, 4],  //d.x
@@ -24,6 +45,7 @@ const Dashboard2 = () => {
       orientation: "h",
       marker: {color: ['blue', 'blue','blue','blue','blue','blue']}, //d.color - 얘도 category 별 색상을 가져와야 할 듯
       //+버튼 클릭 이벤트 있을 시 category 별 색상 변경해서 가져오기
+      //getCategoryColor
       // displayModeBar: 'false',
       hoverinfo: 'skip',
     },
