@@ -5,6 +5,7 @@ import { Slider } from "antd";
 import { theme } from "../styles/Theme";
 
 import StressCodeBoxPlot from "../dashboardMinor/StressCodeBoxPlot";
+import BoxPlot from "../dashboardMinor/BoxPlot";
 
 // For sliders
 const age_marks = {
@@ -127,9 +128,16 @@ const Dashboard4 = () => {
           <StepHeader>Step 2</StepHeader>
           <StepTitle>View My Rank</StepTitle>
         </StepWrapper>
-        <div>
+        <div style={{ marginTop: 10 }}>
           <StressYAxis />
-          <div style={{ display: "block", zIndex: 2, position: "absolute" }}>
+          <div
+            style={{
+              display: "block",
+              zIndex: 2,
+              position: "absolute",
+              marginTop: 5,
+            }}
+          >
             <StressCodeBoxPlot
               color={theme.colors.stress6}
               t={6}
@@ -147,6 +155,13 @@ const Dashboard4 = () => {
             />
           </div>
         </div>
+        <BoxPlot
+          lowerQuartile={20}
+          median={40}
+          upperQuartile={60}
+          min={10}
+          max={80}
+        />
       </BoxplotLayout>
     </ContentLayout>
   );
@@ -236,7 +251,7 @@ const StressYAxis = styled.div`
   );
   z-index: 1;
   position: absolute;
-  margin-top: 3px;
+  margin-top: 8px;
   margin-left: 76px;
 `;
 
