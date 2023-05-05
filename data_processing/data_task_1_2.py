@@ -2,6 +2,7 @@ from data_handle import user_data_dict
 import glob
 import csv
 import pandas as pd
+from operator import itemgetter
 
 user=int(input())
 #user uid를 입력하면 csv파일이 나오는 형식. data_processing 파일 안에 data라는 파일과 그 안에 데이터들이 있어야 작동.
@@ -60,10 +61,14 @@ try:
                 except:continue
     with open(f'data_processing/{user}_stress_by_app_using.csv', 'w', newline='') as f:
         writer = csv.writer(f)
-        for i in range(1, 7):
-            stress, count = app_time_by_category[i-1]
-            writer.writerow([category_list[i], stress/count if count else -1])
+        # for i in range(1, 7):
+        #     stress, count = app_time_by_category[i-1]
+        #     writer.writerow([category_list[i], stress/count if count else -1])
+        L=[]
         for app in app_dict:
             stress, count = app_dict[app]
-            if count>0:writer.writerow([app, stress/count])
+            if count>0:L.append([app, category_list[app_category_dict[app]], stress/count])
+        L.sort(key=itemgetter(2), reverse=True)
+        for row in L[:10]:
+            writer.writerow(row)
 except:pass
