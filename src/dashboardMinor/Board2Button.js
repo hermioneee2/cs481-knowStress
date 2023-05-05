@@ -20,7 +20,7 @@ const Board2Button = ({color, category, changeColor}) => {
     
 
     return (
-        <Button value={category} onClick={changeColor} sx={buttonStyle} variant="text">{category}</Button>
+        <Button value={category} onClick={()=>changeColor(category)} sx={buttonStyle} variant="text">{category}</Button>
     );
 
 };

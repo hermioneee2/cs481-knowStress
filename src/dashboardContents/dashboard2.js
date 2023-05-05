@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import Plot from 'react-plotly.js';
 import Button from '@mui/material/Button';
 import { alpha } from "@mui/material";
@@ -34,23 +34,50 @@ const Dashboard2 = () => {
     });
   
   const [arrColor, setArrColor] = useState([...newArray]);
+  const [activeButton, setActiveButton] = useState(null);
     
 
   // const initialColor = () => {
   //   setArrColor([...arrColor, ...newArray]);
   // };
 
- const changeColor = (event) => {
+  useEffect(() => {
     const updatedList = [...arrColor];
-    dash2Data.map((item, i) => {
-      if (item[1] !== event.target.value) {
-        updatedList[i] = alpha(updatedList[i], 0.1)
-      } else {
-          updatedList[i] = alpha(updatedList[i], 1)
-      }
-    });
+    if (activeButton===null){
+      updatedList.map((item, i) => {
+        updatedList[i] = alpha(updatedList[i], 1);
+      })
+    } else {
+      dash2Data.map((item, i) => {
+        if (item[1] !== activeButton) {
+          updatedList[i] = alpha(updatedList[i], 0.1);
+        } else {
+          updatedList[i] = alpha(updatedList[i], 1);
+        }
+      });
+    }
     setArrColor(updatedList);
-  }
+  }, [activeButton]);
+
+//  const changeColor = (event) => {
+//     const updatedList = [...arrColor];
+//     dash2Data.map((item, i) => {
+//       if (item[1] !== event.target.value) {
+//         updatedList[i] = alpha(updatedList[i], 0.1)
+//       } else {
+//           updatedList[i] = alpha(updatedList[i], 1)
+//       }
+//     });
+//     setArrColor(updatedList);
+//   }
+
+    const changeColor = (buttonId) =>{
+      if (activeButton === buttonId) {
+        setActiveButton(null); // unclicking the active button
+      } else {
+        setActiveButton(buttonId); // clicking a new button
+      }
+    };
 
 
 

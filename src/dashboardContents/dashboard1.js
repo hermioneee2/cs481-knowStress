@@ -103,13 +103,6 @@ const Dashboard1 = () => {
           <XLabel>8PM</XLabel>
           <XLabel>10PM</XLabel>
           
-          {/* <text style={xLabel}>10AM</text>
-          <text style={xLabel}>12PM</text>
-          <text style={xLabel}>2PM</text>
-          <text style={xLabel}>4PM</text>
-          <text style={xLabel}>6PM</text>
-          <text style={xLabel}>8PM</text>
-          <text style={xLabel}>10PM</text> */}
         </div>
         <div style={{marginBottom: 30}}/>
         
