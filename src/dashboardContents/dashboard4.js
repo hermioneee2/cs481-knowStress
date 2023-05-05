@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Layout } from "antd";
 import { Slider } from "antd";
 
+// For sliders
 const age_marks = {
   15: "15",
   26: "me",
@@ -32,54 +33,111 @@ const applyCommonMarkStyle = (marks) => {
   }
 };
 
+const formatter = (value) => {
+  return `Top ${value}%`;
+};
+
 const Dashboard4 = () => {
+  const [ageRange, setAgeRange] = useState([15, 75]);
+  const [appUsageRange, setAppUsageRange] = useState([1, 100]);
+  const [movedDistanceRange, setMovedDistanceRange] = useState([1, 100]);
+
+  const onAfterChangeSlider = (value, sliderName) => {
+    switch (sliderName) {
+      case "age":
+        setAgeRange(value);
+        break;
+      case "appUsage":
+        setAppUsageRange(value);
+        break;
+      case "movedDistance":
+        setMovedDistanceRange(value);
+        break;
+      default:
+        break;
+    }
+  };
+
+  // const printSliderRanges = () => {
+  //   console.log(`Age: ${ageRange[0]} - ${ageRange[1]}`);
+  //   console.log(`App Usage: ${appUsageRange[0]} - ${appUsageRange[1]}`);
+  //   console.log(
+  //     `Moved Distance: ${movedDistanceRange[0]} - ${movedDistanceRange[1]}`
+  //   );
+  // };
+
   return (
-    <div>
-      <StepWrapper>
-        <StepHeader>Step 1</StepHeader>
-        <StepTitle>Select Interest Group</StepTitle>
-      </StepWrapper>
-      <SliderWrapper>
-        <SliderHeader>Age</SliderHeader>
-        <Slider
-          range
-          marks={age_marks}
-          min={15}
-          max={75}
-          defaultValue={[15, 75]}
-          style={{ width: "200px" }}
-        />
-      </SliderWrapper>
-      <SliderWrapper>
-        <SliderHeader>App Usage</SliderHeader>
-        <Slider
-          range
-          marks={app_usage_marks}
-          min={1}
-          max={100}
-          defaultValue={[1, 100]}
-          reverse={true}
-          style={{ width: "200px" }}
-        />
-      </SliderWrapper>
-      <SliderWrapper>
-        <SliderHeader>Moved Distance</SliderHeader>
-        <Slider
-          range
-          marks={moved_distance_marks}
-          min={1}
-          max={100}
-          defaultValue={[1, 100]}
-          reverse={true}
-          style={{ width: "200px" }}
-        />
-      </SliderWrapper>
-      <SliderWrapper>
-        <SliderHeader>Location near</SliderHeader>
-      </SliderWrapper>
-    </div>
+    <ContentLayout>
+      <SliderLayout>
+        <StepWrapper>
+          <StepHeader>Step 1</StepHeader>
+          <StepTitle>Select Interest Group</StepTitle>
+        </StepWrapper>
+        <SliderWrapper>
+          <SliderHeader>Age</SliderHeader>
+          <Slider
+            range
+            marks={age_marks}
+            min={15}
+            max={75}
+            defaultValue={[15, 75]}
+            style={{ width: "200px" }}
+            onAfterChange={(value) => onAfterChangeSlider(value, "age")}
+          />
+        </SliderWrapper>
+        <SliderWrapper>
+          <SliderHeader>App Usage</SliderHeader>
+          <Slider
+            range
+            marks={app_usage_marks}
+            min={1}
+            max={100}
+            defaultValue={[1, 100]}
+            tooltip={{ formatter }}
+            reverse={true}
+            style={{ width: "200px" }}
+            onAfterChange={(value) => onAfterChangeSlider(value, "appUsage")}
+          />
+        </SliderWrapper>
+        <SliderWrapper>
+          <SliderHeader>Moved Distance</SliderHeader>
+          <Slider
+            range
+            marks={moved_distance_marks}
+            min={1}
+            max={100}
+            defaultValue={[1, 100]}
+            tooltip={{ formatter }}
+            reverse={true}
+            style={{ width: "200px" }}
+            onAfterChange={(value) =>
+              onAfterChangeSlider(value, "movedDistance")
+            }
+          />
+        </SliderWrapper>
+        <SliderWrapper>
+          <SliderHeader>Location near</SliderHeader>
+        </SliderWrapper>
+      </SliderLayout>
+      <BoxplotLayout>
+        <StepWrapper>
+          <StepHeader>Step 2</StepHeader>
+          <StepTitle>View My Rank</StepTitle>
+        </StepWrapper>
+      </BoxplotLayout>
+    </ContentLayout>
   );
 };
+
+const ContentLayout = styled.div`
+  display: flex;
+`;
+
+const SliderLayout = styled.div``;
+
+const BoxplotLayout = styled.div`
+  margin-left: 60px;
+`;
 
 const StepWrapper = styled.div`
   display: flex;
