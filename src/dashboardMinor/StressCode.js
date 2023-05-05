@@ -16,6 +16,7 @@ const StressCode = ({v, color, t, lev}) => {
         borderRadius: "50%",
         width:4,
         height:4,
+        verticalAlign: 'middle',
     };
 
     // var levStyle = {
@@ -27,9 +28,18 @@ const StressCode = ({v, color, t, lev}) => {
 
     return (
         <div style={{marginBottom:2}} >
-            {v === -1 ? <HighlightOffIcon sx={{color: '#CDCDCD', width: 10, height: 10, marginTop: 2}} /> : <div style={circleStyle}></div> }
-            <NumberLabel>{t}</NumberLabel>
-            <LevelLabel>{lev}</LevelLabel>
+            {v === -1 ? 
+                <div  style={{marginTop: 10}}>
+                <HighlightOffIcon sx={{verticalAlign: 'middle', color: '#CDCDCD', width: 10, height: 10}} /> 
+                <LevelLabel style={{marginLeft: 10, verticalAlign: 'center'}}>{lev}</LevelLabel>
+                </div>
+                : 
+                <div>
+                <div style={circleStyle}></div> 
+                <NumberLabel>{t}</NumberLabel>
+                <LevelLabel>{lev}</LevelLabel>
+                </div>
+            }
 
             {/* <div style={circleStyle}></div> */}
             {/* <text>{t}</text> */}
@@ -44,6 +54,8 @@ const NumberLabel = styled.span`
     color: ${(props) => props.theme.colors.blackKS};
     font-size: 10px;
     font-weight: 400;
+    padding-bottom: 30px;
+    vertical-align: middle;
 `;
 
 const LevelLabel = styled.span`
@@ -52,7 +64,8 @@ const LevelLabel = styled.span`
     font-weight: lighter;
     font-style: italic;
     margin-left: 15px;
-    padding-bottom: 15px;
+    padding-bottom: 30px;
+    vertical-align: middle;
 `;
   
 export default StressCode;

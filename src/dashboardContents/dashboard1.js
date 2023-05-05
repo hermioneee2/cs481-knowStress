@@ -4,12 +4,10 @@ import {theme} from '../styles/Theme'
 import StressCode from "../dashboardMinor/StressCode";
 import styled from "styled-components";
 
-
-import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import SquareIcon from '@mui/icons-material/Square';
 import DisabledByDefaultIcon from '@mui/icons-material/DisabledByDefault';
 
-import { getColor } from "../dashboardMinor/Heatmap";
+import { getColor } from "../dashboardMinor/GetColor";
 const {Content, Sider } = Layout;
 
 
@@ -27,11 +25,20 @@ const Dashboard1 = () => {
   [1.0,-1,4.0,1.0,4.0,-1,5.0,-1,5.0,2.0,3.0,-1,],
   [5.0,-1,3.0,3.0,-1,1.0,3.0,-1,-1,4.0,3.0,2.5,],
   [-1,-1,2.0,3.0,5.0,-1,2.0,3.0,3.0,4.0,4.0,4.0,],]
+
   // var titleStyle = {
   //   marginBottom: 10,
   //   fontSize: '15px',
   //   display: 'block',
   // };
+  // var xLabel = {
+  //   color: theme.colors.grayKS,
+  //   fontWeight: 'lighter',
+  //   fontSize: '12px',
+  //   width: 10,
+  //   paddingRight: 23,
+  // }
+
 
   var WeeklyText = {
     color : getColor(weeklyValues),
@@ -39,27 +46,19 @@ const Dashboard1 = () => {
     fontWeight: 'bold',
   }
 
-  var xLabel = {
-    color: theme.colors.grayKS,
-    fontWeight: 'lighter',
-    fontSize: '12px',
-    width: 10,
-    paddingRight: 23,
-  }
-
   var yLabel = {
     color: theme.colors.grayKS,
     fontWeight: 'lighter',
     fontSize: '12px',
     width: 10,
-    paddingTop: 2,
-    marginTop: 5,
-    paddingRight: 35,
+    // paddingTop: 2,
+    marginTop: 3,
+    marginRight: 25,
   }
 
   const Daily = dailyValues.map((item) => (
     <div key={item.id} style={{display: 'block'}}>
-      <SquareIcon sx={{color: getColor(item), margin:-0.3, fontSize:'30px'}} />
+      <SquareIcon sx={{color: getColor(item), margin:-0.3, marginTop:-0.7, fontSize:'30px'}} />
     </div>
     
   ));
@@ -69,7 +68,7 @@ const Dashboard1 = () => {
       <text style={yLabel}>{days[i]}</text>
       {v.map((value, j) => (
         <div style={{display: 'block'}} key={j}>
-          {value == -1 ? <DisabledByDefaultIcon sx={{color: '#CDCDCD', margin:-0.3, fontSize:'30px'}}/> : <SquareIcon sx={{color: getColor(value), margin:-0.3, fontSize:'30px'}} /> }
+          {value == -1 ? <DisabledByDefaultIcon sx={{color: '#CDCDCD', margin:-0.3,marginTop:-0.7,  fontSize:'30px'}}/> : <SquareIcon sx={{color: getColor(value), margin:-0.3, marginTop:-0.7,  fontSize:'30px'}} /> }
         </div>
       ))}
     </div>
@@ -80,11 +79,12 @@ const Dashboard1 = () => {
 
       <Sider width={130} style={{ background: '#ffffff'}}>
         <TitleStyle>Weekly</TitleStyle>
+        <text style={WeeklyText}>{weeklyValues}</text>
         {/* <text style={titleStyle}>Weekly</text> */}
-        <text style={WeeklyText}>4.3</text>
+        {/* <WeeklyText>{weeklyValues}</WeeklyText> */}
       </Sider>
 
-      <Sider width={60} style={{ background: '#ffffff'}}>
+      <Sider width={40} style={{ background: '#ffffff'}}>
         {/* <text style={titleStyle}>Daily</text> */}
         <TitleStyle>Daily</TitleStyle>
         <div style={{display: 'block', marginTop: 10}}>{Daily}</div>
@@ -95,15 +95,23 @@ const Dashboard1 = () => {
         <TitleStyle style={{marginLeft: 35}}>Hourly</TitleStyle>
         <div style={{display: 'block', marginTop: 10}}>{Hourly}</div>
         <div style={{paddingLeft: 25}}>
-          {/* <XLabel>10AM</XLabel> */}
-          <text style={xLabel}>10AM</text>
+          <XLabel>10AM</XLabel>
+          <XLabel>12PM</XLabel>
+          <XLabel>2PM</XLabel>
+          <XLabel>4PM</XLabel>
+          <XLabel>6PM</XLabel>
+          <XLabel>8PM</XLabel>
+          <XLabel>10PM</XLabel>
+          
+          {/* <text style={xLabel}>10AM</text>
           <text style={xLabel}>12PM</text>
           <text style={xLabel}>2PM</text>
           <text style={xLabel}>4PM</text>
           <text style={xLabel}>6PM</text>
           <text style={xLabel}>8PM</text>
-          <text style={xLabel}>10PM</text>
+          <text style={xLabel}>10PM</text> */}
         </div>
+        <div style={{marginBottom: 30}}/>
         
         
         
@@ -141,12 +149,19 @@ const TitleStyle = styled(Layout.Content)`
   display: block;
 `;
 
-const XLabel = styled(Layout.Content)`
+// const WeeklyText = styled(Layout.Content)`
+//   color : ${(props) => getColor(props.Dashboard1.weeklyValues)};
+//   font-size: 40px;
+//   font-weight: 700;
+// `;
+
+const XLabel = styled.span`
   color: ${(props) => props.theme.colors.grayKS};
   font-size: 11px;
-  font-weight: 100;
+  font-weight: 200;
   width: 10;
-  paddingRight: 25;
+  padding-right: 25;
+  margin-right: 25px;
 `;
 
 const StressLevel = styled(Layout.Content)`
