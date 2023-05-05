@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Layout } from "antd";
 import { Slider } from "antd";
+import { theme } from "../styles/Theme";
+
+import StressCodeBoxPlot from "../dashboardMinor/StressCodeBoxPlot";
 
 // For sliders
 const age_marks = {
@@ -124,6 +127,26 @@ const Dashboard4 = () => {
           <StepHeader>Step 2</StepHeader>
           <StepTitle>View My Rank</StepTitle>
         </StepWrapper>
+        <div>
+          <StressYAxis />
+          <div style={{ display: "block", zIndex: 2, position: "absolute" }}>
+            <StressCodeBoxPlot
+              color={theme.colors.stress6}
+              t={6}
+              lev={"Very Stressed"}
+            />
+            <StressCodeBoxPlot color={theme.colors.stress5} t={5} />
+            <StressCodeBoxPlot color={theme.colors.stress4} t={4} />
+            <StressCodeBoxPlot color={theme.colors.stress3} t={3} />
+            <StressCodeBoxPlot color={theme.colors.stress2} t={2} />
+            <StressCodeBoxPlot color={theme.colors.stress1} t={1} />
+            <StressCodeBoxPlot
+              color={theme.colors.stress0}
+              t={0}
+              lev={"Not Stressed"}
+            />
+          </div>
+        </div>
       </BoxplotLayout>
     </ContentLayout>
   );
@@ -202,5 +225,19 @@ const commonMarkStyle = {
 applyCommonMarkStyle(age_marks);
 applyCommonMarkStyle(app_usage_marks);
 applyCommonMarkStyle(moved_distance_marks);
+
+const StressYAxis = styled.div`
+  height: 192px;
+  width: 2px;
+  background: linear-gradient(
+    ${(props) => props.theme.colors.stress5},
+    ${(props) => props.theme.colors.stress2},
+    ${(props) => props.theme.colors.stress0}
+  );
+  z-index: 1;
+  position: absolute;
+  margin-top: 3px;
+  margin-left: 76px;
+`;
 
 export default Dashboard4;
