@@ -21,3 +21,10 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+#csv
+*.csv
+/data_processing/data
+
+#pycache
+/data_processing/__pycache__

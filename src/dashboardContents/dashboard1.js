@@ -1,8 +1,9 @@
 import React from "react";
-import styled from "styled-components";
 import { Layout } from "antd";
 import {theme} from '../styles/Theme'
 import StressCode from "../dashboardMinor/StressCode";
+import styled from "styled-components";
+
 
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import SquareIcon from '@mui/icons-material/Square';
@@ -19,19 +20,18 @@ const Dashboard1 = () => {
   const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
   const weeklyValues = 2.6
   const hourlyValues = 
-  [[-1,-1,-1,3.5,4.666666666666667,3.0,1.0,3.0,2.6666666666666665,3.0,1.0,3.0,3.0625],
-  [3.0,3.0,4.0,-1,-1,4.0,-1,5.0,3.5,5.0,-1,3.0,3.6153846153846154],
-  [4.0,4.0,4.0,-1,4.0,-1,4.0,5.0,3.0,-1,-1,5.5,4.2727272727272725],
-  [5.0,2.0,4.0,4.0,-1,4.5,-1,6.0,2.0,1.0,3.0,5.0,3.9166666666666665],
-  [1.0,-1,4.0,1.0,4.0,-1,5.0,-1,5.0,2.0,3.0,-1,3.2222222222222223],
-  [5.0,-1,3.0,3.0,-1,1.0,3.0,-1,-1,4.0,3.0,2.5,3.0],
-  [-1,-1,2.0,3.0,5.0,-1,2.0,3.0,3.0,4.0,4.0,4.0,3.3333333333333335],]
-  var titleStyle = {
-    marginBottom: 10,
-    // fontWeight: 'bold',
-    fontSize: '15px',
-    display: 'block',
-  };
+  [[-1,-1,-1,3.5,4.666666666666667,3.0,1.0,3.0,2.6666666666666665,3.0,1.0,3.0,],
+  [3.0,3.0,4.0,-1,-1,4.0,-1,5.0,3.5,5.0,-1,3.0,],
+  [4.0,4.0,4.0,-1,4.0,-1,4.0,5.0,3.0,-1,-1,5.5,],
+  [5.0,2.0,4.0,4.0,-1,4.5,-1,6.0,2.0,1.0,3.0,5.0],
+  [1.0,-1,4.0,1.0,4.0,-1,5.0,-1,5.0,2.0,3.0,-1,],
+  [5.0,-1,3.0,3.0,-1,1.0,3.0,-1,-1,4.0,3.0,2.5,],
+  [-1,-1,2.0,3.0,5.0,-1,2.0,3.0,3.0,4.0,4.0,4.0,],]
+  // var titleStyle = {
+  //   marginBottom: 10,
+  //   fontSize: '15px',
+  //   display: 'block',
+  // };
 
   var WeeklyText = {
     color : getColor(weeklyValues),
@@ -42,16 +42,15 @@ const Dashboard1 = () => {
   var xLabel = {
     color: theme.colors.grayKS,
     fontWeight: 'lighter',
-    fontSize: '11px',
+    fontSize: '12px',
     width: 10,
-    paddingRight: 25,
-
+    paddingRight: 23,
   }
 
   var yLabel = {
     color: theme.colors.grayKS,
     fontWeight: 'lighter',
-    fontSize: '11px',
+    fontSize: '12px',
     width: 10,
     paddingTop: 2,
     marginTop: 5,
@@ -80,19 +79,23 @@ const Dashboard1 = () => {
     <Layout style={{ background: '#ffffff'}}>
 
       <Sider width={130} style={{ background: '#ffffff'}}>
-        <text style={titleStyle}>Weekly</text>
+        <TitleStyle>Weekly</TitleStyle>
+        {/* <text style={titleStyle}>Weekly</text> */}
         <text style={WeeklyText}>4.3</text>
       </Sider>
 
       <Sider width={60} style={{ background: '#ffffff'}}>
-        <text style={titleStyle}>Daily</text>
+        {/* <text style={titleStyle}>Daily</text> */}
+        <TitleStyle>Daily</TitleStyle>
         <div style={{display: 'block', marginTop: 10}}>{Daily}</div>
       </Sider>
 
       <Content>
-        <text style={titleStyle}>Hourly</text>
+        {/* <text style={titleStyle}>Hourly</text> */}
+        <TitleStyle style={{marginLeft: 35}}>Hourly</TitleStyle>
         <div style={{display: 'block', marginTop: 10}}>{Hourly}</div>
         <div style={{paddingLeft: 25}}>
+          {/* <XLabel>10AM</XLabel> */}
           <text style={xLabel}>10AM</text>
           <text style={xLabel}>12PM</text>
           <text style={xLabel}>2PM</text>
@@ -106,8 +109,9 @@ const Dashboard1 = () => {
         
       </Content>
 
-      <Sider style={{ background: '#ffffff', paddingLeft:20}}>
-        <text style={{ marginBottom: 10, fontWeight: 'bold',}}>Stress Level</text>
+      <Sider style={{ background: '#ffffff', paddingLeft:20, marginTop:25}}>
+        {/* <text style={{ marginBottom: 10, fontWeight: 'bold',}}>Stress Level</text> */}
+        <StressLevel>Stress Level</StressLevel>
         <div style={{display: 'block', marginTop: 10}}>
           <StressCode color={theme.colors.stress6} t={6} lev={'Very Stressed'}/>
           <StressCode color={theme.colors.stress5} t={5}/>
@@ -116,10 +120,11 @@ const Dashboard1 = () => {
           <StressCode color={theme.colors.stress2} t={2}/>
           <StressCode color={theme.colors.stress1} t={1}/>
           <StressCode color={theme.colors.stress0} t={0} lev={'Not Stressed'}/>
-          <div style={{marginTop: 15}}>
+          <StressCode v={-1} lev={'No Data'}/>
+          {/* <div style={{marginTop: 15}}>
             <HighlightOffIcon sx={{color: '#CDCDCD', width: 13, height: 13}} />
             <text style={{marginLeft: 15, fontStyle: 'italic', fontWeight: 'lighter'}}>No Data</text>
-          </div>
+          </div> */}
         </div>
       </Sider>
     </Layout>
@@ -127,6 +132,29 @@ const Dashboard1 = () => {
   );
 };
 
+const TitleStyle = styled(Layout.Content)`
+  color: ${(props) => props.theme.colors.blackKS};
+  font-family: "Open Sans";
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  display: block;
+`;
+
+const XLabel = styled(Layout.Content)`
+  color: ${(props) => props.theme.colors.grayKS};
+  font-size: 11px;
+  font-weight: 100;
+  width: 10;
+  paddingRight: 25;
+`;
+
+const StressLevel = styled(Layout.Content)`
+  color: ${(props) => props.theme.colors.blackKS};
+  font-size: 11px;
+  font-weight: 600;
+  margin-bottom: 5px;
+`;
 
 
 export default Dashboard1;

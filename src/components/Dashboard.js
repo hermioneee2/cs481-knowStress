@@ -3,10 +3,13 @@ import styled from "styled-components";
 import { Layout } from "antd";
 import DashboardContentSwitcher from "./DashboardContentSwitcher";
 
-const Dashboard = ({ title, dashboardNum }) => {
+const Dashboard = ({ title, page1, subtitle, dashboardNum }) => {
   return (
     <DashboardContainer>
       <DashboardTitle>{title}</DashboardTitle>
+      <Title>{page1}
+        <SubTitle>{subtitle}</SubTitle>
+      </Title> 
       <DashboardContentSwitcher dashboardNum={dashboardNum} />
     </DashboardContainer>
   );
@@ -32,6 +35,22 @@ const DashboardTitle = styled(Layout.Content)`
   font-size: 20px;
   font-weight: 400;
   margin-bottom: 10px;
+`;
+
+const Title = styled(Layout.Content)`
+  color: ${(props) => props.theme.colors.grayKS};
+  font-family: "Open Sans";
+  font-size: 20px;
+  font-weight: 400;
+  margin-bottom: 28px;
+`;
+
+const SubTitle = styled.span`
+  color: ${(props) => props.theme.colors.blackKS};
+  font-family: "Open Sans";
+  font-size: 20px;
+  font-weight: 400;
+  margin-bottom: 28px;
 `;
 
 export default Dashboard;
