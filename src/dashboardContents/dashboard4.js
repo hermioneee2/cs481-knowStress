@@ -128,7 +128,7 @@ const Dashboard4 = () => {
           <StepHeader>Step 2</StepHeader>
           <StepTitle>View My Rank</StepTitle>
         </StepWrapper>
-        <div style={{ marginTop: 10 }}>
+        <div style={{ marginTop: 0 }}>
           <StressYAxis />
           <div
             style={{
@@ -155,13 +155,16 @@ const Dashboard4 = () => {
             />
           </div>
         </div>
-        <BoxPlot
-          lowerQuartile={20}
-          median={40}
-          upperQuartile={60}
-          min={10}
-          max={80}
-        />
+        <div style={{ marginTop: 22 }}>
+          <BoxPlot
+            lowerQuartile={2.3}
+            median={3.8}
+            upperQuartile={4}
+            min={0}
+            max={6}
+            myValue={5}
+          />
+        </div>
       </BoxplotLayout>
     </ContentLayout>
   );
@@ -242,7 +245,7 @@ applyCommonMarkStyle(app_usage_marks);
 applyCommonMarkStyle(moved_distance_marks);
 
 const StressYAxis = styled.div`
-  height: 192px;
+  height: 219px;
   width: 2px;
   background: linear-gradient(
     ${(props) => props.theme.colors.stress5},

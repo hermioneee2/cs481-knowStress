@@ -16,7 +16,11 @@ const StressCodeBoxPlot = ({ v, color, t, lev }) => {
 
   return (
     <div
-      style={{ marginBottom: 18, display: "flex", justifyContent: "flex-end" }}
+      style={{
+        marginBottom: 22.3,
+        display: "flex",
+        justifyContent: "flex-end",
+      }}
     >
       <LevelLabel>{lev}</LevelLabel>
       <NumberLabel>{t}</NumberLabel>
