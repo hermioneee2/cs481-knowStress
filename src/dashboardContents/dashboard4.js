@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useRef } from "react";
 import styled from "styled-components";
 import { theme } from "../styles/Theme";
 import { DownOutlined } from "@ant-design/icons";
 import { Layout, Slider, Collapse, theme as antdTheme } from "antd";
+import { GoogleMap, MarkerF, useLoadScript } from "@react-google-maps/api";
 
 import StressCodeBoxPlot from "../dashboardMinor/StressCodeBoxPlot";
 import BoxPlot from "../dashboardMinor/BoxPlot";
@@ -44,11 +45,24 @@ const formatter = (value) => {
 // textbox
 const { Panel } = Collapse;
 
+//map
+const mapContainerStyle = {
+  width: "300px",
+  height: "300px",
+  marginLeft: "100px",
+};
+
+const API_KEY = "AIzaSyAtsisxIQqoYmIwh7-BckZfuuQImS8c--4";
+
 const Dashboard4 = () => {
   //sliders: input values
   const [ageRange, setAgeRange] = useState([15, 75]);
   const [appUsageRange, setAppUsageRange] = useState([1, 100]);
   const [movedDistanceRange, setMovedDistanceRange] = useState([1, 100]);
+  const [location, setLocation] = useState({
+    lat: 36.370053712983704,
+    lng: 127.3605726960359,
+  });
 
   // //default output value
   // const myValue = 4.3;
@@ -72,26 +86,51 @@ const Dashboard4 = () => {
   const [min, setMin] = useState(1);
   const [max, setMax] = useState(5.8);
 
+  //map
+  const mapRef = useRef(null);
+  const [address, setAddress] = useState("대한민국 대전광역시 한국과학기술원");
+
+  const { isLoaded, loadError } = useLoadScript({
+    googleMapsApiKey: API_KEY,
+  });
+
+  const onMapLoad = useCallback((map) => {
+    mapRef.current = map;
+  }, []);
+
+  const getAddress = async (lat, lng) => {
+    const response = await fetch(
+      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${API_KEY}`
+    );
+    const data = await response.json();
+    return data.results[0].formatted_address;
+  };
+
   const onAfterChangeSlider = (value, sliderName) => {
     switch (sliderName) {
       case "age":
         setAgeRange(value);
-        getBoxPlotData(value, appUsageRange, movedDistanceRange);
+        getBoxPlotData(value, appUsageRange, movedDistanceRange, location);
         break;
       case "appUsage":
         setAppUsageRange(value);
-        getBoxPlotData(ageRange, value, movedDistanceRange);
+        getBoxPlotData(ageRange, value, movedDistanceRange, location);
         break;
       case "movedDistance":
         setMovedDistanceRange(value);
-        getBoxPlotData(ageRange, appUsageRange, value);
+        getBoxPlotData(ageRange, appUsageRange, value, location);
         break;
       default:
         break;
     }
   };
 
-  const getBoxPlotData = (ageRange, appUsageRange, movedDistanceRange) => {
+  const getBoxPlotData = (
+    ageRange,
+    appUsageRange,
+    movedDistanceRange,
+    location
+  ) => {
     //get data...
     const outputMyValue = 4.3;
     const outputNumOfPeople = 60;
@@ -119,6 +158,18 @@ const Dashboard4 = () => {
   //     `Moved Distance: ${movedDistanceRange[0]} - ${movedDistanceRange[1]}`
   //   );
   // };
+
+  //map
+  const onDragEnd = useCallback(async (event) => {
+    const center = mapRef.current.getCenter();
+
+    setLocation({
+      lat: center.lat(),
+      lng: center.lng(),
+    });
+
+    setAddress(await getAddress(center.lat(), center.lng()));
+  }, []);
 
   // text
   const { token } = antdTheme.useToken();
@@ -236,7 +287,28 @@ const Dashboard4 = () => {
         </SliderWrapper>
         <SliderWrapper>
           <SliderHeader>Location near</SliderHeader>
+          <AddressWrapper>{address}</AddressWrapper>
         </SliderWrapper>
+        {isLoaded ? (
+          <GoogleMap
+            mapContainerStyle={mapContainerStyle}
+            center={location}
+            zoom={14}
+            onLoad={onMapLoad}
+            onDragEnd={onDragEnd}
+            options={{
+              disableDefaultUI: true,
+              zoomControl: true,
+            }}
+          >
+            <MarkerF
+              position={location}
+              // icon={{ url: "/images/icons/map_marker.svg", scale: 5 }}
+            />
+          </GoogleMap>
+        ) : (
+          <div>Loading...</div>
+        )}
       </SliderLayout>
       <BoxplotLayout>
         <StepWrapper>
@@ -417,6 +489,22 @@ const commonMarkStyle = {
 applyCommonMarkStyle(age_marks);
 applyCommonMarkStyle(app_usage_marks);
 applyCommonMarkStyle(moved_distance_marks);
+
+const AddressWrapper = styled.div`
+  margin-left: -40px;
+  margin-top: -10px;
+  height: 24px;
+  font-family: "Open Sans";
+  font-size: 12px;
+  font-weight: 400;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 13px;
+  padding-right: 13px;
+  border-radius: 10px;
+  color: ${(props) => props.theme.colors.selectionBlue};
+  background-color: ${(props) => props.theme.colors.selectionTransparent};
+`;
 
 const StressYAxis = styled.div`
   height: 219px;
