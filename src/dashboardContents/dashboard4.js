@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Layout } from "antd";
-import { Slider } from "antd";
 import { theme } from "../styles/Theme";
+import { DownOutlined } from "@ant-design/icons";
+import { Layout, Slider, Collapse, theme as antdTheme } from "antd";
 
 import StressCodeBoxPlot from "../dashboardMinor/StressCodeBoxPlot";
 import BoxPlot from "../dashboardMinor/BoxPlot";
@@ -41,10 +41,16 @@ const formatter = (value) => {
   return `Top ${value}%`;
 };
 
+// textbox
+const { Panel } = Collapse;
+
 const Dashboard4 = () => {
   const [ageRange, setAgeRange] = useState([15, 75]);
   const [appUsageRange, setAppUsageRange] = useState([1, 100]);
   const [movedDistanceRange, setMovedDistanceRange] = useState([1, 100]);
+  const topValue = 20;
+  const numOfPeople = 77;
+  const myValue = 5.1;
 
   const onAfterChangeSlider = (value, sliderName) => {
     switch (sliderName) {
@@ -69,6 +75,62 @@ const Dashboard4 = () => {
   //     `Moved Distance: ${movedDistanceRange[0]} - ${movedDistanceRange[1]}`
   //   );
   // };
+
+  // text
+  const { token } = antdTheme.useToken();
+  const panelStyle = {
+    marginBottom: 15,
+    background: token.colorFillAlter,
+    borderRadius: token.borderRadiusLG,
+    border: "none",
+    fontFamily: "Open Sans",
+    fontSize: "12px",
+  };
+
+  const PeoplRangeExplanation = (
+    <>
+      Among{" "}
+      <span
+        style={{
+          fontWeight: 700,
+          color: theme.colors.selectionBlue,
+        }}
+      >
+        {numOfPeople}
+      </span>{" "}
+      people in the group
+    </>
+  );
+
+  const boxplotExplanation1 = (
+    <>
+      <span style={{ color: theme.colors.stress3 }}>
+        My average stress level of {myValue} ranked in top {topValue}% among{" "}
+        {numOfPeople} people in the group.
+      </span>{" "}
+      Top 1% indicates the most stressed and top 100% indicates the least
+      stressed in the group. The closer your ranking is to top 1%, the more
+      stressed you are compared to the group.
+    </>
+  );
+
+  const boxplotExplanation2 = (
+    <>
+      In the order of top to bottom, each horizontal lines indicates such
+      values:
+      <ul style={{ listStyleType: "disc", marginLeft: "20px" }}>
+        <li>100th percentiles: Maximum </li>
+        <li>75th percentiles: Third quartile (Q3)</li>
+        <li>50th percentiles: Median (Q2)</li>
+        <li>25th percentiles: First quartile (Q1)</li>
+        <li>0th percentiles: Minimum</li>
+      </ul>
+      This means that Q1 represents the value below which 25% of the data falls,
+      Q2 represents the value below which 50% of the data falls, etc. The box
+      represents the middle 50% of the data, between the first quartile (Q1) and
+      the third quartile (Q3).
+    </>
+  );
 
   return (
     <ContentLayout>
@@ -128,6 +190,18 @@ const Dashboard4 = () => {
           <StepHeader>Step 2</StepHeader>
           <StepTitle>View My Rank</StepTitle>
         </StepWrapper>
+        <p
+          style={{
+            margin: "10 0",
+            fontFamily: "Open Sans",
+            fontSize: "15px",
+            fontWeight: 300,
+
+            color: theme.colors.grayKS,
+          }}
+        >
+          {PeoplRangeExplanation}
+        </p>
         <BoxplotWrapper>
           <BoxplotGraph>
             <div style={{ marginTop: 0 }}>
@@ -164,18 +238,54 @@ const Dashboard4 = () => {
                 upperQuartile={4}
                 min={0}
                 max={6}
-                myValue={5}
+                myValue={myValue}
               />
             </div>
           </BoxplotGraph>
           <MyRankingTextWrapper>
-            <MyRankingTextLeft>4.3</MyRankingTextLeft>
+            <MyRankingTextLeft>{myValue}</MyRankingTextLeft>
             <MyRankingTextRight>
               <MyRankingTitle>My Stress Ranking</MyRankingTitle>
-              <TopNPercent>Top 20%</TopNPercent>
+              <TopNPercent>Top {topValue}%</TopNPercent>
             </MyRankingTextRight>
           </MyRankingTextWrapper>
         </BoxplotWrapper>
+        <Collapse
+          bordered={false}
+          defaultActiveKey={["1"]}
+          expandIcon={({ isActive }) => (
+            <DownOutlined rotate={isActive ? 180 : 0} />
+          )}
+          expandIconPosition="end"
+          style={{
+            background: token.colorBgContainer,
+            marginTop: 50,
+            width: "400px",
+          }}
+        >
+          <Panel header="My Stress Ranking" key="1" style={panelStyle}>
+            <p
+              style={{
+                margin: 0,
+                fontFamily: "Open Sans",
+                color: theme.colors.grayKS,
+              }}
+            >
+              {boxplotExplanation1}
+            </p>
+          </Panel>
+          <Panel header="How to Read Box Plot" key="2" style={panelStyle}>
+            <p
+              style={{
+                margin: 0,
+                fontFamily: "Open Sans",
+                color: theme.colors.grayKS,
+              }}
+            >
+              {boxplotExplanation2}
+            </p>
+          </Panel>
+        </Collapse>
       </BoxplotLayout>
     </ContentLayout>
   );
@@ -197,7 +307,7 @@ const StepWrapper = styled.div`
   align-items: center;
   width: 300px;
   margin-top: 20px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 `;
 
 const StepHeader = styled.div`

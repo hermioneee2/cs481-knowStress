@@ -53,7 +53,7 @@ const BoxPlot = ({
           y1: myValue,
           line: {
             color: theme.colors.me,
-            width: 2,
+            width: 1,
             dash: "dash",
           },
         },
