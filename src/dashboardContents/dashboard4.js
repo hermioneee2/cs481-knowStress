@@ -45,27 +45,71 @@ const formatter = (value) => {
 const { Panel } = Collapse;
 
 const Dashboard4 = () => {
+  //sliders: input values
   const [ageRange, setAgeRange] = useState([15, 75]);
   const [appUsageRange, setAppUsageRange] = useState([1, 100]);
   const [movedDistanceRange, setMovedDistanceRange] = useState([1, 100]);
-  const topValue = 20;
-  const numOfPeople = 77;
-  const myValue = 5.1;
+
+  // //default output value
+  // const myValue = 4.3;
+
+  // //boxplot: output values
+  // const numOfPeople = 77;
+  // const topValue = 20;
+  // const lowerQuartile = 2.3;
+  // const median = 3.8;
+  // const upperQuartile = 4;
+  // const min = 1;
+  // const max = 5.8;
+
+  const [myValue, setMyValue] = useState(4.3);
+
+  const [numOfPeople, setNumOfPeople] = useState(77);
+  const [topValue, setTopValue] = useState(20);
+  const [lowerQuartile, setLowerQuartile] = useState(2.3);
+  const [median, setMedian] = useState(3.8);
+  const [upperQuartile, setUpperQuartile] = useState(4);
+  const [min, setMin] = useState(1);
+  const [max, setMax] = useState(5.8);
 
   const onAfterChangeSlider = (value, sliderName) => {
     switch (sliderName) {
       case "age":
         setAgeRange(value);
+        getBoxPlotData(value, appUsageRange, movedDistanceRange);
         break;
       case "appUsage":
         setAppUsageRange(value);
+        getBoxPlotData(ageRange, value, movedDistanceRange);
         break;
       case "movedDistance":
         setMovedDistanceRange(value);
+        getBoxPlotData(ageRange, appUsageRange, value);
         break;
       default:
         break;
     }
+  };
+
+  const getBoxPlotData = (ageRange, appUsageRange, movedDistanceRange) => {
+    //get data...
+    const outputMyValue = 4.3;
+    const outputNumOfPeople = 60;
+    const outputTopValue = 19;
+    const outputLowerQuartile = 2.3;
+    const outputMedian = 3.3;
+    const outputUpperQuartile = 4.4;
+    const outputMin = 0;
+    const outputMax = 6;
+
+    setMyValue(outputMyValue);
+    setNumOfPeople(outputNumOfPeople);
+    setTopValue(outputTopValue);
+    setLowerQuartile(outputLowerQuartile);
+    setMedian(outputMedian);
+    setUpperQuartile(outputUpperQuartile);
+    setMin(outputMin);
+    setMax(outputMax);
   };
 
   // const printSliderRanges = () => {
@@ -116,9 +160,8 @@ const Dashboard4 = () => {
 
   const boxplotExplanation2 = (
     <>
-      In the order of top to bottom, each horizontal lines indicates such
-      values:
-      <ul style={{ listStyleType: "disc", marginLeft: "20px" }}>
+      From top to bottom, each horizontal line indicates:
+      <ul style={{ listStyleType: "disc", marginLeft: "-15px" }}>
         <li>100th percentiles: Maximum </li>
         <li>75th percentiles: Third quartile (Q3)</li>
         <li>50th percentiles: Median (Q2)</li>
@@ -131,6 +174,16 @@ const Dashboard4 = () => {
       the third quartile (Q3).
     </>
   );
+
+  const MyRankingTextWrapper = styled.div`
+    display: flex;
+    z-index: 1;
+    position: absolute;
+    margin-left: 205px;
+    // margin-top: -25px;
+    // margin-top: 184px;
+    margin-top: ${((myValue * (184 + 25)) / 6) * -1 + 184}px;
+  `;
 
   return (
     <ContentLayout>
@@ -233,11 +286,11 @@ const Dashboard4 = () => {
             </div>
             <div style={{ marginTop: 12 }}>
               <BoxPlot
-                lowerQuartile={2.3}
-                median={3.8}
-                upperQuartile={4}
-                min={0}
-                max={6}
+                lowerQuartile={lowerQuartile}
+                median={median}
+                upperQuartile={upperQuartile}
+                min={min}
+                max={max}
                 myValue={myValue}
               />
             </div>
@@ -385,14 +438,6 @@ const BoxplotWrapper = styled.div`
 
 const BoxplotGraph = styled.div`
   width: 300px;
-`;
-
-const MyRankingTextWrapper = styled.div`
-  display: flex;
-  z-index: 1;
-  position: absolute;
-  margin-left: 200px;
-  margin-top: -23px;
 `;
 
 const MyRankingTextLeft = styled.div`
