@@ -128,43 +128,54 @@ const Dashboard4 = () => {
           <StepHeader>Step 2</StepHeader>
           <StepTitle>View My Rank</StepTitle>
         </StepWrapper>
-        <div style={{ marginTop: 0 }}>
-          <StressYAxis />
-          <div
-            style={{
-              display: "block",
-              zIndex: 2,
-              position: "absolute",
-              marginTop: 5,
-            }}
-          >
-            <StressCodeBoxPlot
-              color={theme.colors.stress6}
-              t={6}
-              lev={"Very Stressed"}
-            />
-            <StressCodeBoxPlot color={theme.colors.stress5} t={5} />
-            <StressCodeBoxPlot color={theme.colors.stress4} t={4} />
-            <StressCodeBoxPlot color={theme.colors.stress3} t={3} />
-            <StressCodeBoxPlot color={theme.colors.stress2} t={2} />
-            <StressCodeBoxPlot color={theme.colors.stress1} t={1} />
-            <StressCodeBoxPlot
-              color={theme.colors.stress0}
-              t={0}
-              lev={"Not Stressed"}
-            />
-          </div>
-        </div>
-        <div style={{ marginTop: 22 }}>
-          <BoxPlot
-            lowerQuartile={2.3}
-            median={3.8}
-            upperQuartile={4}
-            min={0}
-            max={6}
-            myValue={5}
-          />
-        </div>
+        <BoxplotWrapper>
+          <BoxplotGraph>
+            <div style={{ marginTop: 0 }}>
+              <StressYAxis />
+              <div
+                style={{
+                  display: "block",
+                  zIndex: 3,
+                  position: "absolute",
+                  marginTop: 5,
+                }}
+              >
+                <StressCodeBoxPlot
+                  color={theme.colors.stress6}
+                  t={6}
+                  lev={"Very Stressed"}
+                />
+                <StressCodeBoxPlot color={theme.colors.stress5} t={5} />
+                <StressCodeBoxPlot color={theme.colors.stress4} t={4} />
+                <StressCodeBoxPlot color={theme.colors.stress3} t={3} />
+                <StressCodeBoxPlot color={theme.colors.stress2} t={2} />
+                <StressCodeBoxPlot color={theme.colors.stress1} t={1} />
+                <StressCodeBoxPlot
+                  color={theme.colors.stress0}
+                  t={0}
+                  lev={"Not Stressed"}
+                />
+              </div>
+            </div>
+            <div style={{ marginTop: 12 }}>
+              <BoxPlot
+                lowerQuartile={2.3}
+                median={3.8}
+                upperQuartile={4}
+                min={0}
+                max={6}
+                myValue={5}
+              />
+            </div>
+          </BoxplotGraph>
+          <MyRankingTextWrapper>
+            <MyRankingTextLeft>4.3</MyRankingTextLeft>
+            <MyRankingTextRight>
+              <MyRankingTitle>My Stress Ranking</MyRankingTitle>
+              <TopNPercent>Top 20%</TopNPercent>
+            </MyRankingTextRight>
+          </MyRankingTextWrapper>
+        </BoxplotWrapper>
       </BoxplotLayout>
     </ContentLayout>
   );
@@ -252,10 +263,53 @@ const StressYAxis = styled.div`
     ${(props) => props.theme.colors.stress2},
     ${(props) => props.theme.colors.stress0}
   );
-  z-index: 1;
+  z-index: 2;
   position: absolute;
   margin-top: 8px;
   margin-left: 76px;
+`;
+
+const BoxplotWrapper = styled.div`
+  display: flex;
+`;
+
+const BoxplotGraph = styled.div`
+  width: 300px;
+`;
+
+const MyRankingTextWrapper = styled.div`
+  display: flex;
+  z-index: 1;
+  position: absolute;
+  margin-left: 200px;
+  margin-top: -23px;
+`;
+
+const MyRankingTextLeft = styled.div`
+  margin-top: 20px;
+  margin-right: 8px;
+  font-family: "Open Sans";
+  font-size: 12px;
+  font-weight: 400;
+  color: ${(props) => props.theme.colors.me};
+`;
+
+const MyRankingTextRight = styled.div`
+  display: block;
+`;
+
+const MyRankingTitle = styled.div`
+  font-family: "Open Sans";
+  font-size: 10px;
+  font-weight: 400;
+  color: ${(props) => props.theme.colors.grayKS};
+`;
+
+const TopNPercent = styled.div`
+  font-family: "Open Sans";
+  font-size: 23px;
+  font-weight: 800;
+  color: ${(props) => props.theme.colors.me};
 `;
 
 export default Dashboard4;
