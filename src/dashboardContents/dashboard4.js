@@ -1,9 +1,18 @@
 import React, { useState, useCallback, useRef } from "react";
 import styled from "styled-components";
 import { theme } from "../styles/Theme";
-import { DownOutlined } from "@ant-design/icons";
+import {
+  DownOutlined,
+  EnvironmentFilled,
+  EnvironmentTwoTone,
+} from "@ant-design/icons";
 import { Layout, Slider, Collapse, theme as antdTheme } from "antd";
-import { GoogleMap, MarkerF, useLoadScript } from "@react-google-maps/api";
+import {
+  GoogleMap,
+  MarkerF,
+  useLoadScript,
+  OverlayView,
+} from "@react-google-maps/api";
 
 import StressCodeBoxPlot from "../dashboardMinor/StressCodeBoxPlot";
 import BoxPlot from "../dashboardMinor/BoxPlot";
@@ -63,6 +72,7 @@ const Dashboard4 = () => {
     lat: 36.370053712983704,
     lng: 127.3605726960359,
   });
+  const [locationRadius, setLocationRadius] = useState(120);
 
   // //default output value
   // const myValue = 4.3;
@@ -170,6 +180,67 @@ const Dashboard4 = () => {
 
     setAddress(await getAddress(center.lat(), center.lng()));
   }, []);
+
+  const [overlayLoaded, setOverlayLoaded] = useState(false);
+
+  const onOverlayLoad = () => {
+    setOverlayLoaded(true);
+  };
+
+  const locationRangeCircleStyle = {
+    position: "absolute",
+    width: locationRadius * 2,
+    height: locationRadius * 2,
+    backgroundColor: theme.colors.selectionTransparent,
+    borderRadius: "50%",
+    textAlign: "center",
+    color: theme.colors.selectionBlue,
+    fontWeight: "bold",
+    fontSize: 16,
+    padding: 4,
+    border: `2px solid ${theme.colors.selectionBlue}`,
+    marginLeft: `-${locationRadius}px`,
+    marginTop: `-${locationRadius}px`,
+  };
+
+  const LocationRangeCircle = () => {
+    const ref = useRef(null);
+    return (
+      <OverlayView
+        position={location}
+        mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+        onLoad={onOverlayLoad}
+      >
+        {overlayLoaded && (
+          <div style={locationRangeCircleStyle} ref={ref}></div>
+        )}
+      </OverlayView>
+    );
+  };
+
+  const locationIconStyle = {
+    position: "absolute",
+    // width: 50,
+    // height: 50,
+    fontSize: "36px",
+
+    color: theme.colors.selectionBlue,
+
+    marginLeft: `-18px`,
+    marginTop: `-36px`,
+  };
+
+  const LocationPin = () => {
+    return (
+      <OverlayView
+        position={location}
+        mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+        onLoad={onOverlayLoad}
+      >
+        {overlayLoaded && <EnvironmentFilled style={locationIconStyle} />}
+      </OverlayView>
+    );
+  };
 
   // text
   const { token } = antdTheme.useToken();
@@ -301,10 +372,12 @@ const Dashboard4 = () => {
               zoomControl: true,
             }}
           >
-            <MarkerF
+            {/* <MarkerF
               position={location}
               // icon={{ url: "/images/icons/map_marker.svg", scale: 5 }}
-            />
+            /> */}
+            <LocationPin />
+            <LocationRangeCircle />
           </GoogleMap>
         ) : (
           <div>Loading...</div>
