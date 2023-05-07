@@ -52,7 +52,7 @@ const mapContainerStyle = {
   marginLeft: "100px",
 };
 
-const API_KEY = "AIzaSyAtsisxIQqoYmIwh7-BckZfuuQImS8c--4";
+const API_KEY = "";
 
 const Dashboard4 = () => {
   //sliders: input values
