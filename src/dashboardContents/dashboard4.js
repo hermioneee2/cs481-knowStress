@@ -74,18 +74,6 @@ const Dashboard4 = () => {
   });
   const [locationRadius, setLocationRadius] = useState(120);
 
-  // //default output value
-  // const myValue = 4.3;
-
-  // //boxplot: output values
-  // const numOfPeople = 77;
-  // const topValue = 20;
-  // const lowerQuartile = 2.3;
-  // const median = 3.8;
-  // const upperQuartile = 4;
-  // const min = 1;
-  // const max = 5.8;
-
   const [myValue, setMyValue] = useState(4.3);
 
   const [numOfPeople, setNumOfPeople] = useState(77);
@@ -161,14 +149,6 @@ const Dashboard4 = () => {
     setMax(outputMax);
   };
 
-  // const printSliderRanges = () => {
-  //   console.log(`Age: ${ageRange[0]} - ${ageRange[1]}`);
-  //   console.log(`App Usage: ${appUsageRange[0]} - ${appUsageRange[1]}`);
-  //   console.log(
-  //     `Moved Distance: ${movedDistanceRange[0]} - ${movedDistanceRange[1]}`
-  //   );
-  // };
-
   //map
   const onDragEnd = useCallback(async (event) => {
     const center = mapRef.current.getCenter();
@@ -220,12 +200,8 @@ const Dashboard4 = () => {
 
   const locationIconStyle = {
     position: "absolute",
-    // width: 50,
-    // height: 50,
     fontSize: "36px",
-
     color: theme.colors.selectionBlue,
-
     marginLeft: `-18px`,
     marginTop: `-36px`,
   };
@@ -372,10 +348,6 @@ const Dashboard4 = () => {
               zoomControl: true,
             }}
           >
-            {/* <MarkerF
-              position={location}
-              // icon={{ url: "/images/icons/map_marker.svg", scale: 5 }}
-            /> */}
             <LocationPin />
             <LocationRangeCircle />
           </GoogleMap>
