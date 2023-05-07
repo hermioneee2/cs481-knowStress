@@ -43,6 +43,6 @@ with open(f'data_processing/{user}_stress_by_day_time.csv', 'w', newline='') as 
         if dailyct==0:daily_list.append(-1) #null for whole day
         else:daily_list.append(dailyst/dailyct)
         hourly_list.append(row)
-    writer.writerow([weeklyst/weeklyct if weeklyct else 0])
+    writer.writerow([round(weeklyst/weeklyct,1) if weeklyct else 0])
     writer.writerow(daily_list)
     for row in hourly_list:writer.writerow(row)
