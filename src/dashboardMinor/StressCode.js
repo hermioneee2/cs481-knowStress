@@ -8,7 +8,6 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 const StressCode = ({v, color, t, lev}) => {
     var circleStyle = {
         marginLeft: 1,
-        // marginTop: 4,
         padding:4,
         marginRight: 8,
         display:"inline-block",
@@ -18,13 +17,6 @@ const StressCode = ({v, color, t, lev}) => {
         height:4,
         verticalAlign: 'middle',
     };
-
-    // var levStyle = {
-    //     marginLeft: 15,
-    //     fontStyle: 'italic',
-    //     fontWeight: 'lighter',
-    //     fontSize: '10px',
-    // };
 
     return (
         <div style={{marginBottom:2}} >
@@ -41,9 +33,6 @@ const StressCode = ({v, color, t, lev}) => {
                 </div>
             }
 
-            {/* <div style={circleStyle}></div> */}
-            {/* <text>{t}</text> */}
-            {/* <text style={levStyle}>{lev}</text> */}
         </div>
         
     );

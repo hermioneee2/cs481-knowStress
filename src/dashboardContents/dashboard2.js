@@ -9,6 +9,7 @@ import BarChart from "../dashboardMinor/BarChart";
 import styled from "styled-components";
 import { Layout } from "antd";
 import Board2Button from "../dashboardMinor/Board2Button";
+import Images from "../dashboardMinor/Images";
 const {Content, Sider } = Layout;
 
 
@@ -26,17 +27,20 @@ const Dashboard2 = () => {
    [  "카카오톡","Messenger","3.6656425085848543"],
    [  "날씨","Utility","3.695156695156695"],
    [  "Bleacher Report","Utility","3.717136150234742"],
-   [   "MTP 애플리케이션","Utility","3.7354758961681087"],
+   [   "MTP","Utility","3.7354758961681087"],
    [  "전화","Messenger","3.8299024918743227"],
    [  "연락처","Utility","3.9095982142857144"],
    [  "Dropsync","Utility","3.9817495280050346"],
   ];
-  // const dash2Data = [
 
+  // const dash2Data = [
   //    ["Instagram","Social Media","3.580088402441591"],
+  //    [ "YouTube","Video/Contents","3.635525141326986"],
   //    ["NAVER","Utility","3.333652312599681"],
   //    ["Melon","Video/Contents","3.218100056211355"],
   //  ];
+
+   const imgArr = dash2Data.map((arr) => require(`./images/${arr[0]}.png`))
 
   const newArray = [];
 
@@ -93,8 +97,11 @@ const Dashboard2 = () => {
   return (
     <div>
     <Layout style={{ background: '#ffffff'}}> 
+      <Sider width={50} style={{ background: '#ffffff', paddingLeft:20}}>
+        {/* <Images dash2Data={dash2Data.map((arr) => require(`./images/${arr[0]}.png`))} /> */}
+        <Images dash2Data={imgArr.reverse()} />
+      </Sider>
       <Content style={{display: 'flex', }} >
-        {/* {/* <Plot data = {data} config={{displayModeBar:false}} layout={{width: 600,xaxis:{title: "Average Stress Level", range: [0, 6]}}} /> */}
         <BarChart color={arrColor} dash2Data={dash2Data}/>
       </Content>
       <Sider style={{ background: '#ffffff', paddingLeft:20}}>
