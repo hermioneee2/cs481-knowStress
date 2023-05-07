@@ -2,7 +2,7 @@ export const theme = {
   colors: {
     blackKS: "#1E1E1E",
     grayKS: "#7B7B7B",
-    selectedSidbarKS: "#F6F6F6",
+    selectedSidebarKS: "#F6F6F6",
     stress6: "#4F0E08",
     stress5: "#7C1D14",
     stress4: "#C42E20",
@@ -12,7 +12,7 @@ export const theme = {
     stress0: "#FFD9D4",
     white: "#FFFFFF",
     selectionBlue: "#21AAFF",
-    selectionTransparent: "#3891D5FF",
+    selectionTransparent: "#91D5FF38",
     me: "#7B61FF",
     mainBgLightGray: "#FAFAFA",
     topbarBorder: "#F4F6F8",

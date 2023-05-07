@@ -6,7 +6,7 @@ import Dashboard from "../../components/Dashboard";
 const MeAndOthersPresenter = () => {
   return (
     <ContentContainer>
-      <Dashboard title="test4" dashboardNum={4} />
+      <Dashboard title="What is My Stress Rank in Group?" dashboardNum={4} />
       <Dashboard title="test5" dashboardNum={5} />
     </ContentContainer>
   );

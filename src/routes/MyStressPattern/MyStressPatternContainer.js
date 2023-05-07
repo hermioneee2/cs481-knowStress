@@ -1,3 +1,4 @@
+import React from "react";
 import MyStressPatternPresenter from "./MyStressPatternPresenter";
 
 const MyStressPatternContainer = () => {
