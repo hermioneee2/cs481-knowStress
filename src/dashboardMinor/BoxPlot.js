@@ -7,7 +7,7 @@ function generateBoxPlotData(lowerQuartile, median, upperQuartile, min, max) {
     y: [min, lowerQuartile, median, upperQuartile, max],
     type: "box",
     boxpoints: false,
-    hovertemplate: "%{y}",
+    hoverinfo: "y",
     marker: {
       color: theme.colors.grayKS,
     },
@@ -20,15 +20,6 @@ function generateBoxPlotData(lowerQuartile, median, upperQuartile, min, max) {
   };
 }
 
-// function showMyValueInfo(myValue) {
-//   return {
-//     x: [1],
-//     y: [myValue],
-//     text: [myValue],
-//     mode: "text",
-//   };
-// }
-
 const BoxPlot = ({
   lowerQuartile,
   median,
@@ -40,7 +31,6 @@ const BoxPlot = ({
   useEffect(() => {
     const data = [
       generateBoxPlotData(lowerQuartile, median, upperQuartile, min, max),
-      // showMyValueInfo(myValue),
     ];
 
     const layout = {
@@ -70,8 +60,20 @@ const BoxPlot = ({
       margin: {
         t: 0,
         b: 0,
+        l: 0,
+        r: 0,
       },
       height: 210,
+      hovermode: "closest",
+      hoverlabel: {
+        bgcolor: theme.colors.selectionTransparent,
+        font: {
+          color: theme.colors.selectionBlue,
+          family: "Open Sans",
+          size: 10,
+        },
+        bordercolor: "transparent",
+      },
     };
 
     const config = {

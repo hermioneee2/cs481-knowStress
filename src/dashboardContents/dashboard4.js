@@ -441,7 +441,7 @@ const Dashboard4 = () => {
                 />
               </div>
             </div>
-            <div style={{ marginTop: 12 }}>
+            <div style={{ marginTop: 12, marginLeft: 75, width: 150 }}>
               <BoxPlot
                 lowerQuartile={lowerQuartile}
                 median={median}
