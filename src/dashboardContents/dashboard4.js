@@ -1,18 +1,9 @@
 import React, { useState, useCallback, useRef } from "react";
 import styled from "styled-components";
 import { theme } from "../styles/Theme";
-import {
-  DownOutlined,
-  EnvironmentFilled,
-  EnvironmentTwoTone,
-} from "@ant-design/icons";
-import { Layout, Slider, Collapse, theme as antdTheme } from "antd";
-import {
-  GoogleMap,
-  MarkerF,
-  useLoadScript,
-  OverlayView,
-} from "@react-google-maps/api";
+import { DownOutlined, EnvironmentFilled } from "@ant-design/icons";
+import { Slider, Collapse, theme as antdTheme } from "antd";
+import { GoogleMap, useLoadScript, OverlayView } from "@react-google-maps/api";
 
 import StressCodeBoxPlot from "../dashboardMinor/StressCodeBoxPlot";
 import BoxPlot from "../dashboardMinor/BoxPlot";
@@ -50,6 +41,11 @@ const applyCommonMarkStyle = (marks) => {
 const formatter = (value) => {
   return `Top ${value}%`;
 };
+
+// // TODO: Scale this value
+// const locationRadiusFormatter = (value) => {
+//   return `Top ${value}%`;
+// };
 
 // textbox
 const { Panel } = Collapse;
@@ -108,15 +104,43 @@ const Dashboard4 = () => {
     switch (sliderName) {
       case "age":
         setAgeRange(value);
-        getBoxPlotData(value, appUsageRange, movedDistanceRange, location);
+        getBoxPlotData(
+          value,
+          appUsageRange,
+          movedDistanceRange,
+          location,
+          locationRadius
+        );
         break;
       case "appUsage":
         setAppUsageRange(value);
-        getBoxPlotData(ageRange, value, movedDistanceRange, location);
+        getBoxPlotData(
+          ageRange,
+          value,
+          movedDistanceRange,
+          location,
+          locationRadius
+        );
         break;
       case "movedDistance":
         setMovedDistanceRange(value);
-        getBoxPlotData(ageRange, appUsageRange, value, location);
+        getBoxPlotData(
+          ageRange,
+          appUsageRange,
+          value,
+          location,
+          locationRadius
+        );
+        break;
+      case "locationRadius":
+        setLocationRadius(value);
+        getBoxPlotData(
+          ageRange,
+          appUsageRange,
+          movedDistanceRange,
+          location,
+          value
+        );
         break;
       default:
         break;
@@ -127,7 +151,8 @@ const Dashboard4 = () => {
     ageRange,
     appUsageRange,
     movedDistanceRange,
-    location
+    location,
+    locationRadius
   ) => {
     //get data...
     const outputMyValue = 4.3;
@@ -354,6 +379,21 @@ const Dashboard4 = () => {
         ) : (
           <div>Loading...</div>
         )}
+        <SliderWrapper>
+          <SliderHeader></SliderHeader>
+          <Slider
+            // marks={moved_distance_marks}
+            min={20}
+            max={140}
+            defaultValue={locationRadius}
+            // tooltip={{ locationRadiusFormatter }}
+            tooltip={{ formatter: null }}
+            style={{ width: "200px" }}
+            onAfterChange={(value) =>
+              onAfterChangeSlider(value, "locationRadius")
+            }
+          />
+        </SliderWrapper>
       </SliderLayout>
       <BoxplotLayout>
         <StepWrapper>
@@ -538,7 +578,6 @@ applyCommonMarkStyle(moved_distance_marks);
 const AddressWrapper = styled.div`
   margin-left: -40px;
   margin-top: -10px;
-  height: 24px;
   font-family: "Open Sans";
   font-size: 12px;
   font-weight: 400;
