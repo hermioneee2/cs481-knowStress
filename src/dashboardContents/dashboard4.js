@@ -358,7 +358,7 @@ const Dashboard4 = () => {
           />
         </SliderWrapper>
         <SliderWrapper>
-          <SliderHeader>Location near</SliderHeader>
+          <LocationHeader>Location near</LocationHeader>
           <AddressWrapper>{address}</AddressWrapper>
         </SliderWrapper>
         {isLoaded ? (
@@ -380,15 +380,15 @@ const Dashboard4 = () => {
           <div>Loading...</div>
         )}
         <SliderWrapper>
-          <SliderHeader></SliderHeader>
+          <LocationHeader></LocationHeader>
+          <RadiusText>Radius</RadiusText>
           <Slider
-            // marks={moved_distance_marks}
             min={20}
             max={140}
             defaultValue={locationRadius}
             // tooltip={{ locationRadiusFormatter }}
             tooltip={{ formatter: null }}
-            style={{ width: "200px" }}
+            style={{ width: "180px" }}
             onAfterChange={(value) =>
               onAfterChangeSlider(value, "locationRadius")
             }
@@ -562,6 +562,24 @@ const SliderHeader = styled.div`
   color: ${(props) => props.theme.colors.grayKS};
 `;
 
+const LocationHeader = styled.div`
+  width: 90px;
+  font-family: "Open Sans";
+  font-size: 13px;
+  font-weight: 300;
+  margin-right: 10px;
+  padding-bottom: 15px;
+  color: ${(props) => props.theme.colors.grayKS};
+`;
+
+const RadiusText = styled.div`
+  font-family: "Open Sans";
+  font-size: 11px;
+  font-weight: 500;
+  margin-right: 10px;
+  color: ${(props) => props.theme.colors.selectionBlue};
+`;
+
 const commonMarkStyle = {
   color: "#7B7B7B",
   fontFamily: "Open Sans",
@@ -576,8 +594,7 @@ applyCommonMarkStyle(app_usage_marks);
 applyCommonMarkStyle(moved_distance_marks);
 
 const AddressWrapper = styled.div`
-  margin-left: -40px;
-  margin-top: -10px;
+  // margin-top: -10px;
   font-family: "Open Sans";
   font-size: 12px;
   font-weight: 400;
