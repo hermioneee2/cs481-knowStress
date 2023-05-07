@@ -3,7 +3,7 @@ import { GoogleMap, Circle, useLoadScript, MarkerF, LoadScript } from '@react-go
 import { getColor } from '../dashboardMinor/GetColor';
 import styled from "styled-components";
 import { Layout } from 'antd';
-import csvtojson from 'csvtojson';
+// import csvtojson from 'csvtojson';
 // import Papa from 'papaparse';
 
 
