@@ -14,7 +14,30 @@ const {Content, Sider } = Layout;
 
 const Dashboard2 = () => {
   
-  const dash2Data = [['Z', 'Messenger', 2.67],['A', 'Messenger', 2.67],['B', 'Messenger', 2.67],['C', 'Messenger', 2.67],['D', 'Messenger', 2.67],['E', 'Messenger', 2.67],['Kakao Talk', 'Messenger', 2.67],['Instagram', 'Social Media', 6],['Twitter', 'Social Media', 3],]
+  const dash2Data = [
+   [ "Melon","Video/Contents","3.218100056211355" ],
+   [  "MLB9이닝스19","Game","3.2933168316831685"],
+   [  "NAVER","Browser","3.333652312599681"],
+   [  "Instagram","Social Media","3.580088402441591"],
+   [  "CYBOS Touch","Utility","3.583751253761284"],
+   [  "Facebook","Social Media","3.6305197342712"],
+   [  "YouTube","Video/Contents","3.635525141326986"],
+   [   "Chrome","Browser","3.660663119115841"],
+   [  "카카오톡","Messenger","3.6656425085848543"],
+   [  "날씨","Utility","3.695156695156695"],
+   [  "Bleacher Report","Utility","3.717136150234742"],
+   [   "MTP 애플리케이션","Utility","3.7354758961681087"],
+   [  "전화","Messenger","3.8299024918743227"],
+   [  "연락처","Utility","3.9095982142857144"],
+   [  "Dropsync","Utility","3.9817495280050346"],
+  ];
+  // const dash2Data = [
+
+  //    ["Instagram","Social Media","3.580088402441591"],
+  //    ["NAVER","Utility","3.333652312599681"],
+  //    ["Melon","Video/Contents","3.218100056211355"],
+  //  ];
+
   const newArray = [];
 
     dash2Data.map((item) => {
@@ -24,22 +47,18 @@ const Dashboard2 = () => {
         newArray.push(  theme.colors.game );
       } else if (item[1] === "Messenger") {
         newArray.push(  theme.colors.communication );
-      } else if (item[1] === "Video Streaming") {
+      } else if (item[1] === "Video/Contents") {
         newArray.push(  theme.colors.videoStreaming );
       } else if (item[1] === "Utility") {
-        newArray.push(  theme.colors.utilit );
-      } else if (item[1] === "Etc") {
-        newArray.push(  theme.colors.etc );
+        newArray.push(  theme.colors.utility );
+      } else if (item[1] === "Browser") {
+        newArray.push(  theme.colors.browser );
       } 
     });
   
   const [arrColor, setArrColor] = useState([...newArray]);
   const [activeButton, setActiveButton] = useState(null);
     
-
-  // const initialColor = () => {
-  //   setArrColor([...arrColor, ...newArray]);
-  // };
 
   useEffect(() => {
     const updatedList = [...arrColor];
@@ -59,17 +78,6 @@ const Dashboard2 = () => {
     setArrColor(updatedList);
   }, [activeButton]);
 
-//  const changeColor = (event) => {
-//     const updatedList = [...arrColor];
-//     dash2Data.map((item, i) => {
-//       if (item[1] !== event.target.value) {
-//         updatedList[i] = alpha(updatedList[i], 0.1)
-//       } else {
-//           updatedList[i] = alpha(updatedList[i], 1)
-//       }
-//     });
-//     setArrColor(updatedList);
-//   }
 
     const changeColor = (buttonId) =>{
       if (activeButton === buttonId) {
@@ -94,9 +102,9 @@ const Dashboard2 = () => {
         <Board2Button changeColor={changeColor} color={theme.colors.socialMedia} category={'Social Media'}/>
         <Board2Button changeColor={changeColor} color={theme.colors.game} category={'Game'}/>
         <Board2Button changeColor={changeColor} color={theme.colors.communicationWriting} category={'Messenger'}/>
-        <Board2Button changeColor={changeColor} color={theme.colors.videoStreaming} category={'Video Streaming'}/>
+        <Board2Button changeColor={changeColor} color={theme.colors.videoStreaming} category={'Video/Contents'}/>
+        <Board2Button changeColor={changeColor} color={theme.colors.browser} category={'Browser'}/>
         <Board2Button changeColor={changeColor} color={theme.colors.utility} category={'Utility'}/>
-        <Board2Button changeColor={changeColor} color={theme.colors.etc} category={'Etc'}/>
 
       </Sider>
     </Layout>

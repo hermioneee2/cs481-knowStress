@@ -14,37 +14,26 @@ const {Content, Sider } = Layout;
 
 const Dashboard1 = () => {
 
-  const dailyValues = [3, 3.2, 3.5, 3.7, 4, 4.9, 5]
-  const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-  const weeklyValues = 2.6
-  const hourlyValues = 
-  [[-1,-1,-1,3.5,4.666666666666667,3.0,1.0,3.0,2.6666666666666665,3.0,1.0,3.0,],
-  [3.0,3.0,4.0,-1,-1,4.0,-1,5.0,3.5,5.0,-1,3.0,],
-  [4.0,4.0,4.0,-1,4.0,-1,4.0,5.0,3.0,-1,-1,5.5,],
-  [5.0,2.0,4.0,4.0,-1,4.5,-1,6.0,2.0,1.0,3.0,5.0],
-  [1.0,-1,4.0,1.0,4.0,-1,5.0,-1,5.0,2.0,3.0,-1,],
-  [5.0,-1,3.0,3.0,-1,1.0,3.0,-1,-1,4.0,3.0,2.5,],
-  [-1,-1,2.0,3.0,5.0,-1,2.0,3.0,3.0,4.0,4.0,4.0,],]
-
-  // var titleStyle = {
-  //   marginBottom: 10,
-  //   fontSize: '15px',
-  //   display: 'block',
-  // };
-  // var xLabel = {
-  //   color: theme.colors.grayKS,
-  //   fontWeight: 'lighter',
-  //   fontSize: '12px',
-  //   width: 10,
-  //   paddingRight: 23,
-  // }
+  
+  const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  const weeklyValues = 3.4;
+  const dailyValues = [4.454545454545454,4.076923076923077,3.5,3.8181818181818183,3.8181818181818183,1.2727272727272727,2.8];
+  const hourlyValues = [
+    [2.0,5.0,-1,3.0,4.0,6.0,-1,6.0,3.0,6.0,-1,3.0 ],
+    [3.0,-1,3.0,6.0,5.0,6.0,5.5,3.0,2.5,-1,2.0,-1],
+    [5.0,-1,4.0,-1,-1,2.0,3.6666666666666665,4.0,2.0,5.0,-1,-1],
+    [3.0,3.0,-1,5.5,6.0,-1,3.0,4.0,-1,2.5,4.0,3.0],
+    [1.5,-1,2.5,-1,4.0,6.0,4.0,-1,3.0,6.0,6.0,5.0],
+    [0.5,0.0,3.0,0.0,0.0,-1,3.0,3.0,0.0,3.0,-1,1.0],
+    [2.0,2.0,2.0,3.0,4.0,2.0,2.0,3.0,4.0,-1,-1,-1],
+  ];
 
 
   var WeeklyText = {
     color : getColor(weeklyValues),
     fontSize: '40px',
     fontWeight: 'bold',
-  }
+  };
 
   var yLabel = {
     color: theme.colors.grayKS,
@@ -54,7 +43,7 @@ const Dashboard1 = () => {
     // paddingTop: 2,
     marginTop: 3,
     marginRight: 25,
-  }
+  };
 
   const Daily = dailyValues.map((item) => (
     <div key={item.id} style={{display: 'block'}}>
