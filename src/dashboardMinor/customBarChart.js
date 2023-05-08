@@ -1,10 +1,11 @@
 import React, {useState, useEffect, useRef } from "react";
 import {theme} from '../styles/Theme'
-import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme, VictoryLabel } from 'victory';
-import { YAxis } from "recharts";
+import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme, VictoryScatter, VictoryLabel} from 'victory';
 
 const CustomBarChart = ({ category }) => {
-    let data;
+    let data, userX, userY;
+    userX = 0;
+    userY = 3.44;
   
     if (category === "Age") {
       data = [
@@ -19,6 +20,7 @@ const CustomBarChart = ({ category }) => {
         { x: "55-59", y: 0 },
         { x: "60-64", y: 0 },
       ];
+      userX = 2;
     } else if (category === "Total App Usage") {
         data=[
             { x: '0-9', y: 3.12},
@@ -32,6 +34,7 @@ const CustomBarChart = ({ category }) => {
             { x: '80-89', y: 2.91},
             { x: '90-99', y: 2.88}
         ];
+        userX=3;
     }
     else if (category==="Movement"){
         data=[
@@ -46,6 +49,7 @@ const CustomBarChart = ({ category }) => {
             { x: '80-89', y: 2.36},
             { x: '90-99', y: 3.30}
         ];
+        userX=1;
     }
     else if (category==="Sleep Time"){
         //not exist yet, fake data
@@ -61,6 +65,7 @@ const CustomBarChart = ({ category }) => {
             { x: '80-89', y: 2.66},
             { x: '90-99', y: 3.31}
         ];
+        userX=3;
     }
     else if (category==="Social Media"){
         data=[
@@ -75,6 +80,7 @@ const CustomBarChart = ({ category }) => {
             { x: '80-89', y: 2.43},
             { x: '90-99', y: 2.98}
         ];
+        userX=4;
     }
     else if (category==="Game"){
         data=[
@@ -89,6 +95,7 @@ const CustomBarChart = ({ category }) => {
             { x: '80-89', y: 3.17},
             { x: '90-99', y: 2.87}
         ];
+        userX=1;
     }
     else if (category==="Messenger"){
         data=[
@@ -103,6 +110,7 @@ const CustomBarChart = ({ category }) => {
             { x: '80-89', y: 3.19},
             { x: '90-99', y: 2.56}
         ];
+        userX=6;
     }
     else if (category==="Video/Contents"){
         data=[
@@ -117,6 +125,7 @@ const CustomBarChart = ({ category }) => {
             { x: '80-89', y: 2.87},
             { x: '90-99', y: 2.66}
         ];
+        userX=4;
     }
     else if (category==="Browser"){
         //not exist yet, fake data
@@ -132,6 +141,7 @@ const CustomBarChart = ({ category }) => {
             { x: '80-89', y: 2.66},
             { x: '90-99', y: 3.31}
         ];
+        userX=5;
     }
     else if (category==="Utility"){
         data=[
@@ -146,23 +156,24 @@ const CustomBarChart = ({ category }) => {
             { x: '80-89', y: 2.83},
             { x: '90-99', y: 2.69}
         ];
+        userX=6;
     }
     else{
         data=[
-            { x: '0-9', y: 3},
-            { x: '10-19', y: 3},
-            { x: '20-29', y: 3},
-            { x: '30-39', y: 3},
-            { x: '40-49', y: 3},
-            { x: '50-59', y: 3},
-            { x: '60-69', y: 3},
-            { x: '70-79', y: 3},
-            { x: '80-89', y: 3},
-            { x: '90-99', y: 3}
+            { x: '0-9', y: 0},
+            { x: '10-19', y: 0},
+            { x: '20-29', y: 0},
+            { x: '30-39', y: 0},
+            { x: '40-49', y: 0},
+            { x: '50-59', y: 0},
+            { x: '60-69', y: 0},
+            { x: '70-79', y: 0},
+            { x: '80-89', y: 0},
+            { x: '90-99', y: 0}
         ];
+        userX=-1;
     };
 
-  
     return (
       <VictoryChart
         responsive={false}
@@ -173,7 +184,7 @@ const CustomBarChart = ({ category }) => {
         }}
         theme={VictoryTheme.material}
         domainPadding={30}
-        padding={{left:30, top:0, right:30, bottom:50}}
+        padding={{left:30, top:0, right:30, bottom:100}}
       >
         <VictoryAxis
             dependentAxis
@@ -191,7 +202,14 @@ const CustomBarChart = ({ category }) => {
           alignment="middle"
           data={data}
         />
+        {userX&&(<VictoryScatter
+            data={[{x:userX, y:userY}]}
+            size={5 }
+            style={{data:{fill:theme.colors.me, stroke:'while', strokeWidth:1}}}
+            labels = {({datum})=>((userX>0)?"me":"")}
+            labelComponent={<VictoryLabel dy={-15} />}
+            symbol="star"/>)}
       </VictoryChart>
-    );
+    )
   };
 export default CustomBarChart

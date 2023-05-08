@@ -7,7 +7,7 @@ const MeAndOthersPresenter = () => {
   return (
     <ContentContainer>
       <Dashboard title="What is My Stress Rank in Group?" dashboardNum={4} />
-      <Dashboard title="test5" dashboardNum={5} />
+      <Dashboard title="What Group Gets Less Stress?" dashboardNum={5} />
     </ContentContainer>
   );
 };

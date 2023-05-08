@@ -5,43 +5,6 @@ import Button from '@mui/material/Button';
 import { alpha } from "@mui/material";
 import CustomBarChart from "../dashboardMinor/customBarChart";
 
-// const CustomBarChart = () => {
-//     return (
-//         <VictoryChart
-//         responsive={false}
-//         width={500}
-//         animate={{
-//             duration:1000,
-//             onLoad:{duration:200}
-//         }}
-//         theme={VictoryTheme.material}
-//         domainPadding={0}
-
-//         >
-//         <VictoryAxis/>
-//         <VictoryBar
-//             barRatio={1}
-//             style = {{data:{fill: theme.colors.stress3}}}
-//             tickLabelComponent={<VictoryLabel angle={45} textAnchor="start"/>}
-//             alignment="middle"
-//             // labels={d=>d.y}
-//             data={[
-//                 { x: '0-9', y: 3.12},
-//                 { x: '10-19', y: 2.71},
-//                 { x: '20-29', y: 2.62},
-//                 { x: '30-39', y: 2.74},
-//                 { x: '40-49', y: 3.33},
-//                 { x: '50-59', y: 2.68},
-//                 { x: '60-69', y: 2.75},
-//                 { x: '70-79', y: 2.20},
-//                 { x: '80-89', y: 2.91},
-//                 { x: '90-99', y: 2.88}
-              
-//             ]}
-//         />
-//         </VictoryChart>
-//     );
-// }
 
 
 const buttonStyle = (color) => {
@@ -90,6 +53,12 @@ const Dashboard5 = () => {
           setActiveButton(buttonId); // clicking a new button
         }
       };
+      
+    const HistogramExplanation = (
+        activeButton ? <>
+        Relationship between Stress Level and {activeButton}
+        </> : <></>
+    );
 
     useEffect(() => {
         const updatedList = [...arrColor];
@@ -125,6 +94,18 @@ const Dashboard5 = () => {
           <StepHeader>Step 2</StepHeader>
           <StepTitle>View Stress Level Distribution</StepTitle>
         </StepWrapper>
+        <p
+          style={{
+            margin: "10 0",
+            fontFamily: "Open Sans",
+            fontSize: "15px",
+            fontWeight: 300,
+
+            color: theme.colors.grayKS,
+          }}
+        >
+          {HistogramExplanation}
+        </p>
         <CustomBarChart category={activeButton}/>
       </ResultGraphLayout>
     </ContentLayout>
