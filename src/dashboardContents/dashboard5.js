@@ -79,15 +79,23 @@ const Dashboard5 = () => {
         <Button value={'Age'} onClick={()=>changeColor('Age')} sx={buttonStyle2(theme.colors.blackKS)} variant="text">{'Age'}</Button>
         <Button value={'Movement'} onClick={()=>changeColor('Movement')} sx={buttonStyle2(theme.colors.blackKS)} variant="text">{'Movement'}</Button>
         <Button value={'Sleep Time'} onClick={()=>changeColor('Sleep Time')} sx={buttonStyle2(theme.colors.blackKS)} variant="text">{'Sleep Time'}</Button>
-        <Button value={'Total App Usage'} onClick={()=>changeColor('Total App Usage')} sx={buttonStyle2(theme.colors.blackKS)} variant="text">{'Total App Usage'}</Button>
-        <div></div>
-        <Button value={'Social Media'} onClick={()=>changeColor('Social Media')} sx={buttonStyle(theme.colors.socialMedia)} variant="text">{'Social Media'}</Button>
-        <Button value={'Game'} onClick={()=>changeColor('Game')} sx={buttonStyle(theme.colors.game)} variant="text">{'Game'}</Button>
-        <Button value={'Messenger'} onClick={()=>changeColor('Messenger')} sx={buttonStyle(theme.colors.communicationWriting)} variant="text">{'Messenger'}</Button>
-        <Button value={'Video/Contents'} onClick={()=>changeColor('Video/Contents')} sx={buttonStyle(theme.colors.videoStreaming)} variant="text">{'Video/Contents'}</Button>
-        <Button value={'Browser'} onClick={()=>changeColor('Browser')} sx={buttonStyle(theme.colors.browser)} variant="text">{'Browser'}</Button>
-        <Button value={'Utility'} onClick={()=>changeColor('Utility')} sx={buttonStyle(theme.colors.utility)} variant="text">{'Utility'}</Button>
-      </CategorySelectionLayout>
+
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', marginTop: '10px' }}>
+            <Button value={'Total App Usage'} onClick={()=>changeColor('Total App Usage')} sx={{ ...buttonStyle2(theme.colors.blackKS)}} variant="text">{'Total App Usage'}</Button>
+            <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '10px' }}>
+            <div style={{ display: 'flex' }}>
+                <Button value={'Social Media'} onClick={()=>changeColor('Social Media')} sx={buttonStyle(theme.colors.socialMedia)} variant="text">{'Social Media'}</Button>
+                <Button value={'Game'} onClick={()=>changeColor('Game')} sx={buttonStyle(theme.colors.game)} variant="text">{'Game'}</Button>
+                <Button value={'Messenger'} onClick={()=>changeColor('Messenger')} sx={buttonStyle(theme.colors.communicationWriting)} variant="text">{'Messenger'}</Button>
+            </div>
+            <div style={{ display: 'flex' }}>
+                <Button value={'Video/Contents'} onClick={()=>changeColor('Video/Contents')} sx={buttonStyle(theme.colors.videoStreaming)} variant="text">{'Video/Contents'}</Button>
+                <Button value={'Browser'} onClick={()=>changeColor('Browser')} sx={buttonStyle(theme.colors.browser)} variant="text">{'Browser'}</Button>
+                <Button value={'Utility'} onClick={()=>changeColor('Utility')} sx={buttonStyle(theme.colors.utility)} variant="text">{'Utility'}</Button>
+            </div>
+            </div>
+        </div>
+        </CategorySelectionLayout>
 
       <ResultGraphLayout>
         <StepWrapper>
