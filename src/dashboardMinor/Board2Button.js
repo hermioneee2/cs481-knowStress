@@ -1,7 +1,6 @@
 import React from "react";
 import Button from '@mui/material/Button';
 import { alpha } from "@mui/material";
-import styled from "styled-components";
 
 
 const Board2Button = ({color, category, changeColor}) => {

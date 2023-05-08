@@ -57,7 +57,7 @@ const Dashboard1 = () => {
       <text style={yLabel}>{days[i]}</text>
       {v.map((value, j) => (
         <div style={{display: 'block'}} key={j}>
-          {value == -1 ? <DisabledByDefaultIcon sx={{color: '#CDCDCD', margin:-0.3,marginTop:-0.7,  fontSize:'30px'}}/> : <SquareIcon sx={{color: getColor(value), margin:-0.3, marginTop:-0.7,  fontSize:'30px'}} /> }
+          {value === -1 ? <DisabledByDefaultIcon sx={{color: '#CDCDCD', margin:-0.3,marginTop:-0.7,  fontSize:'30px'}}/> : <SquareIcon sx={{color: getColor(value), margin:-0.3, marginTop:-0.7,  fontSize:'30px'}} /> }
         </div>
       ))}
     </div>
@@ -69,18 +69,15 @@ const Dashboard1 = () => {
       <Sider width={130} style={{ background: '#ffffff'}}>
         <TitleStyle>Weekly</TitleStyle>
         <text style={WeeklyText}>{weeklyValues}</text>
-        {/* <text style={titleStyle}>Weekly</text> */}
-        {/* <WeeklyText>{weeklyValues}</WeeklyText> */}
+
       </Sider>
 
       <Sider width={40} style={{ background: '#ffffff'}}>
-        {/* <text style={titleStyle}>Daily</text> */}
         <TitleStyle>Daily</TitleStyle>
         <div style={{display: 'block', marginTop: 10}}>{Daily}</div>
       </Sider>
 
       <Content>
-        {/* <text style={titleStyle}>Hourly</text> */}
         <TitleStyle style={{marginLeft: 35}}>Hourly</TitleStyle>
         <div style={{display: 'block', marginTop: 10}}>{Hourly}</div>
         <div style={{paddingLeft: 25}}>
@@ -100,7 +97,6 @@ const Dashboard1 = () => {
       </Content>
 
       <Sider style={{ background: '#ffffff', paddingLeft:20, marginTop:25}}>
-        {/* <text style={{ marginBottom: 10, fontWeight: 'bold',}}>Stress Level</text> */}
         <StressLevel>Stress Level</StressLevel>
         <div style={{display: 'block', marginTop: 10}}>
           <StressCode color={theme.colors.stress6} t={6} lev={'Very Stressed'}/>
@@ -111,10 +107,6 @@ const Dashboard1 = () => {
           <StressCode color={theme.colors.stress1} t={1}/>
           <StressCode color={theme.colors.stress0} t={0} lev={'Not Stressed'}/>
           <StressCode v={-1} lev={'No Data'}/>
-          {/* <div style={{marginTop: 15}}>
-            <HighlightOffIcon sx={{color: '#CDCDCD', width: 13, height: 13}} />
-            <text style={{marginLeft: 15, fontStyle: 'italic', fontWeight: 'lighter'}}>No Data</text>
-          </div> */}
         </div>
       </Sider>
     </Layout>
