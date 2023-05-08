@@ -3,78 +3,45 @@ import styled from "styled-components";
 import {theme} from '../styles/Theme'
 import Button from '@mui/material/Button';
 import { alpha } from "@mui/material";
-import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme } from 'victory';
+import CustomBarChart from "../dashboardMinor/customBarChart";
 
-const totAppTimeData = [
-    { name: '0-9 percent', stress: 312},
-    { name: '10-19 percent', stress: 271},
-    { name: '20-29 percent', stress: 262},
-    { name: '30-39 percent', stress: 274},
-    { name: '40-49 percent', stress: 333},
-    { name: '50-59 percent', stress: 268},
-    { name: '60-69 percent', stress: 275},
-    { name: '70-79 percent', stress: 220},
-    { name: '80-89 percent', stress: 291},
-    { name: '90-99 percent', stress: 288},
-  
-];
+// const CustomBarChart = () => {
+//     return (
+//         <VictoryChart
+//         responsive={false}
+//         width={500}
+//         animate={{
+//             duration:1000,
+//             onLoad:{duration:200}
+//         }}
+//         theme={VictoryTheme.material}
+//         domainPadding={0}
 
-const defaultX = [
-    '0-9 percent', '10-19 percent', '20-29 percent', '30-39 percent', '40-49 percent',
-    '50-59 percent', '60-69 percent', '70-79 percent', '80-89 percent', '90-99 percent'];
-
-const CustomBarChart = () => {
-    return (
-        <VictoryChart
-        responsive={false}
-        animate={{
-            duration:1000,
-            onLoad:{duration:200}
-        }}
-        theme={VictoryTheme.material}
-        domainPadding={0}
-
-        >
-        <VictoryAxis/>
-        <VictoryBar
-            barRatio={1}
-            style = {{data:{fill: theme.colors.stress3}}}
-            alignment="middle"
-            // labels={d=>d.y}
-            data={[
-                { x: '0-9', y: 3.12},
-                { x: '10-19', y: 2.71},
-                { x: '20-29', y: 2.62},
-                { x: '30-39', y: 2.74},
-                { x: '40-49', y: 3.33},
-                { x: '50-59', y: 2.68},
-                { x: '60-69', y: 2.75},
-                { x: '70-79', y: 2.20},
-                { x: '80-89', y: 2.91},
-                { x: '90-99', y: 2.88}
+//         >
+//         <VictoryAxis/>
+//         <VictoryBar
+//             barRatio={1}
+//             style = {{data:{fill: theme.colors.stress3}}}
+//             tickLabelComponent={<VictoryLabel angle={45} textAnchor="start"/>}
+//             alignment="middle"
+//             // labels={d=>d.y}
+//             data={[
+//                 { x: '0-9', y: 3.12},
+//                 { x: '10-19', y: 2.71},
+//                 { x: '20-29', y: 2.62},
+//                 { x: '30-39', y: 2.74},
+//                 { x: '40-49', y: 3.33},
+//                 { x: '50-59', y: 2.68},
+//                 { x: '60-69', y: 2.75},
+//                 { x: '70-79', y: 2.20},
+//                 { x: '80-89', y: 2.91},
+//                 { x: '90-99', y: 2.88}
               
-            ]}
-        />
-        </VictoryChart>
-    );
-}
-
-// import Plotly from 'plotly.js'
-
-// const HistogramChart = ({data, layout}) => {
-//     const chartRef = useRef(null);
-    
-//     useEffect(()=> {
-//         const chartData = [{x: data.x, y:data.y, type: 'bar'}];
-//         Plotly.newPlot(chartRef.current, chartData, layout);
-
-
-//         return () => {
-//             Plotly.purge(chartRef.current);
-//         };
-//     }, [data, layout]);
-//     return <div ref={chartRef}/>;
-// };
+//             ]}
+//         />
+//         </VictoryChart>
+//     );
+// }
 
 
 const buttonStyle = (color) => {
@@ -112,8 +79,9 @@ const buttonStyle2 = (color) => {
 };
 
 
-
 const Dashboard5 = () => {
+    const newArray=[];
+    const [arrColor, setArrColor] = useState([...newArray]);
     const [activeButton, setActiveButton] = useState(null);
     const changeColor = (buttonId) =>{
         if (activeButton === buttonId) {
@@ -122,8 +90,16 @@ const Dashboard5 = () => {
           setActiveButton(buttonId); // clicking a new button
         }
       };
-    const totAppTimeData = {x:defaultX, y: [3.121834, 2.713119, 2.622682, 2.743586, 3.332538, 2.677278, 2.748661, 2.201376, 2.905632, 2.881322]};
-    const layout = {title: 'Relation between Stress Level and Age'}
+
+    useEffect(() => {
+        const updatedList = [...arrColor];
+        if (activeButton===null){
+          updatedList.map((item, i) => {
+            updatedList[i] = alpha(updatedList[i], 1);
+          })
+        } 
+        setArrColor(updatedList);
+      }, [activeButton]);
   return (
     <ContentLayout>
       <CategorySelectionLayout>
@@ -142,13 +118,6 @@ const Dashboard5 = () => {
         <Button value={'Video/Contents'} onClick={()=>changeColor('Video/Contents')} sx={buttonStyle(theme.colors.videoStreaming)} variant="text">{'Video/Contents'}</Button>
         <Button value={'Browser'} onClick={()=>changeColor('Browser')} sx={buttonStyle(theme.colors.browser)} variant="text">{'Browser'}</Button>
         <Button value={'Utility'} onClick={()=>changeColor('Utility')} sx={buttonStyle(theme.colors.utility)} variant="text">{'Utility'}</Button>
-
-        {/* <Board2Button changeColor={changeColor} color={theme.colors.socialMedia} category={'Social Media'}/>
-        <Board2Button changeColor={changeColor} color={theme.colors.game} category={'Game'}/>
-        <Board2Button changeColor={changeColor} color={theme.colors.communicationWriting} category={'Messenger'}/>
-        <Board2Button changeColor={changeColor} color={theme.colors.videoStreaming} category={'Video/Contents'}/>
-        <Board2Button changeColor={changeColor} color={theme.colors.browser} category={'Browser'}/>
-        <Board2Button changeColor={changeColor} color={theme.colors.utility} category={'Utility'}/> */}
       </CategorySelectionLayout>
 
       <ResultGraphLayout>
@@ -156,7 +125,7 @@ const Dashboard5 = () => {
           <StepHeader>Step 2</StepHeader>
           <StepTitle>View Stress Level Distribution</StepTitle>
         </StepWrapper>
-        <CustomBarChart />
+        <CustomBarChart category={activeButton}/>
       </ResultGraphLayout>
     </ContentLayout>
   );
