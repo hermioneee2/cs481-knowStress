@@ -6,13 +6,25 @@ import { QuestionCircleOutlined } from "@ant-design/icons";
 import { theme } from "../styles/Theme";
 
 const Dashboard = ({ title, page1, subtitle, dashboardNum }) => {
+  const iconStyle = {
+    fontSize: "28px",
+    color: theme.colors.stress1,
+    marginRight: `10px`,
+  };
+
   return (
     <DashboardContainer>
-      <DashboardTitle>{title}</DashboardTitle>
-      <Title>
-        {page1}
-        <SubTitle>{subtitle}</SubTitle>
-      </Title>
+      {dashboardNum === 4 || dashboardNum === 5 ? (
+        <DashboardTitleWrapper>
+          <QuestionCircleOutlined style={iconStyle} />
+          <DashboardTitle>{title}</DashboardTitle>
+        </DashboardTitleWrapper>
+      ) : (
+        <Title>
+          {page1}
+          <SubTitle>{subtitle}</SubTitle>
+        </Title>
+      )}
       <DashboardContentSwitcher dashboardNum={dashboardNum} />
     </DashboardContainer>
   );
