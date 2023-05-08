@@ -60,7 +60,7 @@ try:
         writer = csv.writer(f)
         for loc in loc_dict:
             stress, count = loc_dict[loc]
-            if count>0:writer.writerow([loc, stress/count])
+            if count>0:writer.writerow([round(loc[1],4), round(loc[0],4), round(stress/count,1)])
             # if count>0:writer.writerow([geocoding_reverse(loc[1], loc[0]), stress/count])
     
 except:pass

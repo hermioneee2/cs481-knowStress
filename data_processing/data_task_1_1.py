@@ -23,6 +23,11 @@ for data in user_data:
 
 with open(f'data_processing/{user}_stress_by_day_time.csv', 'w', newline='') as f:
     writer = csv.writer(f)
+    daily_list = []
+    weekly_list = []
+    hourly_list = []
+    weeklyst = 0
+    weeklyct = 0
     for i in range(7):
         row=[]
         dailyst=0
@@ -31,8 +36,13 @@ with open(f'data_processing/{user}_stress_by_day_time.csv', 'w', newline='') as 
             stress, ct = stress_table[i][j]
             dailyst+=stress
             dailyct+=ct
+            weeklyst+=stress
+            weeklyct+=ct
             if ct==0:row.append(-1) #null
             else:row.append(stress/ct)
-        if dailyct==0:row.append(-1) #null for one day
-        else:row.append(dailyst/dailyct)
-        writer.writerow(row)
+        if dailyct==0:daily_list.append(-1) #null for whole day
+        else:daily_list.append(dailyst/dailyct)
+        hourly_list.append(row)
+    writer.writerow([round(weeklyst/weeklyct,1) if weeklyct else 0])
+    writer.writerow(daily_list)
+    for row in hourly_list:writer.writerow(row)

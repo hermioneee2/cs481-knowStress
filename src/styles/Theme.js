@@ -1,8 +1,10 @@
+import { alpha } from "@mui/material";
+
 export const theme = {
   colors: {
     blackKS: "#1E1E1E",
     grayKS: "#7B7B7B",
-    selectedSidbarKS: "#F6F6F6",
+    selectedSidebarKS: "#F6F6F6",
     stress6: "#4F0E08",
     stress5: "#7C1D14",
     stress4: "#C42E20",
@@ -19,12 +21,13 @@ export const theme = {
     socialMedia: "#78AEFF",
     communication: "#FFDE31",
     videoStreaming: "#FF835C",
-    utility: "#80E184",
+    utility: "#969696",
     game: "#89DEF0",
     communicationWriting: "#EDC700",
-    etc: "#969696",
+    browser: "#80E184",
     selected: "#91D5FF",
     logoColor: "#FF4949",
+    explanationBackground: '#F9F9F9',
   },
   // fonts: {
   //   poppins: "Anek Malayalam",
