@@ -1,6 +1,4 @@
 import React, {useState, useEffect} from "react";
-import Plot from 'react-plotly.js';
-import Button from '@mui/material/Button';
 import { alpha } from "@mui/material";
 import {theme} from '../styles/Theme'
 import BarChart from "../dashboardMinor/BarChart";
@@ -32,13 +30,6 @@ const Dashboard2 = () => {
    [  "연락처","Utility","3.9095982142857144"],
    [  "Dropsync","Utility","3.9817495280050346"],
   ];
-
-  // const dash2Data = [
-  //    ["Instagram","Social Media","3.580088402441591"],
-  //    [ "YouTube","Video/Contents","3.635525141326986"],
-  //    ["NAVER","Utility","3.333652312599681"],
-  //    ["Melon","Video/Contents","3.218100056211355"],
-  //  ];
 
    const imgArr = dash2Data.map((arr) => require(`./images/${arr[0]}.png`))
 
@@ -97,7 +88,7 @@ const Dashboard2 = () => {
   return (
     <div>
     <Layout style={{ background: '#ffffff'}}> 
-      <Sider width={50} style={{ background: '#ffffff', paddingLeft:20}}>
+      <Sider width={60} style={{ background: '#ffffff', paddingLeft:20}}>
         {/* <Images dash2Data={dash2Data.map((arr) => require(`./images/${arr[0]}.png`))} /> */}
         <Images dash2Data={imgArr.reverse()} />
       </Sider>

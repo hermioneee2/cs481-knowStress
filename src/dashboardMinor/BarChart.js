@@ -1,7 +1,6 @@
 import React from "react";
 import Plot from 'react-plotly.js';
 import {theme} from '../styles/Theme';
-import Images from "./Images";
 
 
 
@@ -28,6 +27,7 @@ const BarChart = ({color, dash2Data}) => {
             title: {text: "Average Stress Level", standoff:20, font: {size: 10, color: theme.colors.grayKS}}, 
             range: [0, 6], 
             tickfont: { size: 11, color:theme.colors.grayKS  },
+            zeroline: false,
         },
         margin: {t: 0, l:0},
         pad: {t:0, l:0},
@@ -35,6 +35,8 @@ const BarChart = ({color, dash2Data}) => {
         yaxis: {
             automargin: true,
             showticklabels: false,
+            zeroline: false,
+            // visible: false,
         //     tickmode: 'array',
         //     tickvals: [2,1,0],
         //     // tickformat: customTickFormat,
