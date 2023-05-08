@@ -14,7 +14,7 @@ export const theme = {
     stress0: "#FFD9D4",
     white: "#FFFFFF",
     selectionBlue: "#21AAFF",
-    selectionTransparent: "#3891D5FF",
+    selectionTransparent: "#91D5FF38",
     me: "#7B61FF",
     mainBgLightGray: "#FAFAFA",
     topbarBorder: "#F4F6F8",
