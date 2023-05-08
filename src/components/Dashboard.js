@@ -5,21 +5,14 @@ import DashboardContentSwitcher from "./DashboardContentSwitcher";
 import { QuestionCircleOutlined } from "@ant-design/icons";
 import { theme } from "../styles/Theme";
 
-const Dashboard = ({ title, dashboardNum }) => {
-  const iconStyle = {
-    fontSize: "28px",
-    color: theme.colors.stress1,
-    marginRight: `10px`,
-  };
-
+const Dashboard = ({ title, page1, subtitle, dashboardNum }) => {
   return (
     <DashboardContainer>
-      <DashboardTitleWrapper>
-        {dashboardNum === 4 || dashboardNum === 5 ? (
-          <QuestionCircleOutlined style={iconStyle} />
-        ) : null}
-        <DashboardTitle>{title}</DashboardTitle>
-      </DashboardTitleWrapper>
+      <DashboardTitle>{title}</DashboardTitle>
+      <Title>
+        {page1}
+        <SubTitle>{subtitle}</SubTitle>
+      </Title>
       <DashboardContentSwitcher dashboardNum={dashboardNum} />
     </DashboardContainer>
   );
@@ -49,6 +42,22 @@ const DashboardTitle = styled(Layout.Content)`
   font-size: 20px;
   font-weight: 400;
   margin-bottom: 10px;
+`;
+
+const Title = styled(Layout.Content)`
+  color: ${(props) => props.theme.colors.grayKS};
+  font-family: "Open Sans";
+  font-size: 20px;
+  font-weight: 400;
+  margin-bottom: 28px;
+`;
+
+const SubTitle = styled.span`
+  color: ${(props) => props.theme.colors.blackKS};
+  font-family: "Open Sans";
+  font-size: 20px;
+  font-weight: 400;
+  margin-bottom: 28px;
 `;
 
 export default Dashboard;

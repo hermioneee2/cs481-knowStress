@@ -28,7 +28,7 @@ class ESM_data:
     def __str__(self):
         return f"User: {self.user}\nStress: {self.stress}\nTime: {self.year}.{self.month}.{self.day} {'0'*(self.hour<10)}{self.hour}:{'0'*(self.minute<10)}{self.minute}:{'0'*(self.second<10)}{self.second}\n"
 
-with open('data_processing/data/user_info.csv') as user_info:
+with open('data_processing/data/user_info.csv', encoding= 'cp949') as user_info:
     reader = csv.reader(user_info)
     for line in reader:
         try:
