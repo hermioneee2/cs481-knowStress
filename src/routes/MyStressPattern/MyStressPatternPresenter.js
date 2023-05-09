@@ -6,9 +6,9 @@ import Dashboard from "../../components/Dashboard";
 const MyStressPatternPresenter = () => {
   return (
     <ContentContainer>
-      <Dashboard title="test" dashboardNum={1} />
-      <Dashboard title="test2" dashboardNum={2} />
-      <Dashboard title="test3" dashboardNum={3} />
+      <Dashboard page1="Average Stress Level By " subtitle="Time" dashboardNum={1} />
+      <Dashboard page1="Average Stress Level By " subtitle="Application" dashboardNum={2} />
+      <Dashboard page1="Average Stress Level By " subtitle="Location" dashboardNum={3} />
     </ContentContainer>
   );
 };
