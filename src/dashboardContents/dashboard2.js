@@ -97,12 +97,12 @@ const Dashboard2 = () => {
       </Content>
       <Sider style={{ background: '#ffffff', paddingLeft:20}}>
         <CategoryNames>Highlight By Category</CategoryNames>
-        <Board2Button changeColor={changeColor} color={theme.colors.socialMedia} category={'Social Media'}/>
-        <Board2Button changeColor={changeColor} color={theme.colors.game} category={'Game'}/>
-        <Board2Button changeColor={changeColor} color={theme.colors.communicationWriting} category={'Messenger'}/>
-        <Board2Button changeColor={changeColor} color={theme.colors.videoStreaming} category={'Video/Contents'}/>
-        <Board2Button changeColor={changeColor} color={theme.colors.browser} category={'Browser'}/>
-        <Board2Button changeColor={changeColor} color={theme.colors.utility} category={'Utility'}/>
+        <Board2Button activeButton={activeButton} changeColor={changeColor} color={theme.colors.socialMedia} category={'Social Media'}/>
+        <Board2Button activeButton={activeButton} changeColor={changeColor} color={theme.colors.game} category={'Game'}/>
+        <Board2Button activeButton={activeButton} changeColor={changeColor} color={theme.colors.communicationWriting} category={'Messenger'}/>
+        <Board2Button activeButton={activeButton} changeColor={changeColor} color={theme.colors.videoStreaming} category={'Video/Contents'}/>
+        <Board2Button activeButton={activeButton} changeColor={changeColor} color={theme.colors.browser} category={'Browser'}/>
+        <Board2Button activeButton={activeButton} changeColor={changeColor} color={theme.colors.utility} category={'Utility'}/>
 
       </Sider>
     </Layout>
