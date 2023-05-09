@@ -16,7 +16,7 @@ const buttonStyle = (color) => {
         display:'flex', 
         flexDirection: 'row',
         justifyContent:'center',
-        allignItems:'flex-start',
+        allignItems:'center',
         height:'22px', 
 
         textTransform:'none',
@@ -71,9 +71,9 @@ const Dashboard5 = () => {
     const [activeButton, setActiveButton] = useState(null);
     const changeColor = (buttonId) =>{
         if (activeButton === buttonId) {
-          setActiveButton(null); // unclicking the active button
+          setActiveButton(buttonId);
         } else {
-          setActiveButton(buttonId); // clicking a new button
+          setActiveButton(buttonId);
         }
       };
       
@@ -81,7 +81,7 @@ const Dashboard5 = () => {
         activeButton ? <>
         Relationship between Stress Level and {activeButton}
         </> : 
-        <>　</>
+        <>Relationship between Stress Level and Age</>
     );
     const BarChartExplanationString = () => {
         switch(activeButton){
@@ -95,7 +95,7 @@ const Dashboard5 = () => {
             case "Video/Contents": return <>It seems: the lower the video/contents using time, the higher the stress level.</>;
             case "Browser": return <>It seems: too less or much browser using is related with higher stress level.</>;
             case "Utility": return <>It seems: the higher the utility using time, the higher the stress level.</>;
-            default: return <></>;
+            default: return <>It seems: the higher the age, the higher the stress level.</>;
     
         }
     }
@@ -124,7 +124,7 @@ const Dashboard5 = () => {
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', marginTop: '10px' }}>
-            <Button value={'Total App Usage'} onClick={()=>changeColor('Total App Usage')} sx={{ ...buttonStyle2(theme.colors.blackKS)}} variant="text">{'Total App Usage'}</Button>
+            <Button value={'Total App Usage'} onClick={()=>changeColor('Total App Usage')} sx={{...buttonStyle2(theme.colors.blackKS), width: '130px'} } variant="text">{'Total App Usage'}</Button>
             <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '10px', gap:'7px' }}>
             <div style={{ display: 'flex' }}>
                 <Button value={'Social Media'} onClick={()=>changeColor('Social Media')} sx={buttonStyle(theme.colors.socialMedia)} variant="text">{'Social Media'}</Button>
@@ -162,7 +162,7 @@ const Dashboard5 = () => {
         <div style={{marginBottom: '20px'}}></div>
         <BarChartExplanation>
         <text style={{marginBottom: '10px', fontFamily: "Open Sans",fontWeight: '400', color:theme.colors.grayKS}}>
-        {(activeButton)&&BarChartExplanationString(activeButton)}
+        {BarChartExplanationString(activeButton)}
         </text>
         </BarChartExplanation>
       </ResultGraphLayout>

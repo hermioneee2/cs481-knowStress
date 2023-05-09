@@ -33,33 +33,33 @@ const CustomBarChart = ({ category }) => {
       labelText2 = "";
     } else if (category === "Total App Usage") {
         data=[
-            { x: '1st', y: 3.12},
-            { x: '10th', y: 2.71},
-            { x: '20th', y: 2.62},
-            { x: '30th', y: 2.74},
-            { x: '40th', y: 3.33},
-            { x: '50th', y: 2.68},
-            { x: '60th', y: 2.75},
-            { x: '70th', y: 2.20},
-            { x: '80th', y: 2.91},
-            { x: '90th', y: 2.88},
-            { x: '100th',y: 0}
+            { x: 'top\n1%', y: 3.12},
+            { x: 'top\n10%', y: 2.71},
+            { x: 'top\n20%', y: 2.62},
+            { x: 'top\n30%', y: 2.74},
+            { x: 'top\n40%', y: 3.33},
+            { x: 'top\n50%', y: 2.68},
+            { x: 'top\n60%', y: 2.75},
+            { x: 'top\n70%', y: 2.20},
+            { x: 'top\n80%', y: 2.91},
+            { x: 'top\n90%', y: 2.88},
+            { x: 'top\n100%',y: 0}
         ];
         userX=3;
     }
     else if (category==="Movement"){
         data=[
-            { x: '1st', y: 2.82},
-            { x: '10th', y: 2.80},
-            { x: '20th', y: 2.61},
-            { x: '30th', y: 2.64},
-            { x: '40th', y: 2.99},
-            { x: '50th', y: 2.50},
-            { x: '60th', y: 3.31},
-            { x: '70th', y: 2.66},
-            { x: '80th', y: 2.36},
-            { x: '90th', y: 3.30},
-            { x: '100th',y: 0}
+            { x: 'top\n1%', y: 2.82},
+            { x: 'top\n10%', y: 2.80},
+            { x: 'top\n20%', y: 2.61},
+            { x: 'top\n30%', y: 2.64},
+            { x: 'top\n40%', y: 2.99},
+            { x: 'top\n50%', y: 2.50},
+            { x: 'top\n60%', y: 3.31},
+            { x: 'top\n70%', y: 2.66},
+            { x: 'top\n80%', y: 2.36},
+            { x: 'top\n90%', y: 3.30},
+            { x: 'top\n100%',y: 0}
         ];
         userX=1;
         labelText1 = "Least Activity";
@@ -68,17 +68,17 @@ const CustomBarChart = ({ category }) => {
     else if (category==="Sleep Time"){
         //not exist yet, fake data
         data=[
-            { x: '1st', y: 3.71},
-            { x: '10th', y: 3.04},
-            { x: '20th', y: 2.96},
-            { x: '30th', y: 3.11},
-            { x: '40th', y: 2.76},
-            { x: '50th', y: 2.50},
-            { x: '60th', y: 2.21},
-            { x: '70th', y: 2.46},
-            { x: '80th', y: 2.66},
-            { x: '90th', y: 3.31},
-            { x: '100th',y: 0}
+            { x: 'top\n1%', y: 3.71},
+            { x: 'top\n10%', y: 3.04},
+            { x: 'top\n20%', y: 2.96},
+            { x: 'top\n30%', y: 3.11},
+            { x: 'top\n40%', y: 2.76},
+            { x: 'top\n50%', y: 2.50},
+            { x: 'top\n60%', y: 2.21},
+            { x: 'top\n70%', y: 2.46},
+            { x: 'top\n80%', y: 2.66},
+            { x: 'top\n90%', y: 3.31},
+            { x: 'top\n100%',y: 0}
         ];
         userX=3;
         labelText1 = "Least Sleep";
@@ -86,120 +86,119 @@ const CustomBarChart = ({ category }) => {
     }
     else if (category==="Social Media"){
         data=[
-            { x: '1st', y: 2.97},
-            { x: '10th', y: 3.29},
-            { x: '20th', y: 2.88},
-            { x: '30th', y: 2.96},
-            { x: '40th', y: 3.10},
-            { x: '50th', y: 2.52},
-            { x: '60th', y: 2.90},
-            { x: '70th', y: 2.25},
-            { x: '80th', y: 2.43},
-            { x: '90th', y: 2.98},
-            { x: '100th',y: 0}
+            { x: 'top\n1%', y: 2.97},
+            { x: 'top\n10%', y: 3.29},
+            { x: 'top\n20%', y: 2.88},
+            { x: 'top\n30%', y: 2.96},
+            { x: 'top\n40%', y: 3.10},
+            { x: 'top\n50%', y: 2.52},
+            { x: 'top\n60%', y: 2.90},
+            { x: 'top\n70%', y: 2.25},
+            { x: 'top\n80%', y: 2.43},
+            { x: 'top\n90%', y: 2.98},
+            { x: 'top\n100%',y: 0}
         ];
         userX=4;
     }
     else if (category==="Game"){
         data=[
-            { x: '1st', y: 2.75},
-            { x: '10th', y: 2.58},
-            { x: '20th', y: 2.88},
-            { x: '30th', y: 3.03},
-            { x: '40th', y: 2.53},
-            { x: '50th', y: 2.50},
-            { x: '60th', y: 3.00},
-            { x: '70th', y: 2.70},
-            { x: '80th', y: 3.17},
-            { x: '90th', y: 2.87},
-            { x: '100th',y: 0}
+            { x: 'top\n1%', y: 2.75},
+            { x: 'top\n10%', y: 2.58},
+            { x: 'top\n20%', y: 2.88},
+            { x: 'top\n30%', y: 3.03},
+            { x: 'top\n40%', y: 2.53},
+            { x: 'top\n50%', y: 2.50},
+            { x: 'top\n60%', y: 3.00},
+            { x: 'top\n70%', y: 2.70},
+            { x: 'top\n80%', y: 3.17},
+            { x: 'top\n90%', y: 2.87},
+            { x: 'top\n100%',y: 0}
         ];
         userX=1;
     }
     else if (category==="Messenger"){
         data=[
-            { x: '1st', y: 2.80},
-            { x: '10th', y: 2.80},
-            { x: '20th', y: 2.62},
-            { x: '30th', y: 3.03},
-            { x: '40th', y: 2.99},
-            { x: '50th', y: 2.58},
-            { x: '60th', y: 2.83},
-            { x: '70th', y: 2.58},
-            { x: '80th', y: 3.19},
-            { x: '90th', y: 2.56},
-            { x: '100th',y: 0}
+            { x: 'top\n1%', y: 2.80},
+            { x: 'top\n10%', y: 2.80},
+            { x: 'top\n20%', y: 2.62},
+            { x: 'top\n30%', y: 3.03},
+            { x: 'top\n40%', y: 2.99},
+            { x: 'top\n50%', y: 2.58},
+            { x: 'top\n60%', y: 2.83},
+            { x: 'top\n70%', y: 2.58},
+            { x: 'top\n80%', y: 3.19},
+            { x: 'top\n90%', y: 2.56},
+            { x: 'top\n100%',y: 0}
         ];
         userX=6;
     }
     else if (category==="Video/Contents"){
         data=[
-            { x: '1st', y: 2.46},
-            { x: '10th', y: 3.33},
-            { x: '20th', y: 3.14},
-            { x: '30th', y: 2.80},
-            { x: '40th', y: 2.92},
-            { x: '50th', y: 2.83},
-            { x: '60th', y: 2.64},
-            { x: '70th', y: 2.36},
-            { x: '80th', y: 2.87},
-            { x: '90th', y: 2.66},
-            { x: '100th',y: 0}
+            { x: 'top\n1%', y: 2.46},
+            { x: 'top\n10%', y: 3.33},
+            { x: 'top\n20%', y: 3.14},
+            { x: 'top\n30%', y: 2.80},
+            { x: 'top\n40%', y: 2.92},
+            { x: 'top\n50%', y: 2.83},
+            { x: 'top\n60%', y: 2.64},
+            { x: 'top\n70%', y: 2.36},
+            { x: 'top\n80%', y: 2.87},
+            { x: 'top\n90%', y: 2.66},
+            { x: 'top\n100%',y: 0}
         ];
         userX=4;
     }
     else if (category==="Browser"){
         //not exist yet, fake data
         data=[
-            { x: '1st', y: 3.71},
-            { x: '10th', y: 3.04},
-            { x: '20th', y: 2.96},
-            { x: '30th', y: 3.11},
-            { x: '40th', y: 2.76},
-            { x: '50th', y: 2.50},
-            { x: '60th', y: 2.21},
-            { x: '70th', y: 2.46},
-            { x: '80th', y: 2.66},
-            { x: '90th', y: 3.31},
-            { x: '100th',y: 0}
+            { x: 'top\n1%', y: 3.71},
+            { x: 'top\n10%', y: 3.04},
+            { x: 'top\n20%', y: 2.96},
+            { x: 'top\n30%', y: 3.11},
+            { x: 'top\n40%', y: 2.76},
+            { x: 'top\n50%', y: 2.50},
+            { x: 'top\n60%', y: 2.21},
+            { x: 'top\n70%', y: 2.46},
+            { x: 'top\n80%', y: 2.66},
+            { x: 'top\n90%', y: 3.31},
+            { x: 'top\n100%',y: 0}
         ];
         userX=5;
     }
     else if (category==="Utility"){
         data=[
-            { x: '1st', y: 2.47},
-            { x: '10th', y: 2.62},
-            { x: '20th', y: 3.07},
-            { x: '30th', y: 2.97},
-            { x: '40th', y: 2.91},
-            { x: '50th', y: 2.82},
-            { x: '60th', y: 2.86},
-            { x: '70th', y: 2.80},
-            { x: '80th', y: 2.83},
-            { x: '90th', y: 2.69},
-            { x: '100th',y: 0}
+            { x: 'top\n1%', y: 2.47},
+            { x: 'top\n10%', y: 2.62},
+            { x: 'top\n20%', y: 3.07},
+            { x: 'top\n30%', y: 2.97},
+            { x: 'top\n40%', y: 2.91},
+            { x: 'top\n50%', y: 2.82},
+            { x: 'top\n60%', y: 2.86},
+            { x: 'top\n70%', y: 2.80},
+            { x: 'top\n80%', y: 2.83},
+            { x: 'top\n90%', y: 2.69},
+            { x: 'top\n100%',y: 0}
         ];
         userX=6;
     }
-    else{
-        data=[
-            { x: '1st', y: 0},
-            { x: '10th', y: 0},
-            { x: '20th', y: 0},
-            { x: '30th', y: 0},
-            { x: '40th', y: 0},
-            { x: '50th', y: 0},
-            { x: '60th', y: 0},
-            { x: '70th', y: 0},
-            { x: '80th', y: 0},
-            { x: '90th', y: 0},
-            { x: '100th',y: 0}
+    else {
+        data = [
+          { x: "15", y: 2.63 },
+          { x: "20", y: 2.74 },
+          { x: "25", y: 2.88 },
+          { x: "30", y: 2.82 },
+          { x: "35", y: 0 },
+          { x: "40", y: 3.43 },
+          { x: "45", y: 0 },
+          { x: "50", y: 0 },
+          { x: "55", y: 0 },
+          { x: "60", y: 0 },
+          { x: "65", y: 0},
         ];
-        userX=-1;
+        userX = 2;
         labelText1 = "";
         labelText2 = "";
-        isnull=true;
-    };
+      }
     const CircleTick = (props) =>{
         let stressColor;
         if (props.index === 0) {
@@ -254,14 +253,8 @@ const CustomBarChart = ({ category }) => {
             domainPadding={0}
             tickValues={[0,1,2,3,4,5,6]}
             tickComponent={<CircleTick/>}
-            tickFormat={(tick)=>{
-                switch (tick){
-                    case 0: return "No Stress";
-                    case 6: return "Very Stressed";
-                    default: return "";
-                }
-            }}
-            tickLabelComponent={<VictoryLabel style={{fontFamily: 'Open Sans', fontStyle:'italic', fontWeight:300, fill:theme.colors.blackKS, size:'14px'}}/>}
+            tickFormat={(tick)=>tick}
+            tickLabelComponent={<VictoryLabel style={{fontFamily: 'Open Sans', fontStyle:'normal', fontWeight:300, fill:theme.colors.blackKS, size:'10px'}}/>}
             style={{ 
                 grid: {stroke: "transparent"},
                 tickLabels: { fontSize: 10 }, 
@@ -298,13 +291,26 @@ const CustomBarChart = ({ category }) => {
         x={100}
         y={300}
         text={labelText1}
-        style={{fontFamily: 'Open Sans', fontStyle:'italic', fontWeight:300, fill:theme.colors.blackKS, size:'14px'}}
+        style={{fontFamily: 'Open Sans', fontStyle:'italic', fontWeight:300, fill:theme.colors.blackKS, size:'10px'}}
         />
         <VictoryLabel
         x={400}
         y={300}
         text={labelText2}
-        style={{fontFamily: 'Open Sans', fontStyle:'italic', fontWeight:300, fill:theme.colors.blackKS, size:'14px'}}
+        style={{fontFamily: 'Open Sans', fontStyle:'italic', fontWeight:300, fill:theme.colors.blackKS, size:'10px'}}
+        /> 
+
+        <VictoryLabel
+        x={0}
+        y={-45}
+        text='Very Stressed'
+        style={{fontFamily: 'Open Sans', fontStyle:'italic', fontWeight:300, fill:theme.colors.blackKS, size:'10px'}}
+        />         
+        <VictoryLabel
+        x={20}
+        y={250}
+        text='No Stress'
+        style={{fontFamily: 'Open Sans', fontStyle:'italic', fontWeight:300, fill:theme.colors.blackKS, size:'10px'}}
         /> 
         <div style={{marginBottom: '20px'}}></div>
       </VictoryChart>
