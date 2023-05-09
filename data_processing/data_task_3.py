@@ -67,3 +67,18 @@ for app_time in app_time_dict:
         writer = csv.writer(f)
         for i in range(0, 100, 10):
             writer.writerow([f"{i}-{i+9} percentile", app_time_dict[i][0]/app_time_dict[i][1]])
+
+#histogram by app category usage time
+for category in ['Social media', 'Game', 'Messenger', 'Video/Contents', 'Utility', 'etc']:
+    app_time_list=[]
+    for user in user_dict:
+        if user_dict[user][f'{category} app time'] == '0':continue
+        app_time_list.append((float(user_dict[user][f'{category} app time']), float(user_dict[user]['avg_stress'])))
+    app_time_dict = make_histogram(app_time_list)
+
+    for app_time in app_time_dict:
+        category_url = '_'.join(category.split('/'))
+        with open(f'data_processing/data/{category_url}_app_time_stress_distribution.csv', 'w', newline='') as f:
+            writer = csv.writer(f)
+            for i in range(0, 100, 10):
+                writer.writerow([f"{i}-{i+9} percentile", app_time_dict[i][0]/app_time_dict[i][1]])
