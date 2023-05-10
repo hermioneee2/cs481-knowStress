@@ -1,4 +1,3 @@
-import { alpha } from "@mui/material";
 
 export const theme = {
   colors: {

@@ -24,7 +24,7 @@ function blendColors(color1, color2, proportion) {
 
 export const getColor = (v) => {
     let c1 = Math.floor(v)
-    if (c1 == v) return theme.colors["stress"+c1]
+    if (c1 === v) return theme.colors["stress"+c1]
     let c2 = Math.ceil(v)
     
     let color1 = theme.colors["stress"+c1]

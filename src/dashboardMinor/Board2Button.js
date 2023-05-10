@@ -1,10 +1,19 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import Button from '@mui/material/Button';
 import { alpha } from "@mui/material";
-import styled from "styled-components";
 
 
-const Board2Button = ({color, category, changeColor}) => {
+const Board2Button = ({activeButton, color, category, changeColor}) => {
+
+    const [buttonColor, setButtonColor] = useState(alpha(color, 0.1));
+
+    useEffect(() => {
+        if (activeButton===category){
+          setButtonColor(alpha(color, 0.7));
+        } else {
+            setButtonColor(alpha(color, 0.1));
+        }
+      }, [activeButton]);
 
     const buttonStyle = {
         textAlign: 'center',
@@ -15,12 +24,18 @@ const Board2Button = ({color, category, changeColor}) => {
         display:'flex', 
         flexDirection: 'column',
         color: color, 
-        backgroundColor: alpha(color, 0.1) 
+        backgroundColor: buttonColor,
     };
+
+    const handleClick = () => {
+        changeColor(category);
+        setButtonColor(alpha(color, 0.7));
+    }
+    
     
 
     return (
-        <Button value={category} onClick={()=>changeColor(category)} sx={buttonStyle} variant="text">{category}</Button>
+        <Button value={category} onClick={handleClick} sx={buttonStyle} variant="text">{category}</Button>
     );
 
 };
