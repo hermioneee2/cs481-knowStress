@@ -85,17 +85,56 @@ const Dashboard5 = () => {
     );
     const BarChartExplanationString = () => {
         switch(activeButton){
-            case "Age": return <>It seems: the higher the age, the higher the stress level.</>;
-            case "Total App Usage": return <>It seems: total app usage time is not really related with stress level.</>;
-            case "Movement": return <>It seems: movement is not really related with stress level.</>;
-            case "Sleep Time": return <>It seems: too less or much sleeping is related with higher stress level.</>;
-            case "Social Media": return <>It seems: social media usage time is not really related with stress level.</>;
-            case "Game": return <>It seems: the higher the game playing time, the higher the stress level.</>;
-            case "Messenger": return <>It seems: messenger usage time is not really related with stress level.</>;
-            case "Video/Contents": return <>It seems: the lower the video/contents using time, the higher the stress level.</>;
-            case "Browser": return <>It seems: too less or much browser using is related with higher stress level.</>;
-            case "Utility": return <>It seems: the higher the utility using time, the higher the stress level.</>;
-            default: return <>It seems: the higher the age, the higher the stress level.</>;
+            case "Total App Usage": return <>
+            This graph shows stress level distribution according to the usage time of apps in total.
+            <br/><br/>
+            According to graph, it seems: total app usage time is not really related with stress level.
+            </>;
+            case "Movement": return <>
+            This graph shows stress level distribution according to the movement time.
+            <br/><br/>
+            According to graph, it seems: movement is not really related with stress level.
+            </>;
+            case "Sleep Time": return <>
+            This graph shows stress level distribution according to the sleep time.
+            <br/><br/>
+            According to graph, it seems: <b>too less or much sleeping is related with higher stress level.</b> Would you try proper sleep regularly?
+            </>;
+            case "Social Media": return <>
+            This graph shows stress level distribution according to the usage time of social media apps.
+            <br/><br/>
+            According to graph, it seems: social media usage time is not really related with stress level.
+            </>;
+            case "Game": return <>
+            This graph shows stress level distribution according to the game apps.
+            <br/><br/>
+            According to graph, it seems: <b>the higher the game playing time, the higher the stress level.</b> Would you try reducing the gaming time?
+            </>;
+            case "Messenger": return <>
+            This graph shows stress level distribution according to the messenger apps.
+            <br/><br/>
+            According to graph, it seems: messenger usage time is not really related with stress level.
+            </>;
+            case "Video/Contents": return <>
+            This graph shows stress level distribution according to the video/contents apps.
+            <br/><br/>
+            According to graph, it seems: <b>the lower the video/contents using time, the higher the stress level.</b> Would you try using some video/contents apps to reduce your stress?
+            </>;
+            case "Browser": return <>
+            This graph shows stress level distribution according to the browser apps.
+            <br/><br/>
+            According to graph, it seems: <b>too less or much browser using is related with higher stress level.</b> Would you try to use web browsers properly?
+            </>;
+            case "Utility": return <>
+            This graph shows stress level distribution according to the browser apps.
+            <br/><br/>
+            According to graph, it seems: <b>the higher the utility using time, the higher the stress level.</b> Would you try reducing the utility app using time?
+            </>;
+            default: return <>
+            This graph shows stress level distribution according to the age.
+            <br/><br/>
+            According to graph, it seems: <b>the higher the age, the higher the stress level.</b>
+            </>;
     
         }
     }
@@ -157,8 +196,8 @@ const Dashboard5 = () => {
         >
           {HistogramExplanation}
         </p>
-
-        <CustomBarChart category={activeButton}/>
+        <div style ={{height: "150px", width: "300px"}}>
+        <CustomBarChart category={activeButton}/></div>
         <div style={{marginBottom: '20px'}}></div>
         <BarChartExplanation>
         <text style={{marginBottom: '10px', fontFamily: "Open Sans",fontWeight: '400', color:theme.colors.grayKS}}>
