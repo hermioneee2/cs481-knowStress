@@ -7,76 +7,73 @@ import { alpha } from "@mui/material";
 import CustomBarChart from "../dashboardMinor/customBarChart";
 
 
-const buttonStyle = (color) => {
-    return ({
-        gap:'10px',
-        paddingBottom:'4px',
-        paddingHorizontal:'8px',
-
-        display:'flex', 
-        flexDirection: 'row',
-        justifyContent:'center',
-        allignItems:'center',
-        height:'22px', 
-
-        textTransform:'none',
-        textAlign: 'center',
-        color: color, 
-
-        fontFamily : 'Open Sans',
-        fontWeight: 600,
-        fontStyle:'normal',
-        fontSize: '10px', 
-        lineHeight:'14px',
-
-        backgroundColor: alpha(color, 0.1),
-        boxShadow: '0px 2px 7px rgba(0, 0, 0, 0.1)',
-        borderRadius: '7px',
-
-        display:'inline',
-    });
-};
-
-const buttonStyle2 = (color) => {
-    return ({
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent:'center',
-        allignItems:'center',
-        paddingHorizontal:'20px',
-        paddingBottom:'10px',
-        gap:'10px',
-
-        height:'39px', 
-
-        backgroundColor: 'White',
-        boxShadow: '0px 2px 7px rgba(0, 0, 0, 0.1)',
-        borderRadius: '10px',
-
-        textTransform:'none',
-        textAlign: 'center',
-        fontStyle: 'normal',
-        fontWeight: 400,
-        fontSize: '14px',
-        lineHeight: '19px',
-        color: color, 
-        fontFamily : 'Open Sans'
-    });
-};
-
-
 const Dashboard5 = () => {
     const newArray=[];
     const [arrColor, setArrColor] = useState([...newArray]);
     const [activeButton, setActiveButton] = useState(null);
+    const buttonStyle = ({color, buttonId}) => {
+        const isActive = buttonId === activeButton;
+        return ({
+            gap:'10px',
+            paddingBottom:'4px',
+            paddingHorizontal:'8px',
+    
+            display:'flex', 
+            flexDirection: 'row',
+            justifyContent:'center',
+            allignItems:'center',
+            height:'22px', 
+    
+            textTransform:'none',
+            textAlign: 'center',
+            color: color, 
+    
+            fontFamily : 'Open Sans',
+            fontWeight: 600,
+            fontStyle:'normal',
+            fontSize: '10px', 
+            lineHeight:'14px',
+    
+            backgroundColor: isActive? alpha(color, 0.3) : alpha(color, 0.1),
+            boxShadow: '0px 2px 7px rgba(0, 0, 0, 0.1)',
+            borderRadius: '7px',
+    
+            display:'inline',
+        });
+    };
+    
+    const buttonStyle2 = ({color, buttonId}) => {
+        const isActive = buttonId === activeButton;
+        return ({
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent:'center',
+            allignItems:'center',
+            paddingHorizontal:'20px',
+            paddingBottom:'10px',
+            gap:'10px',
+    
+            height:'39px', 
+    
+            backgroundColor: isActive? alpha(color, 0.1) : 'White',
+            boxShadow: '0px 2px 7px rgba(0, 0, 0, 0.1)',
+            borderRadius: '10px',
+    
+            textTransform:'none',
+            textAlign: 'center',
+            fontStyle: 'normal',
+            fontWeight: 400,
+            fontSize: '14px',
+            lineHeight: '19px',
+            color: color, 
+            fontFamily : 'Open Sans'
+        });
+    };
     const changeColor = (buttonId) =>{
-        if (activeButton === buttonId) {
           setActiveButton(buttonId);
-        } else {
-          setActiveButton(buttonId);
-        }
       };
-      
+    
+    
     const HistogramExplanation = (
         activeButton ? <>
         Relationship between Stress Level and {activeButton}
@@ -144,14 +141,7 @@ const Dashboard5 = () => {
         } 
         setArrColor(updatedList);
       }, [activeButton]);
-    const [data, setData] = useState([{}])
-      useEffect(()=>{
-        fetch("/user").then(
-            response =>response.json()
-        ).then(
-            data=>{setData(data);}
-        ).catch(err=>console.log(err))
-      })
+
   return (
     <ContentLayout>
       <CategorySelectionLayout>
@@ -160,23 +150,70 @@ const Dashboard5 = () => {
           <StepTitle>Select Category</StepTitle>
         </StepWrapper>
         <div style={{ display: 'flex', gap:'12px' }}>
-            <Button value={'Age'} onClick={()=>changeColor('Age')} sx={buttonStyle2(theme.colors.blackKS)} variant="text">{'Age'}</Button>
-            <Button value={'Movement'} onClick={()=>changeColor('Movement')} sx={buttonStyle2(theme.colors.blackKS)} variant="text">{'Movement'}</Button>
-            <Button value={'Sleep Time'} onClick={()=>changeColor('Sleep Time')} sx={buttonStyle2(theme.colors.blackKS)} variant="text">{'Sleep Time'}</Button>
+            <Button value={'Age'} 
+            onClick={()=>changeColor('Age')} 
+            sx={buttonStyle2({color: theme.colors.blackKS, buttonId: 'Age'})} 
+            variant="text">{'Age'}
+            </Button>
+
+            <Button value={'Movement'} 
+            onClick={()=>changeColor('Movement')}
+            sx={buttonStyle2({color: theme.colors.blackKS, buttonId: 'Movement'})}
+            variant="text">{'Movement'}
+            </Button>
+
+            <Button value={'Sleep Time'}
+            onClick={()=>changeColor('Sleep Time')}
+            sx={buttonStyle2({color: theme.colors.blackKS, buttonId: 'Sleep Time'})}
+            variant="text">{'Sleep Time'}
+            </Button>
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', marginTop: '10px' }}>
-            <Button value={'Total App Usage'} onClick={()=>changeColor('Total App Usage')} sx={{...buttonStyle2(theme.colors.blackKS), width: '130px'} } variant="text">{'Total App Usage'}</Button>
+            <Button value={'Total App Usage'}
+            onClick={()=>changeColor('Total App Usage')}
+            sx={{...buttonStyle2({color: theme.colors.blackKS, buttonId: 'Total App Usage'}), width: '130px'} }
+            variant="text">{'Total App Usage'}
+            </Button>
+
             <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '10px', gap:'7px' }}>
             <div style={{ display: 'flex' }}>
-                <Button value={'Social Media'} onClick={()=>changeColor('Social Media')} sx={buttonStyle(theme.colors.socialMedia)} variant="text">{'Social Media'}</Button>
-                <Button value={'Game'} onClick={()=>changeColor('Game')} sx={buttonStyle(theme.colors.game)} variant="text">{'Game'}</Button>
-                <Button value={'Messenger'} onClick={()=>changeColor('Messenger')} sx={buttonStyle(theme.colors.communicationWriting)} variant="text">{'Messenger'}</Button>
+                <Button value={'Social Media'}
+                onClick={()=>changeColor('Social Media')}
+                sx={buttonStyle({color: theme.colors.socialMedia, buttonId: 'Social Media'})}
+                variant="text">{'Social Media'}
+                </Button>
+
+                <Button value={'Game'}
+                onClick={()=>changeColor('Game')}
+                sx={buttonStyle({color: theme.colors.game, buttonId: 'Game'})}
+                variant="text">{'Game'}
+                </Button>
+
+                <Button value={'Messenger'}
+                onClick={()=>changeColor('Messenger')}
+                sx={buttonStyle({color: theme.colors.communicationWriting, buttonId: 'Messenger'})}
+                variant="text">{'Messenger'}
+                </Button>
             </div>
             <div style={{ display: 'flex' }}>
-                <Button value={'Video/Contents'} onClick={()=>changeColor('Video/Contents')} sx={buttonStyle(theme.colors.videoStreaming)} variant="text">{'Video/Contents'}</Button>
-                <Button value={'Browser'} onClick={()=>changeColor('Browser')} sx={buttonStyle(theme.colors.browser)} variant="text">{'Browser'}</Button>
-                <Button value={'Utility'} onClick={()=>changeColor('Utility')} sx={buttonStyle(theme.colors.utility)} variant="text">{'Utility'}</Button>
+                <Button value={'Video/Contents'}
+                onClick={()=>changeColor('Video/Contents')}
+                sx={buttonStyle({color: theme.colors.videoStreaming, buttonId: 'Video/Contents'})}
+                variant="text">{'Video/Contents'}
+                </Button>
+
+                <Button value={'Browser'}
+                onClick={()=>changeColor('Browser')}
+                sx={buttonStyle({color: theme.colors.browser, buttonId: 'Browser'})}
+                variant="text">{'Browser'}
+                </Button>
+
+                <Button value={'Utility'}
+                onClick={()=>changeColor('Utility')}
+                sx={buttonStyle({color: theme.colors.utility, buttonId: 'Utility'})}
+                variant="text">{'Utility'}
+                </Button>
             </div>
             </div>
         </div>
@@ -187,10 +224,6 @@ const Dashboard5 = () => {
           <StepHeader>Step 2</StepHeader>
           <StepTitle>
             View Stress Level Distribution
-            test for server connections
-            <div>
-                {(typeof data.my_stress === 'undefined')? (<p>loading...</p>) : (data.my_stress)}
-            </div>
             </StepTitle>
         </StepWrapper>
         <p
@@ -205,11 +238,11 @@ const Dashboard5 = () => {
         >
           {HistogramExplanation}
         </p>
-        <div style ={{height: "150px", width: "300px"}}>
+        <div style ={{height: "400px", width: "400px"}}>
         <CustomBarChart category={activeButton}/></div>
-        <div style={{marginBottom: '20px'}}></div>
+        <div style={{marginBottom: '0px'}}></div>
         <BarChartExplanation>
-        <text style={{marginBottom: '10px', fontFamily: "Open Sans",fontWeight: '400', color:theme.colors.grayKS}}>
+        <text style={{marginBottom: '0px', fontFamily: "Open Sans",fontWeight: '400', color:theme.colors.grayKS}}>
         {BarChartExplanationString(activeButton)}
         </text>
         </BarChartExplanation>
@@ -271,7 +304,7 @@ const BarChartExplanation = styled(Layout.Content)`
   background-color: 
   color: ${(props) => props.theme.colors.grayKS};
   background: ${(props) => props.theme.colors.explanationBackground};
-  margin-top: 10px;
+
   border-radius: 10px;
 `;
 

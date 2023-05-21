@@ -17,24 +17,6 @@ function getTooltipText(category, range, percentile, stressLevel) {
     return `${usageTimeText}${percentileText}${stressLevelText}`;
 }
 
-function CustomLabel(props) {
-    const { category, range, percentile, stressLevel } = props.datum;
-  
-    return (
-      <g>
-        <text x={-10} y={-10} fontWeight="bold">
-          {`${category}\n${range}`}
-        </text>
-        <text x={-10} y={5}>
-          {`Average Stress Level\n${stressLevel}`}
-        </text>
-        <text x={-10} y={20} fontWeight="bold">
-          {percentile ? `(Top ${percentile} ~ ${percentile + 10} %)` : ""}
-        </text>
-      </g>
-    );
-  }
-
 const CustomBarChart = ({ category }) => {
     let data, userX, userY, labelText1, labelText2, isnull;
     userX = 0;
@@ -243,10 +225,10 @@ const CustomBarChart = ({ category }) => {
     return (!isnull)&&(
       <VictoryChart
         responsive={false}
-        width={500}
+        width = {500}
         theme={VictoryTheme.material}
         domainPadding={{x:[30, 30], y:[5, 5]}}
-        padding={{left:120, top:0, right:20, bottom:100}}
+        padding={{left:120, top:0, right:20, bottom:0}}
       >
         {/* y축 */}
         <defs>
@@ -279,8 +261,8 @@ const CustomBarChart = ({ category }) => {
         <VictoryAxis
             tickValues = {XTick}
             tickComponent={<VoidTick/>}
-            tickLabels: {fontWeight: 300, fontFamily: "Open Sans"}
             style={{ 
+                tickLabels: {fontWeight: 300, fontFamily: "Open Sans"},
                 grid: {stroke: "transparent"},
                 axis: {stroke: "transparent"},
             }}
@@ -291,7 +273,7 @@ const CustomBarChart = ({ category }) => {
             labels: {
                 fill: "white",
                 fontFamily: "Open Sans",
-                fontSize: 14,
+                fontSize: 10,
                 backgroundColor: "black"
               },
             data: { fill: theme.colors.stress2},
@@ -322,26 +304,26 @@ const CustomBarChart = ({ category }) => {
             symbol="star"/>)}
         <VictoryLabel
         x={100}
-        y={300}
+        y={400}
         text={labelText1}
         style={{fontFamily: 'Open Sans', fontStyle:'italic', fontWeight:300, fill:theme.colors.blackKS, size:'10px'}}
         />
         <VictoryLabel
         x={400}
-        y={300}
+        y={400}
         text={labelText2}
         style={{fontFamily: 'Open Sans', fontStyle:'italic', fontWeight:300, fill:theme.colors.blackKS, size:'10px'}}
         /> 
 
         <VictoryLabel
-        x={0}
-        y={-45}
+        x={10}
+        y={-20}
         text='Very Stressed'
         style={{fontFamily: 'Open Sans', fontStyle:'italic', fontWeight:300, fill:theme.colors.blackKS, size:'10px'}}
         />         
         <VictoryLabel
-        x={20}
-        y={250}
+        x={30}
+        y={350}
         text='No Stress'
         style={{fontFamily: 'Open Sans', fontStyle:'italic', fontWeight:300, fill:theme.colors.blackKS, size:'10px'}}
         /> 
