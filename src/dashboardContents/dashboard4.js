@@ -179,7 +179,7 @@ const Dashboard4 = () => {
     lon: location.lng,
     rad: locationRadius, // TODO: need conversion
   });
-  // http://riyuna.pythonanywhere.com/user?user_id=702&min_age=20&max_age=30&rad=0.5
+
   useEffect(() => {
     fetch(`http://riyuna.pythonanywhere.com/user?${queryString}`)
       .then((response) => response.json())
@@ -215,38 +215,18 @@ const Dashboard4 = () => {
       rad: locationRadiusB, // TODO: need conversion
     });
 
-    useEffect(() => {
-      fetch(`http://riyuna.pythonanywhere.com/user?${queryString}`)
-        .then((response) => response.json())
-        .then((data) => {
-          setMyValue(data.my_stress);
-          setNumOfPeople(data.total_number);
-          setTopValue(data.top_value);
-          setLowerQuartile(data.Q1);
-          setMedian(data.median);
-          setUpperQuartile(data.Q3);
-          setMin(data.min);
-          setMax(data.max);
-        });
-    }, []);
-
-    // const outputMyValue = 4.3;
-    // const outputNumOfPeople = 60;
-    // const outputTopValue = 19;
-    // const outputLowerQuartile = 2.3;
-    // const outputMedian = 3.3;
-    // const outputUpperQuartile = 4.4;
-    // const outputMin = 0;
-    // const outputMax = 6;
-
-    // setMyValue(outputMyValue);
-    // setNumOfPeople(outputNumOfPeople);
-    // setTopValue(outputTopValue);
-    // setLowerQuartile(outputLowerQuartile);
-    // setMedian(outputMedian);
-    // setUpperQuartile(outputUpperQuartile);
-    // setMin(outputMin);
-    // setMax(outputMax);
+    fetch(`http://riyuna.pythonanywhere.com/user?${queryString}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setMyValue(data.my_stress);
+        setNumOfPeople(data.total_number);
+        setTopValue(data.top_value);
+        setLowerQuartile(data.Q1);
+        setMedian(data.median);
+        setUpperQuartile(data.Q3);
+        setMin(data.min);
+        setMax(data.max);
+      });
   };
 
   //map
