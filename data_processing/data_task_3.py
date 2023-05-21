@@ -6,11 +6,14 @@ def make_histogram(L):
     tot_len = len(L)
     L.sort()
     d=dict()
-    for i in range(0, 100, 10):d[i]=[0,0]
+    for i in range(0, 100, 10):d[i]=[0,0,10**20,-10**20]
     for i in range(tot_len):
         now = int(i/tot_len*10)
         d[now*10][0]+=L[i][1]
         d[now*10][1]+=1
+        d[now*10][2]=min(d[now*10][2], L[i][0])
+        d[now*10][3]=max(d[now*10][3], L[i][0])
+
     
     return d
 
@@ -51,7 +54,7 @@ for movement in movement_dict:
     with open('data_processing/data/movement_stress_distribution.csv', 'w', newline='') as f:
         writer = csv.writer(f)
         for i in range(0, 100, 10):
-            writer.writerow([f"{i}-{i+9} percentile", movement_dict[i][0]/movement_dict[i][1]])
+            writer.writerow([f"{i}-{i+9} percentile", movement_dict[i][0]/movement_dict[i][1], movement_dict[i][2], movement_dict[i][3]])
 
 #histogram by Sleep Time #todo
 
@@ -66,7 +69,7 @@ for app_time in app_time_dict:
     with open('data_processing/data/app_time_stress_distribution.csv', 'w', newline='') as f:
         writer = csv.writer(f)
         for i in range(0, 100, 10):
-            writer.writerow([f"{i}-{i+9} percentile", app_time_dict[i][0]/app_time_dict[i][1]])
+            writer.writerow([f"{i}-{i+9} percentile", app_time_dict[i][0]/app_time_dict[i][1], app_time_dict[i][2], app_time_dict[i][3]])
 
 #histogram by app category usage time
 for category in ['Social media', 'Game', 'Messenger', 'Video/Contents', 'Utility', 'etc']:
@@ -81,4 +84,4 @@ for category in ['Social media', 'Game', 'Messenger', 'Video/Contents', 'Utility
         with open(f'data_processing/data/{category_url}_app_time_stress_distribution.csv', 'w', newline='') as f:
             writer = csv.writer(f)
             for i in range(0, 100, 10):
-                writer.writerow([f"{i}-{i+9} percentile", app_time_dict[i][0]/app_time_dict[i][1]])
+                writer.writerow([f"{i}-{i+9} percentile", app_time_dict[i][0]/app_time_dict[i][1], app_time_dict[i][2], app_time_dict[i][3]])
