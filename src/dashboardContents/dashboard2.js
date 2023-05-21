@@ -86,8 +86,10 @@ const Dashboard2 = () => {
 
 
   return (
-    <div>
-    <Layout style={{ background: '#ffffff'}}> 
+    <div> 
+      <GraphExplanation>The apps are your TOP 15 most used apps.</GraphExplanation>
+      {/* <text style={{fontWeight: 'lighter', marginTop: 1, fontSize: 12,}}>The apps are your TOP 15 most used apps.</text> */}
+    <Layout style={{ background: '#ffffff', marginTop: 20}}> 
       <Sider width={60} style={{ background: '#ffffff', paddingLeft:20}}>
         {/* <Images dash2Data={dash2Data.map((arr) => require(`./images/${arr[0]}.png`))} /> */}
         <Images dash2Data={imgArr.reverse()} />
@@ -103,10 +105,8 @@ const Dashboard2 = () => {
         <Board2Button activeButton={activeButton} changeColor={changeColor} color={theme.colors.videoStreaming} category={'Video/Contents'}/>
         <Board2Button activeButton={activeButton} changeColor={changeColor} color={theme.colors.browser} category={'Browser'}/>
         <Board2Button activeButton={activeButton} changeColor={changeColor} color={theme.colors.utility} category={'Utility'}/>
-
       </Sider>
     </Layout>
-      
     </div>
   );
 };
@@ -117,7 +117,17 @@ const CategoryNames = styled(Layout.Content)`
   font-weight: 400;
   font-family: "Open Sans";
   margin-bottom: 15px;
+`;
 
+const GraphExplanation = styled(Layout.Content)`
+  display: block;
+  padding-bottom: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: 11px;
+  margin-bottom: 15px;
+  color: ${(props) => props.theme.colors.grayKS};
+  margin-top: -15px;
 `;
 
 
