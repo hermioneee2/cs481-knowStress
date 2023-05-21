@@ -13,18 +13,24 @@ const Header = () => {
   return (
     <Affix offsetTop={0}>
       <HeaderWrapper>
-        <Link to="/" onClick={() => handleTabClick("my-stress-pattern")}>
+        <Link
+          to="/cs481-knowStress"
+          onClick={() => handleTabClick("my-stress-pattern")}
+        >
           <Logo>knowstress</Logo>
         </Link>
         <TabWrapper>
-          <Link to="/" onClick={() => handleTabClick("my-stress-pattern")}>
+          <Link
+            to="/cs481-knowStress"
+            onClick={() => handleTabClick("my-stress-pattern")}
+          >
             <Tab active={activeTab === "my-stress-pattern"}>
               <span class="material-symbols-rounded">person_celebrate</span>
               <TabTitle>My Stress Pattern</TabTitle>
             </Tab>
           </Link>
           <Link
-            to="/meAndOthers"
+            to="/cs481-knowStress/meAndOthers"
             onClick={() => handleTabClick("me-and-others")}
           >
             <Tab active={activeTab === "me-and-others"}>

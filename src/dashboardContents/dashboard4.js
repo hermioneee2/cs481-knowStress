@@ -7,6 +7,7 @@ import { GoogleMap, useLoadScript, OverlayView } from "@react-google-maps/api";
 
 import StressCodeBoxPlot from "../dashboardMinor/StressCodeBoxPlot";
 import BoxPlot from "../dashboardMinor/BoxPlot";
+import dotenv from "dotenv";
 
 // For sliders
 const age_marks = {
@@ -58,6 +59,7 @@ const mapContainerStyle = {
 };
 
 // const API_KEY = "";
+dotenv.config();
 
 const Dashboard4 = () => {
   //sliders: input values
@@ -84,19 +86,23 @@ const Dashboard4 = () => {
   const mapRef = useRef(null);
   const [address, setAddress] = useState("대한민국 대전광역시 한국과학기술원");
 
-  useEffect(() => {
-    fetch("/api/get_api_key")
-      .then((response) => response.json())
-      .then((data) => {
-        API_KEY = data.api_key;
-        // Use the apiKey in your React application
-        // For example, you can set it in the component state or pass it as props to child components
-        console.log(API_KEY);
-      });
-  }, []);
+  // useEffect(() => {
+  //   fetch("http://127.0.0.1:5000/map_api_key")
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       setMyValue(outputMyValue);
+  //       setNumOfPeople(outputNumOfPeople);
+  //       setTopValue(outputTopValue);
+  //       setLowerQuartile(outputLowerQuartile);
+  //       setMedian(outputMedian);
+  //       setUpperQuartile(outputUpperQuartile);
+  //       setMin(outputMin);
+  //       setMax(outputMax);
+  //     });
+  // }, []);
 
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: API_KEY,
+    googleMapsApiKey: process.env.REACT_APP_MAP_API_KEY,
   });
 
   const onMapLoad = useCallback((map) => {
@@ -105,7 +111,7 @@ const Dashboard4 = () => {
 
   const getAddress = async (lat, lng) => {
     const response = await fetch(
-      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${API_KEY}`
+      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${process.env.REACT_APP_MAP_API_KEY}`
     );
     const data = await response.json();
     return data.results[0].formatted_address;
