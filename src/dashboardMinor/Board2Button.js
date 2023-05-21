@@ -9,7 +9,7 @@ const Board2Button = ({activeButton, color, category, changeColor}) => {
 
     useEffect(() => {
         if (activeButton===category){
-          setButtonColor(alpha(color, 0.7));
+          setButtonColor(alpha(color, 0.3));
         } else {
             setButtonColor(alpha(color, 0.1));
         }
@@ -25,11 +25,12 @@ const Board2Button = ({activeButton, color, category, changeColor}) => {
         flexDirection: 'column',
         color: color, 
         backgroundColor: buttonColor,
+        '&:hover': { backgroundColor: alpha(color, 0.3),  }
     };
 
     const handleClick = () => {
         changeColor(category);
-        setButtonColor(alpha(color, 0.7));
+        setButtonColor(alpha(color, 0.3));
     }
     
     
