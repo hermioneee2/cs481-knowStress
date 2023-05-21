@@ -70,9 +70,7 @@ const Dashboard4 = () => {
     lng: 127.3605726960359,
   });
   const [locationRadius, setLocationRadius] = useState(120);
-
   const [myValue, setMyValue] = useState(3.4);
-
   const [numOfPeople, setNumOfPeople] = useState(77);
   const [topValue, setTopValue] = useState(20);
   const [lowerQuartile, setLowerQuartile] = useState(2.3);
@@ -159,6 +157,34 @@ const Dashboard4 = () => {
     return keyValuePairs.join("&");
   };
 
+  // initialize box plot
+  const queryString = objToQueryString({
+    min_age: ageRange[0],
+    max_age: ageRange[1],
+    min_movement: movedDistanceRange[0],
+    max_movement: movedDistanceRange[1],
+    min_apptime: appUsageRange[0],
+    max_apptime: appUsageRange[1],
+    lat: location.lat,
+    lon: location.lng,
+    rad: locationRadius, // TODO: need conversion
+  });
+
+  useEffect(() => {
+    fetch(`http://riyuna.pythonanywhere.com/user?${queryString}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setMyValue(data.my_stress);
+        setNumOfPeople(data.total_number);
+        setTopValue(data.top_value);
+        setLowerQuartile(data.Q1);
+        setMedian(data.median);
+        setUpperQuartile(data.Q3);
+        setMin(data.min);
+        setMax(data.max);
+      });
+  }, []);
+
   const getBoxPlotData = (
     ageRangeB,
     appUsageRangeB,
@@ -166,23 +192,31 @@ const Dashboard4 = () => {
     locationB,
     locationRadiusB
   ) => {
-    const outputMyValue = 4.3;
-    const outputNumOfPeople = 60;
-    const outputTopValue = 19;
-    const outputLowerQuartile = 2.3;
-    const outputMedian = 3.3;
-    const outputUpperQuartile = 4.4;
-    const outputMin = 0;
-    const outputMax = 6;
+    //get data...
+    const queryString = objToQueryString({
+      min_age: ageRangeB[0],
+      max_age: ageRangeB[1],
+      min_movement: movedDistanceRangeB[0],
+      max_movement: movedDistanceRangeB[1],
+      min_apptime: appUsageRangeB[0],
+      max_apptime: appUsageRangeB[1],
+      lat: locationB.lat,
+      lon: locationB.lng,
+      rad: locationRadiusB, // TODO: need conversion
+    });
 
-    setMyValue(outputMyValue);
-    setNumOfPeople(outputNumOfPeople);
-    setTopValue(outputTopValue);
-    setLowerQuartile(outputLowerQuartile);
-    setMedian(outputMedian);
-    setUpperQuartile(outputUpperQuartile);
-    setMin(outputMin);
-    setMax(outputMax);
+    fetch(`http://riyuna.pythonanywhere.com/user?${queryString}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setMyValue(data.my_stress);
+        setNumOfPeople(data.total_number);
+        setTopValue(data.top_value);
+        setLowerQuartile(data.Q1);
+        setMedian(data.median);
+        setUpperQuartile(data.Q3);
+        setMin(data.min);
+        setMax(data.max);
+      });
   };
 
   //map
