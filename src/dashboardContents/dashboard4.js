@@ -74,20 +74,13 @@ const Dashboard4 = () => {
 
   const [myValue, setMyValue] = useState(3.4);
 
-  const [numOfPeople, setNumOfPeople] = useState(0);
-  const [topValue, setTopValue] = useState(0);
-  const [lowerQuartile, setLowerQuartile] = useState(0);
-  const [median, setMedian] = useState(0);
-  const [upperQuartile, setUpperQuartile] = useState(0);
-  const [min, setMin] = useState(0);
-  const [max, setMax] = useState(0);
-  // const [numOfPeople, setNumOfPeople] = useState(77);
-  // const [topValue, setTopValue] = useState(20);
-  // const [lowerQuartile, setLowerQuartile] = useState(2.3);
-  // const [median, setMedian] = useState(3.8);
-  // const [upperQuartile, setUpperQuartile] = useState(4);
-  // const [min, setMin] = useState(1);
-  // const [max, setMax] = useState(5.8);
+  const [numOfPeople, setNumOfPeople] = useState(77);
+  const [topValue, setTopValue] = useState(20);
+  const [lowerQuartile, setLowerQuartile] = useState(2.3);
+  const [median, setMedian] = useState(3.8);
+  const [upperQuartile, setUpperQuartile] = useState(4);
+  const [min, setMin] = useState(1);
+  const [max, setMax] = useState(5.8);
 
   //map
   const mapRef = useRef(null);
@@ -167,34 +160,6 @@ const Dashboard4 = () => {
     return keyValuePairs.join("&");
   };
 
-  // initialize box plot
-  const queryString = objToQueryString({
-    min_age: ageRange[0],
-    max_age: ageRange[1],
-    min_movement: movedDistanceRange[0],
-    max_movement: movedDistanceRange[1],
-    min_apptime: appUsageRange[0],
-    max_apptime: appUsageRange[1],
-    lat: location.lat,
-    lon: location.lng,
-    rad: locationRadius, // TODO: need conversion
-  });
-  // http://riyuna.pythonanywhere.com/user?user_id=702&min_age=20&max_age=30&rad=0.5
-  useEffect(() => {
-    fetch(`http://riyuna.pythonanywhere.com/user?${queryString}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setMyValue(data.my_stress);
-        setNumOfPeople(data.total_number);
-        setTopValue(data.top_value);
-        setLowerQuartile(data.Q1);
-        setMedian(data.median);
-        setUpperQuartile(data.Q3);
-        setMin(data.min);
-        setMax(data.max);
-      });
-  }, []);
-
   const getBoxPlotData = (
     ageRangeB,
     appUsageRangeB,
@@ -202,51 +167,23 @@ const Dashboard4 = () => {
     locationB,
     locationRadiusB
   ) => {
-    //get data...
-    const queryString = objToQueryString({
-      min_age: ageRangeB[0],
-      max_age: ageRangeB[1],
-      min_movement: movedDistanceRangeB[0],
-      max_movement: movedDistanceRangeB[1],
-      min_apptime: appUsageRangeB[0],
-      max_apptime: appUsageRangeB[1],
-      lat: locationB.lat,
-      lon: locationB.lng,
-      rad: locationRadiusB, // TODO: need conversion
-    });
+    const outputMyValue = 4.3;
+    const outputNumOfPeople = 60;
+    const outputTopValue = 19;
+    const outputLowerQuartile = 2.3;
+    const outputMedian = 3.3;
+    const outputUpperQuartile = 4.4;
+    const outputMin = 0;
+    const outputMax = 6;
 
-    useEffect(() => {
-      fetch(`http://riyuna.pythonanywhere.com/user?${queryString}`)
-        .then((response) => response.json())
-        .then((data) => {
-          setMyValue(data.my_stress);
-          setNumOfPeople(data.total_number);
-          setTopValue(data.top_value);
-          setLowerQuartile(data.Q1);
-          setMedian(data.median);
-          setUpperQuartile(data.Q3);
-          setMin(data.min);
-          setMax(data.max);
-        });
-    }, []);
-
-    // const outputMyValue = 4.3;
-    // const outputNumOfPeople = 60;
-    // const outputTopValue = 19;
-    // const outputLowerQuartile = 2.3;
-    // const outputMedian = 3.3;
-    // const outputUpperQuartile = 4.4;
-    // const outputMin = 0;
-    // const outputMax = 6;
-
-    // setMyValue(outputMyValue);
-    // setNumOfPeople(outputNumOfPeople);
-    // setTopValue(outputTopValue);
-    // setLowerQuartile(outputLowerQuartile);
-    // setMedian(outputMedian);
-    // setUpperQuartile(outputUpperQuartile);
-    // setMin(outputMin);
-    // setMax(outputMax);
+    setMyValue(outputMyValue);
+    setNumOfPeople(outputNumOfPeople);
+    setTopValue(outputTopValue);
+    setLowerQuartile(outputLowerQuartile);
+    setMedian(outputMedian);
+    setUpperQuartile(outputUpperQuartile);
+    setMin(outputMin);
+    setMax(outputMax);
   };
 
   //map
