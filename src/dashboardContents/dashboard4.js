@@ -72,34 +72,27 @@ const Dashboard4 = () => {
   });
   const [locationRadius, setLocationRadius] = useState(120);
 
-  const [myValue, setMyValue] = useState(4.3);
+  const [myValue, setMyValue] = useState(3.4);
 
-  const [numOfPeople, setNumOfPeople] = useState(77);
-  const [topValue, setTopValue] = useState(20);
-  const [lowerQuartile, setLowerQuartile] = useState(2.3);
-  const [median, setMedian] = useState(3.8);
-  const [upperQuartile, setUpperQuartile] = useState(4);
-  const [min, setMin] = useState(1);
-  const [max, setMax] = useState(5.8);
+  const [numOfPeople, setNumOfPeople] = useState(0);
+  const [topValue, setTopValue] = useState(0);
+  const [lowerQuartile, setLowerQuartile] = useState(0);
+  const [median, setMedian] = useState(0);
+  const [upperQuartile, setUpperQuartile] = useState(0);
+  const [min, setMin] = useState(0);
+  const [max, setMax] = useState(0);
+  // const [numOfPeople, setNumOfPeople] = useState(77);
+  // const [topValue, setTopValue] = useState(20);
+  // const [lowerQuartile, setLowerQuartile] = useState(2.3);
+  // const [median, setMedian] = useState(3.8);
+  // const [upperQuartile, setUpperQuartile] = useState(4);
+  // const [min, setMin] = useState(1);
+  // const [max, setMax] = useState(5.8);
 
   //map
   const mapRef = useRef(null);
   const [address, setAddress] = useState("대한민국 대전광역시 한국과학기술원");
-
-  // useEffect(() => {
-  //   fetch("http://127.0.0.1:5000/map_api_key")
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       setMyValue(outputMyValue);
-  //       setNumOfPeople(outputNumOfPeople);
-  //       setTopValue(outputTopValue);
-  //       setLowerQuartile(outputLowerQuartile);
-  //       setMedian(outputMedian);
-  //       setUpperQuartile(outputUpperQuartile);
-  //       setMin(outputMin);
-  //       setMax(outputMax);
-  //     });
-  // }, []);
+  const [zoomLevel, setZoomLevel] = useState(14);
 
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_MAP_API_KEY,
@@ -164,31 +157,96 @@ const Dashboard4 = () => {
     }
   };
 
+  const objToQueryString = (obj) => {
+    const keyValuePairs = [];
+    for (const key in obj) {
+      keyValuePairs.push(
+        encodeURIComponent(key) + "=" + encodeURIComponent(obj[key])
+      );
+    }
+    return keyValuePairs.join("&");
+  };
+
+  // initialize box plot
+  const queryString = objToQueryString({
+    min_age: ageRange[0],
+    max_age: ageRange[1],
+    min_movement: movedDistanceRange[0],
+    max_movement: movedDistanceRange[1],
+    min_apptime: appUsageRange[0],
+    max_apptime: appUsageRange[1],
+    lat: location.lat,
+    lon: location.lng,
+    rad: locationRadius, // TODO: need conversion
+  });
+
+  useEffect(() => {
+    fetch(`http://127.0.0.1:5000/user?${queryString}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setMyValue(data.my_stress);
+        setNumOfPeople(data.total_number);
+        setTopValue(data.top_value);
+        setLowerQuartile(data.Q1);
+        setMedian(data.median);
+        setUpperQuartile(data.Q3);
+        setMin(data.min);
+        setMax(data.max);
+      });
+  }, []);
+
   const getBoxPlotData = (
-    ageRange,
-    appUsageRange,
-    movedDistanceRange,
-    location,
-    locationRadius
+    ageRangeB,
+    appUsageRangeB,
+    movedDistanceRangeB,
+    locationB,
+    locationRadiusB
   ) => {
     //get data...
-    const outputMyValue = 4.3;
-    const outputNumOfPeople = 60;
-    const outputTopValue = 19;
-    const outputLowerQuartile = 2.3;
-    const outputMedian = 3.3;
-    const outputUpperQuartile = 4.4;
-    const outputMin = 0;
-    const outputMax = 6;
+    const queryString = objToQueryString({
+      min_age: ageRangeB[0],
+      max_age: ageRangeB[1],
+      min_movement: movedDistanceRangeB[0],
+      max_movement: movedDistanceRangeB[1],
+      min_apptime: appUsageRangeB[0],
+      max_apptime: appUsageRangeB[1],
+      lat: locationB.lat,
+      lon: locationB.lng,
+      rad: locationRadiusB, // TODO: need conversion
+    });
 
-    setMyValue(outputMyValue);
-    setNumOfPeople(outputNumOfPeople);
-    setTopValue(outputTopValue);
-    setLowerQuartile(outputLowerQuartile);
-    setMedian(outputMedian);
-    setUpperQuartile(outputUpperQuartile);
-    setMin(outputMin);
-    setMax(outputMax);
+    useEffect(() => {
+      fetch(`http://127.0.0.1:5000/user?${queryString}`)
+        .then((response) => response.json())
+        .then((data) => {
+          setMyValue(data.my_stress);
+          setNumOfPeople(data.total_number);
+          setTopValue(data.top_value);
+          setLowerQuartile(data.Q1);
+          setMedian(data.median);
+          setUpperQuartile(data.Q3);
+          setMin(data.min);
+          setMax(data.max);
+        });
+    }, []);
+
+    // const outputMyValue = 4.3;
+    // const outputNumOfPeople = 60;
+    // const outputTopValue = 19;
+    // const outputLowerQuartile = 2.3;
+    // const outputMedian = 3.3;
+    // const outputUpperQuartile = 4.4;
+    // const outputMin = 0;
+    // const outputMax = 6;
+
+    // setMyValue(outputMyValue);
+    // setNumOfPeople(outputNumOfPeople);
+    // setTopValue(outputTopValue);
+    // setLowerQuartile(outputLowerQuartile);
+    // setMedian(outputMedian);
+    // setUpperQuartile(outputUpperQuartile);
+    // setMin(outputMin);
+    // setMax(outputMax);
   };
 
   //map
@@ -382,7 +440,7 @@ const Dashboard4 = () => {
           <GoogleMap
             mapContainerStyle={mapContainerStyle}
             center={location}
-            zoom={14}
+            zoom={zoomLevel}
             onLoad={onMapLoad}
             onDragEnd={onDragEnd}
             options={{
