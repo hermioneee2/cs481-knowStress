@@ -14,7 +14,7 @@ const Dashboard = ({ title, page1, subtitle, dashboardNum }) => {
 
   return (
     <div>
-      {dashboardNum === 4 ? (
+      {dashboardNum === 4 || dashboardNum === 5 ? (
         <Dashboard4Container>
           <DashboardTitleWrapper>
             <QuestionCircleOutlined style={iconStyle} />
