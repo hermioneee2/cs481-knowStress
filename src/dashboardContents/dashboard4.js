@@ -58,6 +58,7 @@ const mapContainerStyle = {
   marginLeft: "100px",
 };
 
+// const API_KEY = "";
 dotenv.config();
 
 const Dashboard4 = () => {
@@ -70,14 +71,23 @@ const Dashboard4 = () => {
     lng: 127.3605726960359,
   });
   const [locationRadius, setLocationRadius] = useState(120);
+
   const [myValue, setMyValue] = useState(3.4);
-  const [numOfPeople, setNumOfPeople] = useState(77);
-  const [topValue, setTopValue] = useState(20);
-  const [lowerQuartile, setLowerQuartile] = useState(2.3);
-  const [median, setMedian] = useState(3.8);
-  const [upperQuartile, setUpperQuartile] = useState(4);
-  const [min, setMin] = useState(1);
-  const [max, setMax] = useState(5.8);
+
+  const [numOfPeople, setNumOfPeople] = useState(0);
+  const [topValue, setTopValue] = useState(0);
+  const [lowerQuartile, setLowerQuartile] = useState(0);
+  const [median, setMedian] = useState(0);
+  const [upperQuartile, setUpperQuartile] = useState(0);
+  const [min, setMin] = useState(0);
+  const [max, setMax] = useState(0);
+  // const [numOfPeople, setNumOfPeople] = useState(77);
+  // const [topValue, setTopValue] = useState(20);
+  // const [lowerQuartile, setLowerQuartile] = useState(2.3);
+  // const [median, setMedian] = useState(3.8);
+  // const [upperQuartile, setUpperQuartile] = useState(4);
+  // const [min, setMin] = useState(1);
+  // const [max, setMax] = useState(5.8);
 
   //map
   const mapRef = useRef(null);
@@ -368,7 +378,7 @@ const Dashboard4 = () => {
             min={15}
             max={75}
             defaultValue={[15, 75]}
-            style={{ width: "150px" }}
+            style={{ width: "200px" }}
             onAfterChange={(value) => onAfterChangeSlider(value, "age")}
           />
         </SliderWrapper>
@@ -382,7 +392,7 @@ const Dashboard4 = () => {
             defaultValue={[1, 100]}
             tooltip={{ formatter }}
             reverse={true}
-            style={{ width: "150px" }}
+            style={{ width: "200px" }}
             onAfterChange={(value) => onAfterChangeSlider(value, "appUsage")}
           />
         </SliderWrapper>
@@ -396,7 +406,7 @@ const Dashboard4 = () => {
             defaultValue={[1, 100]}
             tooltip={{ formatter }}
             reverse={true}
-            style={{ width: "150px" }}
+            style={{ width: "200px" }}
             onAfterChange={(value) =>
               onAfterChangeSlider(value, "movedDistance")
             }
@@ -433,7 +443,7 @@ const Dashboard4 = () => {
             defaultValue={locationRadius}
             // tooltip={{ locationRadiusFormatter }}
             tooltip={{ formatter: null }}
-            style={{ width: "140px" }}
+            style={{ width: "180px" }}
             onAfterChange={(value) =>
               onAfterChangeSlider(value, "locationRadius")
             }
@@ -653,7 +663,7 @@ const AddressWrapper = styled.div`
 `;
 
 const StressYAxis = styled.div`
-  height: 212px;
+  height: 219px;
   width: 2px;
   background: linear-gradient(
     ${(props) => props.theme.colors.stress5},
@@ -663,13 +673,11 @@ const StressYAxis = styled.div`
   z-index: 2;
   position: absolute;
   margin-top: 8px;
-  margin-left: 88px;
+  margin-left: 76px;
 `;
 
 const BoxplotWrapper = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: center;
 `;
 
 const BoxplotGraph = styled.div`
