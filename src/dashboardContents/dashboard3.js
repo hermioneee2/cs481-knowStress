@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { GoogleMap, Circle, useLoadScript, MarkerF, LoadScript } from '@react-google-maps/api';
+import React from 'react';
+import { GoogleMap, useLoadScript, MarkerF, } from '@react-google-maps/api';
 import { getColor } from '../dashboardMinor/GetColor';
 import styled from "styled-components";
 import { Layout } from 'antd';
