@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/cs481-knowstress/precache-manifest.e2b0a64b93568b467d6209cdd8adcf6c.js"
+  "/cs481-knowStress/precache-manifest.ac30e7530051b98e96984f2551a46d6f.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("/cs481-knowstress/index.html", {
+workbox.routing.registerNavigationRoute("/cs481-knowStress/index.html", {
   
   blacklist: [/^\/_/,/\/[^/]+\.[^/]+$/],
 });
