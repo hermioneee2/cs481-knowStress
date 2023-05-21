@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef } from "react";
+import React, { useState, useCallback, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { theme } from "../styles/Theme";
 import { DownOutlined, EnvironmentFilled } from "@ant-design/icons";
@@ -57,7 +57,7 @@ const mapContainerStyle = {
   marginLeft: "100px",
 };
 
-const API_KEY = "";
+// const API_KEY = "";
 
 const Dashboard4 = () => {
   //sliders: input values
@@ -83,6 +83,17 @@ const Dashboard4 = () => {
   //map
   const mapRef = useRef(null);
   const [address, setAddress] = useState("대한민국 대전광역시 한국과학기술원");
+
+  useEffect(() => {
+    fetch("/api/get_api_key")
+      .then((response) => response.json())
+      .then((data) => {
+        API_KEY = data.api_key;
+        // Use the apiKey in your React application
+        // For example, you can set it in the component state or pass it as props to child components
+        console.log(API_KEY);
+      });
+  }, []);
 
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: API_KEY,
