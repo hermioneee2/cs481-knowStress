@@ -63,6 +63,7 @@ const BoxPlot = ({
         l: 0,
         r: 0,
       },
+      padding: {b:0},
       height: 210,
       hovermode: "closest",
       hoverlabel: {

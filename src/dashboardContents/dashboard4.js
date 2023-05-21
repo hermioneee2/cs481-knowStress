@@ -8,6 +8,12 @@ import { GoogleMap, useLoadScript, OverlayView } from "@react-google-maps/api";
 import StressCodeBoxPlot from "../dashboardMinor/StressCodeBoxPlot";
 import BoxPlot from "../dashboardMinor/BoxPlot";
 import dotenv from "dotenv";
+import BoxPlotWithLine from "../dashboardMinor/VictoryBoxPlot";
+
+import { Layout } from "antd";
+
+const {Content, Sider } = Layout;
+
 
 // For sliders
 const age_marks = {
@@ -468,45 +474,7 @@ const Dashboard4 = () => {
           {PeoplRangeExplanation}
         </p>
         <BoxplotWrapper>
-          <BoxplotGraph>
-            <div style={{ marginTop: 0 }}>
-              <StressYAxis />
-              <div
-                style={{
-                  display: "block",
-                  zIndex: 3,
-                  position: "absolute",
-                  marginTop: 5,
-                }}
-              >
-                <StressCodeBoxPlot
-                  color={theme.colors.stress6}
-                  t={6}
-                  lev={"Very Stressed"}
-                />
-                <StressCodeBoxPlot color={theme.colors.stress5} t={5} />
-                <StressCodeBoxPlot color={theme.colors.stress4} t={4} />
-                <StressCodeBoxPlot color={theme.colors.stress3} t={3} />
-                <StressCodeBoxPlot color={theme.colors.stress2} t={2} />
-                <StressCodeBoxPlot color={theme.colors.stress1} t={1} />
-                <StressCodeBoxPlot
-                  color={theme.colors.stress0}
-                  t={0}
-                  lev={"Not Stressed"}
-                />
-              </div>
-            </div>
-            <div style={{ marginTop: 12, marginLeft: 75, width: 150 }}>
-              <BoxPlot
-                lowerQuartile={lowerQuartile}
-                median={median}
-                upperQuartile={upperQuartile}
-                min={min}
-                max={max}
-                myValue={myValue}
-              />
-            </div>
-          </BoxplotGraph>
+          <BoxPlotWithLine />
           <MyRankingTextWrapper>
             <MyRankingTextLeft>{myValue}</MyRankingTextLeft>
             <MyRankingTextRight>
@@ -670,10 +638,9 @@ const StressYAxis = styled.div`
     ${(props) => props.theme.colors.stress2},
     ${(props) => props.theme.colors.stress0}
   );
-  z-index: 2;
   position: absolute;
   margin-top: 8px;
-  margin-left: 76px;
+  margin-right: 0px;
 `;
 
 const BoxplotWrapper = styled.div`
