@@ -13,20 +13,32 @@ const Dashboard = ({ title, page1, subtitle, dashboardNum }) => {
   };
 
   return (
-    <DashboardContainer>
-      {dashboardNum === 4 || dashboardNum === 5 ? (
-        <DashboardTitleWrapper>
-          <QuestionCircleOutlined style={iconStyle} />
-          <DashboardTitle>{title}</DashboardTitle>
-        </DashboardTitleWrapper>
+    <div>
+      {dashboardNum === 4 ? (
+        <Dashboard4Container>
+          <DashboardTitleWrapper>
+            <QuestionCircleOutlined style={iconStyle} />
+            <DashboardTitle>{title}</DashboardTitle>
+          </DashboardTitleWrapper>
+          <DashboardContentSwitcher dashboardNum={dashboardNum} />
+        </Dashboard4Container>
       ) : (
-        <Title>
-          {page1}
-          <SubTitle>{subtitle}</SubTitle>
-        </Title>
+        <DashboardContainer>
+          {dashboardNum === 5 ? (
+            <DashboardTitleWrapper>
+              <QuestionCircleOutlined style={iconStyle} />
+              <DashboardTitle>{title}</DashboardTitle>
+            </DashboardTitleWrapper>
+          ) : (
+            <Title>
+              {page1}
+              <SubTitle>{subtitle}</SubTitle>
+            </Title>
+          )}
+          <DashboardContentSwitcher dashboardNum={dashboardNum} />
+        </DashboardContainer>
       )}
-      <DashboardContentSwitcher dashboardNum={dashboardNum} />
-    </DashboardContainer>
+    </div>
   );
 };
 
@@ -34,6 +46,24 @@ const DashboardContainer = styled(Layout.Content)`
   background-color: ${(props) => props.theme.colors.white};
   margin-left: 300px;
   margin-right: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  padding-left: 34px;
+  padding-right: 34px;
+  border-radius: 20px;
+  box-shadow: 0px 4px 10px 0 rgba(0, 0, 0, 0.1);
+`;
+
+const Dashboard4Container = styled(Layout.Content)`
+  background-color: ${(props) => props.theme.colors.white};
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
   margin-top: 20px;
   margin-bottom: 20px;
   padding-top: 30px;
