@@ -179,9 +179,9 @@ const Dashboard4 = () => {
     lon: location.lng,
     rad: locationRadius, // TODO: need conversion
   });
-
+  // http://riyuna.pythonanywhere.com/user?user_id=702&min_age=20&max_age=30&rad=0.5
   useEffect(() => {
-    fetch(`http://127.0.0.1:5000/user?${queryString}`)
+    fetch(`http://riyuna.pythonanywhere.com/user?${queryString}`)
       .then((response) => response.json())
       .then((data) => {
         setMyValue(data.my_stress);
@@ -216,7 +216,7 @@ const Dashboard4 = () => {
     });
 
     useEffect(() => {
-      fetch(`http://127.0.0.1:5000/user?${queryString}`)
+      fetch(`http://riyuna.pythonanywhere.com/user?${queryString}`)
         .then((response) => response.json())
         .then((data) => {
           setMyValue(data.my_stress);
