@@ -66,7 +66,7 @@ const Dashboard1 = () => {
   return (
     <Layout style={{ background: '#ffffff'}}>
 
-      <Sider width={130} style={{ background: '#ffffff'}}>
+      <Sider width={'20%'} style={{ background: '#ffffff'}}>
         <TitleStyle>Weekly</TitleStyle>
         <text style={WeeklyText}>{weeklyValues}</text>
 

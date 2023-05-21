@@ -57,7 +57,7 @@ const mapContainerStyle = {
   marginLeft: "100px",
 };
 
-const API_KEY = "";
+const API_KEY = "AIzaSyCYWHhE3VX4JfOUSaqLHW437zlCmpsjo-o";
 
 const Dashboard4 = () => {
   //sliders: input values
@@ -323,7 +323,7 @@ const Dashboard4 = () => {
             min={15}
             max={75}
             defaultValue={[15, 75]}
-            style={{ width: "200px" }}
+            style={{ width: "150px" }}
             onAfterChange={(value) => onAfterChangeSlider(value, "age")}
           />
         </SliderWrapper>
@@ -337,7 +337,7 @@ const Dashboard4 = () => {
             defaultValue={[1, 100]}
             tooltip={{ formatter }}
             reverse={true}
-            style={{ width: "200px" }}
+            style={{ width: "150px" }}
             onAfterChange={(value) => onAfterChangeSlider(value, "appUsage")}
           />
         </SliderWrapper>
@@ -351,7 +351,7 @@ const Dashboard4 = () => {
             defaultValue={[1, 100]}
             tooltip={{ formatter }}
             reverse={true}
-            style={{ width: "200px" }}
+            style={{ width: "150px" }}
             onAfterChange={(value) =>
               onAfterChangeSlider(value, "movedDistance")
             }
@@ -388,7 +388,7 @@ const Dashboard4 = () => {
             defaultValue={locationRadius}
             // tooltip={{ locationRadiusFormatter }}
             tooltip={{ formatter: null }}
-            style={{ width: "180px" }}
+            style={{ width: "140px" }}
             onAfterChange={(value) =>
               onAfterChangeSlider(value, "locationRadius")
             }
@@ -608,7 +608,7 @@ const AddressWrapper = styled.div`
 `;
 
 const StressYAxis = styled.div`
-  height: 219px;
+  height: 212px;
   width: 2px;
   background: linear-gradient(
     ${(props) => props.theme.colors.stress5},
@@ -618,11 +618,13 @@ const StressYAxis = styled.div`
   z-index: 2;
   position: absolute;
   margin-top: 8px;
-  margin-left: 76px;
+  margin-left: 88px;
 `;
 
 const BoxplotWrapper = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const BoxplotGraph = styled.div`

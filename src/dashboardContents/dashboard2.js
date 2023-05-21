@@ -88,13 +88,12 @@ const Dashboard2 = () => {
   return (
     <div> 
       <GraphExplanation>The apps are your TOP 15 most used apps.</GraphExplanation>
-      {/* <text style={{fontWeight: 'lighter', marginTop: 1, fontSize: 12,}}>The apps are your TOP 15 most used apps.</text> */}
     <Layout style={{ background: '#ffffff', marginTop: 20}}> 
       <Sider width={60} style={{ background: '#ffffff', paddingLeft:20}}>
         {/* <Images dash2Data={dash2Data.map((arr) => require(`./images/${arr[0]}.png`))} /> */}
         <Images dash2Data={imgArr.reverse()} />
       </Sider>
-      <Content style={{display: 'flex', }} >
+      <Content width={'80%'} style={{display: 'flex', }} >
         <BarChart color={arrColor} dash2Data={dash2Data}/>
       </Content>
       <Sider style={{ background: '#ffffff', paddingLeft:20}}>

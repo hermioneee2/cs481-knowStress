@@ -21,7 +21,7 @@ const BarChart = ({color, dash2Data}) => {
 
     const layout = {
         autosize: false,
-        width: 600,
+        width: '100%',
         height: 600,
         xaxis: {
             title: {text: "Average Stress Level", standoff:20, font: {size: 10, color: theme.colors.grayKS}}, 

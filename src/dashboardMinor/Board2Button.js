@@ -18,7 +18,7 @@ const Board2Button = ({activeButton, color, category, changeColor}) => {
     const buttonStyle = {
         textAlign: 'center',
         fontSize: '10px', 
-        height:'22px', 
+        height:'5%', 
         boxShadow: 1, 
         marginBottom:1, 
         display:'flex', 
