@@ -85,11 +85,6 @@ const Dashboard5 = () => {
     );
     const BarChartExplanationString = () => {
         switch(activeButton){
-            case "Total App Usage": return <>
-            This graph shows stress level distribution according to the usage time of apps in total.
-            <br/><br/>
-            According to graph, it seems: total app usage time is not really related with stress level.
-            </>;
             case "Movement": return <>
             This graph shows stress level distribution according to the movement time.
             <br/><br/>
@@ -149,6 +144,14 @@ const Dashboard5 = () => {
         } 
         setArrColor(updatedList);
       }, [activeButton]);
+    const [data, setData] = useState([{}])
+      useEffect(()=>{
+        fetch("/user").then(
+            response =>response.json()
+        ).then(
+            data=>{setData(data);}
+        ).catch(err=>console.log(err))
+      })
   return (
     <ContentLayout>
       <CategorySelectionLayout>
@@ -182,7 +185,13 @@ const Dashboard5 = () => {
       <ResultGraphLayout>
         <StepWrapper>
           <StepHeader>Step 2</StepHeader>
-          <StepTitle>View Stress Level Distribution</StepTitle>
+          <StepTitle>
+            View Stress Level Distribution
+            test for server connections
+            <div>
+                {(typeof data.my_stress === 'undefined')? (<p>loading...</p>) : (data.my_stress)}
+            </div>
+            </StepTitle>
         </StepWrapper>
         <p
           style={{
