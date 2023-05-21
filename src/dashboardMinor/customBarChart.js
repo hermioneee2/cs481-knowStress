@@ -279,7 +279,7 @@ const CustomBarChart = ({ category }) => {
         <VictoryAxis
             tickValues = {XTick}
             tickComponent={<VoidTick/>}
-
+            tickLabels: {fontWeight: 300, fontFamily: "Open Sans"}
             style={{ 
                 grid: {stroke: "transparent"},
                 axis: {stroke: "transparent"},
