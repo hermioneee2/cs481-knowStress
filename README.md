@@ -1,70 +1,48 @@
-# Getting Started with Create React App
+# KnowStress
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is the Term project for 2023 Spring KAIST CS492 Data Visualization.
 
-## Available Scripts
+## KnowStress
+### Know your own stress to get no stress
 
-In the project directory, you can run:
+* Eunha Song
+* Hana Yoon
+* Hyerim Lee
 
-### `npm start`
+## Tasks
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+From this project, we wanted to achieve the following three tasks.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. Understanding myself
+* Visualize the user's stress level by time, app usage, and location.
+2. Compare myself with others to check if I am doing fine
+* Visualize the relative location of user’s stress level compared to others
+3. Explore other’s stress patterns to learn from them
+* Visualize other’s stress level based on different factors to discover what are correlated to stress.
+    * age, app usage by each category, active time etc.
 
-### `npm test`
+## Framework & Libraries
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+React and React Libraries including 
+* React-Plotly, React-Google-Maps, Victory, Antd, etc. 
 
-### `npm run build`
+## Project Status
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The project is deployed at https://uplife-dv.herokuapp.com/. 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Installation and Setup Instructions
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Install node and npm on your machine
+2. Clone down this repository
+3. npm install 
+4. npm start
+5. Open http://localhost:3000 to view the web in your browser
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Web Structure
+* /
+    * The MyStressPattern page allows users to explore their stress pattern with three graphs 
+* /myAndOthers
+    * The MeAndOthers page allows user’s to compare their stress level with others and learn from other people with two different graphs
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
