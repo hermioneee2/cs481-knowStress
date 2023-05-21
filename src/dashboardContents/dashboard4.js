@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef } from "react";
+import React, { useState, useCallback, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { theme } from "../styles/Theme";
 import { DownOutlined, EnvironmentFilled } from "@ant-design/icons";
@@ -7,6 +7,7 @@ import { GoogleMap, useLoadScript, OverlayView } from "@react-google-maps/api";
 
 import StressCodeBoxPlot from "../dashboardMinor/StressCodeBoxPlot";
 import BoxPlot from "../dashboardMinor/BoxPlot";
+import dotenv from "dotenv";
 
 // For sliders
 const age_marks = {
@@ -57,7 +58,7 @@ const mapContainerStyle = {
   marginLeft: "100px",
 };
 
-const API_KEY = "AIzaSyCYWHhE3VX4JfOUSaqLHW437zlCmpsjo-o";
+dotenv.config();
 
 const Dashboard4 = () => {
   //sliders: input values
@@ -70,7 +71,7 @@ const Dashboard4 = () => {
   });
   const [locationRadius, setLocationRadius] = useState(120);
 
-  const [myValue, setMyValue] = useState(4.3);
+  const [myValue, setMyValue] = useState(3.4);
 
   const [numOfPeople, setNumOfPeople] = useState(77);
   const [topValue, setTopValue] = useState(20);
@@ -83,9 +84,10 @@ const Dashboard4 = () => {
   //map
   const mapRef = useRef(null);
   const [address, setAddress] = useState("대한민국 대전광역시 한국과학기술원");
+  const [zoomLevel, setZoomLevel] = useState(14);
 
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: API_KEY,
+    googleMapsApiKey: process.env.REACT_APP_MAP_API_KEY,
   });
 
   const onMapLoad = useCallback((map) => {
@@ -94,7 +96,7 @@ const Dashboard4 = () => {
 
   const getAddress = async (lat, lng) => {
     const response = await fetch(
-      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${API_KEY}`
+      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${process.env.REACT_APP_MAP_API_KEY}`
     );
     const data = await response.json();
     return data.results[0].formatted_address;
@@ -147,14 +149,23 @@ const Dashboard4 = () => {
     }
   };
 
+  const objToQueryString = (obj) => {
+    const keyValuePairs = [];
+    for (const key in obj) {
+      keyValuePairs.push(
+        encodeURIComponent(key) + "=" + encodeURIComponent(obj[key])
+      );
+    }
+    return keyValuePairs.join("&");
+  };
+
   const getBoxPlotData = (
-    ageRange,
-    appUsageRange,
-    movedDistanceRange,
-    location,
-    locationRadius
+    ageRangeB,
+    appUsageRangeB,
+    movedDistanceRangeB,
+    locationB,
+    locationRadiusB
   ) => {
-    //get data...
     const outputMyValue = 4.3;
     const outputNumOfPeople = 60;
     const outputTopValue = 19;
@@ -365,7 +376,7 @@ const Dashboard4 = () => {
           <GoogleMap
             mapContainerStyle={mapContainerStyle}
             center={location}
-            zoom={14}
+            zoom={zoomLevel}
             onLoad={onMapLoad}
             onDragEnd={onDragEnd}
             options={{
