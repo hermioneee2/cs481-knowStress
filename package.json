@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "homepage": "https://hermioneee2.github.io/cs481-knowStress",
+  "proxy": "http://riyuna.pythonanywhere.com/",
   "dependencies": {
     "@emotion/react": "^11.10.8",
     "@emotion/styled": "^11.10.8",
