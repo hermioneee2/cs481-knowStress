@@ -3,6 +3,8 @@ import { Layout } from "antd";
 import {theme} from '../styles/Theme'
 import StressCode from "../dashboardMinor/StressCode";
 import styled from "styled-components";
+import { Tooltip } from 'antd';
+
 
 import SquareIcon from '@mui/icons-material/Square';
 import DisabledByDefaultIcon from '@mui/icons-material/DisabledByDefault';
@@ -47,7 +49,9 @@ const Dashboard1 = () => {
 
   const Daily = dailyValues.map((item) => (
     <div key={item.id} style={{display: 'block'}}>
-      <SquareIcon sx={{color: getColor(item), margin:-0.3, marginTop:-0.7, fontSize:'30px'}} />
+      <Tooltip title={item.toFixed(2)}>
+        <SquareIcon fontSize={'inherit'} sx={{color: getColor(item), margin:-0.3, marginTop:-0.7, fontSize:'30px'}} />
+      </Tooltip>
     </div>
     
   ));
@@ -57,7 +61,15 @@ const Dashboard1 = () => {
       <text style={yLabel}>{days[i]}</text>
       {v.map((value, j) => (
         <div style={{display: 'block'}} key={j}>
-          {value === -1 ? <DisabledByDefaultIcon sx={{color: '#CDCDCD', margin:-0.3,marginTop:-0.7,  fontSize:'30px'}}/> : <SquareIcon sx={{color: getColor(value), margin:-0.3, marginTop:-0.7,  fontSize:'30px'}} /> }
+          {value === -1 ? 
+          <DisabledByDefaultIcon fontSize={'inherit'}  sx={{color: '#CDCDCD', margin:-0.3,marginTop:-0.7, fontSize:'30px'}}/> 
+          : 
+          <div>
+             <Tooltip title={value.toFixed(1)}>
+              <SquareIcon fontSize={'inherit'} sx={{color: getColor(value), margin:-0.3, marginTop:-0.7, fontSize:'30px'}} />
+             </Tooltip>
+          </div>
+           }
         </div>
       ))}
     </div>
@@ -72,12 +84,12 @@ const Dashboard1 = () => {
 
       </Sider>
 
-      <Sider width={40} style={{ background: '#ffffff'}}>
+      <Sider width={'5%'} style={{ background: '#ffffff'}}>
         <TitleStyle>Daily</TitleStyle>
         <div style={{display: 'block', marginTop: 10}}>{Daily}</div>
       </Sider>
 
-      <Content>
+      <Content width={'55%'}>
         <TitleStyle style={{marginLeft: 35}}>Hourly</TitleStyle>
         <div style={{display: 'block', marginTop: 10}}>{Hourly}</div>
         <div style={{paddingLeft: 25}}>
@@ -96,7 +108,7 @@ const Dashboard1 = () => {
         
       </Content>
 
-      <Sider style={{ background: '#ffffff', paddingLeft:20, marginTop:25}}>
+      <Sider width={'20%'} style={{ background: '#ffffff', paddingLeft:20, marginTop:25}}>
         <StressLevel>Stress Level</StressLevel>
         <div style={{display: 'block', marginTop: 10}}>
           <StressCode color={theme.colors.stress6} t={6} lev={'Very Stressed'}/>
