@@ -7,7 +7,7 @@ import BarChart from "../dashboardMinor/BarChart";
 import styled from "styled-components";
 import { Layout } from "antd";
 import Board2Button from "../dashboardMinor/Board2Button";
-import Images from "../dashboardMinor/Images";
+import ImageAll from "../dashboardMinor/ImagesAll";
 const {Content, Sider } = Layout;
 
 
@@ -30,8 +30,6 @@ const Dashboard2 = () => {
    [  "연락처","Utility","3.9095982142857144"],
    [  "Dropsync","Utility","3.9817495280050346"],
   ];
-
-   const imgArr = dash2Data.map((arr) => require(`./images/${arr[0]}.png`))
 
   const newArray = [];
 
@@ -74,15 +72,16 @@ const Dashboard2 = () => {
   }, [activeButton]);
 
 
-    const changeColor = (buttonId) =>{
-      if (activeButton === buttonId) {
-        setActiveButton(null); // unclicking the active button
-      } else {
-        setActiveButton(buttonId); // clicking a new button
-      }
-    };
+  const changeColor = (buttonId) =>{
+    if (activeButton === buttonId) {
+      setActiveButton(null); // unclicking the active button
+    } else {
+      setActiveButton(buttonId); // clicking a new button
+    }
+  };
 
 
+  const imgArr = dash2Data.map((arr) => arr[0]);
 
 
   return (
@@ -90,8 +89,10 @@ const Dashboard2 = () => {
       <GraphExplanation>The apps are your TOP 15 most used apps.</GraphExplanation>
     <Layout style={{ background: '#ffffff', marginTop: 20}}> 
       <Sider width={60} style={{ background: '#ffffff', paddingLeft:20}}>
-        {/* <Images dash2Data={dash2Data.map((arr) => require(`./images/${arr[0]}.png`))} /> */}
-        <Images dash2Data={imgArr.reverse()} />
+        {/* <Images dash2Data={imgArr.reverse()} /> */}
+        {/* <OneImage img={dash2Data[0][0]} />
+        <OneImage img={dash2Data[1][0]} /> */}
+        <ImageAll dash2Data={imgArr.reverse()}/>
       </Sider>
       <Content width={'80%'} style={{display: 'flex', }} >
         <BarChart color={arrColor} dash2Data={dash2Data}/>
