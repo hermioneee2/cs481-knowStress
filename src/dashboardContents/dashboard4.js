@@ -68,20 +68,20 @@ const Dashboard4 = () => {
   const [locationRadius, setLocationRadius] = useState(130);
   const [myValue, setMyValue] = useState(3.4);
 
-  const [numOfPeople, setNumOfPeople] = useState(0);
-  const [topValue, setTopValue] = useState(0);
-  const [lowerQuartile, setLowerQuartile] = useState(0);
-  const [median, setMedian] = useState(0);
-  const [upperQuartile, setUpperQuartile] = useState(0);
-  const [min, setMin] = useState(0);
-  const [max, setMax] = useState(0);
-  // const [numOfPeople, setNumOfPeople] = useState(77);
-  // const [topValue, setTopValue] = useState(20);
-  // const [lowerQuartile, setLowerQuartile] = useState(2.3);
-  // const [median, setMedian] = useState(3.8);
-  // const [upperQuartile, setUpperQuartile] = useState(4);
-  // const [min, setMin] = useState(1);
-  // const [max, setMax] = useState(5.8);
+  // const [numOfPeople, setNumOfPeople] = useState(0);
+  // const [topValue, setTopValue] = useState(0);
+  // const [lowerQuartile, setLowerQuartile] = useState(0);
+  // const [median, setMedian] = useState(0);
+  // const [upperQuartile, setUpperQuartile] = useState(0);
+  // const [min, setMin] = useState(0);
+  // const [max, setMax] = useState(0);
+  const [numOfPeople, setNumOfPeople] = useState(77);
+  const [topValue, setTopValue] = useState(20);
+  const [lowerQuartile, setLowerQuartile] = useState(2.3);
+  const [median, setMedian] = useState(3.8);
+  const [upperQuartile, setUpperQuartile] = useState(4);
+  const [min, setMin] = useState(1);
+  const [max, setMax] = useState(5.8);
 
   //map
   const mapRef = useRef(null);
