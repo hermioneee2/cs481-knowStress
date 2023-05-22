@@ -43,11 +43,6 @@ const formatter = (value) => {
   return `Top ${value}%`;
 };
 
-// // TODO: Scale this value
-// const locationRadiusFormatter = (value) => {
-//   return `Top ${value}%`;
-// };
-
 // textbox
 const { Panel } = Collapse;
 
@@ -69,7 +64,7 @@ const Dashboard4 = () => {
     lat: 36.370053712983704,
     lng: 127.3605726960359,
   });
-  const [locationRadius, setLocationRadius] = useState(120);
+  const [locationRadius, setLocationRadius] = useState(130);
   const [myValue, setMyValue] = useState(3.4);
   const [numOfPeople, setNumOfPeople] = useState(77);
   const [topValue, setTopValue] = useState(20);
@@ -98,6 +93,15 @@ const Dashboard4 = () => {
     );
     const data = await response.json();
     return data.results[0].formatted_address;
+  };
+
+  const convertPixToKm = (pix) => {
+    return (pix / 130) * 2 ** (14 - zoomLevel);
+  };
+
+  const locationRadiusFormatter = (value) => {
+    const formattedValue = convertPixToKm(value).toFixed(2);
+    return `${formattedValue}km`;
   };
 
   const onAfterChangeSlider = (value, sliderName) => {
@@ -167,7 +171,7 @@ const Dashboard4 = () => {
     max_apptime: appUsageRange[1],
     lat: location.lat,
     lon: location.lng,
-    rad: locationRadius, // TODO: need conversion
+    rad: convertPixToKm(locationRadius), // TODO: need conversion
   });
 
   useEffect(() => {
@@ -202,7 +206,7 @@ const Dashboard4 = () => {
       max_apptime: appUsageRangeB[1],
       lat: locationB.lat,
       lon: locationB.lng,
-      rad: locationRadiusB, // TODO: need conversion
+      rad: convertPixToKm(locationRadiusB), // TODO: need conversion
     });
 
     fetch(`http://riyuna.pythonanywhere.com/user?${queryString}`)
@@ -220,21 +224,71 @@ const Dashboard4 = () => {
   };
 
   //map
-  const onDragEnd = useCallback(async (event) => {
-    const center = mapRef.current.getCenter();
+  // const onDragEnd = useCallback(async (event) => {
+  //   const center = mapRef.current.getCenter();
+  //   const lat = center.lat();
+  //   const lng = center.lng();
+  //   console.log(lat);
+  //   console.log(lng);
+  //   setLocation({
+  //     lat: lat,
+  //     lng: lng,
+  //   });
 
-    setLocation({
-      lat: center.lat(),
-      lng: center.lng(),
-    });
+  //   setAddress(await getAddress(center.lat(), center.lng()));
 
-    setAddress(await getAddress(center.lat(), center.lng()));
-  }, []);
+  //   getBoxPlotData(
+  //     ageRange,
+  //     appUsageRange,
+  //     movedDistanceRange,
+  //     location,
+  //     locationRadius
+  //   );
+  // }, []);
+
+  const onDragEnd = async () => {
+    if (mapRef.current) {
+      const center = mapRef.current.getCenter();
+      const lat = center.lat();
+      const lng = center.lng();
+      setLocation({
+        lat: lat,
+        lng: lng,
+      });
+
+      setAddress(await getAddress(lat, lng));
+
+      getBoxPlotData(
+        ageRange,
+        appUsageRange,
+        movedDistanceRange,
+        {
+          lat: lat,
+          lng: lng,
+        },
+        locationRadius
+      );
+    }
+  };
 
   const [overlayLoaded, setOverlayLoaded] = useState(false);
 
   const onOverlayLoad = () => {
     setOverlayLoaded(true);
+  };
+
+  const handleZoomChange = () => {
+    if (mapRef.current) {
+      const newZoomLevel = mapRef.current.zoom;
+      setZoomLevel(newZoomLevel);
+      getBoxPlotData(
+        ageRange,
+        appUsageRange,
+        movedDistanceRange,
+        location,
+        locationRadius
+      );
+    }
   };
 
   const locationRangeCircleStyle = {
@@ -301,7 +355,7 @@ const Dashboard4 = () => {
 
   const PeoplRangeExplanation = (
     <>
-      Among{" "}
+      Compared to{" "}
       <span
         style={{
           fontWeight: 700,
@@ -317,8 +371,8 @@ const Dashboard4 = () => {
   const boxplotExplanation1 = (
     <>
       <span style={{ color: theme.colors.stress3 }}>
-        My average stress level of {myValue} ranked in top {topValue}% among{" "}
-        {numOfPeople} people in the group.
+        My average stress level of {myValue} ranked in top {topValue}% compared
+        to {numOfPeople} people in the group.
       </span>{" "}
       Top 1% indicates the most stressed and top 100% indicates the least
       stressed in the group. The closer your ranking is to top 1%, the more
@@ -387,7 +441,7 @@ const Dashboard4 = () => {
           />
         </SliderWrapper>
         <SliderWrapper>
-          <SliderHeader>Moved Distance</SliderHeader>
+          <SliderHeader>Movement</SliderHeader>
           <Slider
             range
             marks={moved_distance_marks}
@@ -417,6 +471,7 @@ const Dashboard4 = () => {
               disableDefaultUI: true,
               zoomControl: true,
             }}
+            onZoomChanged={handleZoomChange} // Add this event handler
           >
             <LocationPin />
             <LocationRangeCircle />
@@ -431,8 +486,8 @@ const Dashboard4 = () => {
             min={20}
             max={140}
             defaultValue={locationRadius}
-            // tooltip={{ locationRadiusFormatter }}
-            tooltip={{ formatter: null }}
+            tooltip={{ formatter: locationRadiusFormatter }}
+            // tooltip={{ formatter: null }}
             style={{ width: "140px" }}
             onAfterChange={(value) =>
               onAfterChangeSlider(value, "locationRadius")
