@@ -422,7 +422,7 @@ const Dashboard4 = () => {
             min={15}
             max={50}
             defaultValue={[15, 50]}
-            style={{ width: "200px" }}
+            style={{ width: "150px" }}
             onAfterChange={(value) => onAfterChangeSlider(value, "age")}
           />
         </SliderWrapper>
@@ -436,7 +436,7 @@ const Dashboard4 = () => {
             defaultValue={[1, 100]}
             tooltip={{ formatter }}
             reverse={true}
-            style={{ width: "200px" }}
+            style={{ width: "150px" }}
             onAfterChange={(value) => onAfterChangeSlider(value, "appUsage")}
           />
         </SliderWrapper>
@@ -450,7 +450,7 @@ const Dashboard4 = () => {
             defaultValue={[1, 100]}
             tooltip={{ formatter }}
             reverse={true}
-            style={{ width: "200px" }}
+            style={{ width: "150px" }}
             onAfterChange={(value) =>
               onAfterChangeSlider(value, "movedDistance")
             }
@@ -488,7 +488,7 @@ const Dashboard4 = () => {
             defaultValue={locationRadius}
             tooltip={{ formatter: locationRadiusFormatter }}
             // tooltip={{ formatter: null }}
-            style={{ width: "200px" }}
+            style={{ width: "140px" }}
             onAfterChange={(value) =>
               onAfterChangeSlider(value, "locationRadius")
             }
