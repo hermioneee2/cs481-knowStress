@@ -283,12 +283,12 @@ const CustomBarChart = ({ category }) => {
             flyoutStyle={{fill: "black", opacity:0.8}}
             flyoutPadding={({ text }) =>
             text.length > 1
-              ? { top: 3, bottom: 3, left: 7, right: 7 }
-              : 7}
+              ? { top: 5, bottom: 5, left: 10, right: 10 }
+              : 10}
             pointerOrientation="bottom"
             dx={13}
             textAnchor="start"
-            style = {{textAnchor: "start", fill:"white", fontFamily: "open Sans", fontSize: 20, fontweight:500, fontStyle:'bold'}}
+            style = {{textAnchor: "start", fill:"white", fontFamily: "open Sans", fontSize: 15, fontweight:500, fontStyle:'bold', lineHeight: 1.25}}
             />
         }
             labels={({ datum }) => String(getTooltipText(datum.category, datum.range, datum.percent, datum.y))}
