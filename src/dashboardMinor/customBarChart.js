@@ -238,9 +238,9 @@ const CustomBarChart = ({ category }) => {
             x2="100%"
             gradientUnits="userSpaceOnUse"
         >
-            <stop offset="0%" stopColor={theme.colors.stress3} />
+            <stop offset="0%" stopColor={theme.colors.stress6} />
             <stop offset="50%" stopColor={theme.colors.stress2} />
-            <stop offset="100%" stopColor={theme.colors.stress1} />
+            <stop offset="100%" stopColor={theme.colors.stress0} />
         </linearGradient>
         </defs>
         <VictoryAxis
