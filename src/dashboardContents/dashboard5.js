@@ -9,7 +9,7 @@ import CustomBarChart from "../dashboardMinor/customBarChart";
 const Dashboard5 = () => {
   const newArray = [];
   const [arrColor, setArrColor] = useState([...newArray]);
-  const [activeButton, setActiveButton] = useState(null);
+  const [activeButton, setActiveButton] = useState("Age");
   const buttonStyle = ({ color, buttonId }) => {
     const isActive = buttonId === activeButton;
     return {
@@ -38,6 +38,7 @@ const Dashboard5 = () => {
       borderRadius: "7px",
 
       display: "inline",
+      '&:hover': { backgroundColor: alpha(color, 0.3),  }
     };
   };
 
@@ -66,6 +67,7 @@ const Dashboard5 = () => {
       lineHeight: "19px",
       color: color,
       fontFamily: "Open Sans",
+      '&:hover': { backgroundColor: alpha(color, 0.3),  }
     };
   };
   const changeColor = (buttonId) => {
