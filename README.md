@@ -45,4 +45,10 @@ The project is deployed at https://uplife-dv.herokuapp.com/.
 * /myAndOthers
     * The MeAndOthers page allows user’s to compare their stress level with others and learn from other people with two different graphs
 
+## Web Images
+### MyStressPattern Page
+![KakaoTalk_Photo_2023-05-23-15-29-49 001](https://github.com/hermioneee2/cs481-knowStress/assets/67997772/e7a7be64-efd1-4a7f-8886-7766e93a2164)
+
+### MeAndOthers Page
+![KakaoTalk_Photo_2023-05-23-15-29-50 002](https://github.com/hermioneee2/cs481-knowStress/assets/67997772/04fb95a4-8f6a-4190-81cc-06b468aa0f23)
 
