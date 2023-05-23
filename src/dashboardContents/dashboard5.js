@@ -10,14 +10,13 @@ import CustomBarChart from "../dashboardMinor/customBarChart";
 const Dashboard5 = () => {
     const newArray=[];
     const [arrColor, setArrColor] = useState([...newArray]);
-    const [activeButton, setActiveButton] = useState('Age');
+    const [activeButton, setActiveButton] = useState(null);
     const buttonStyle = ({color, buttonId}) => {
         const isActive = buttonId === activeButton;
         return ({
             gap:'10px',
             paddingBottom:'4px',
             paddingHorizontal:'8px',
-            '&:hover': { backgroundColor: alpha(color, 0.3),  },
     
             display:'flex', 
             flexDirection: 'row',
@@ -53,7 +52,6 @@ const Dashboard5 = () => {
             paddingHorizontal:'20px',
             paddingBottom:'10px',
             gap:'10px',
-            '&:hover': { backgroundColor: alpha(color, 0.3),  },
     
             height:'39px', 
     
@@ -92,8 +90,7 @@ const Dashboard5 = () => {
             case "Sleep Time": return <>
             This graph shows stress level distribution according to the sleep time.
             <br/><br/>
-            According to graph, it seems: <b>too less or much sleeping is related with higher stress level.</b>
-            <br/> Would you try proper sleep regularly?
+            According to graph, it seems: <b>too less or much sleeping is related with higher stress level.</b> Would you try proper sleep regularly?
             </>;
             case "Social Media": return <>
             This graph shows stress level distribution according to the usage time of social media apps.
@@ -245,9 +242,9 @@ const Dashboard5 = () => {
         <CustomBarChart category={activeButton}/></div>
         <div style={{marginBottom: '0px'}}></div>
         <BarChartExplanation>
-          <text style={{width: '150px', marginBottom: '0px', fontFamily: "Open Sans",fontWeight: '400', color:theme.colors.grayKS}}>
-            {BarChartExplanationString(activeButton)}
-          </text>
+        <text style={{marginBottom: '0px', fontFamily: "Open Sans",fontWeight: '400', color:theme.colors.grayKS}}>
+        {BarChartExplanationString(activeButton)}
+        </text>
         </BarChartExplanation>
       </ResultGraphLayout>
     </ContentLayout>
@@ -297,7 +294,6 @@ const StepTitle = styled.div`
 `;
 
 const BarChartExplanation = styled(Layout.Content)`
-  width: 400px;
   display: block;
   padding-top: 15px;
   padding-bottom: 15px;
@@ -305,7 +301,7 @@ const BarChartExplanation = styled(Layout.Content)`
   padding-right: 15px;
   font-size: 11px;
   margin-bottom: 15px;
-  margin-right: 15px;
+  background-color: 
   color: ${(props) => props.theme.colors.grayKS};
   background: ${(props) => props.theme.colors.explanationBackground};
 
