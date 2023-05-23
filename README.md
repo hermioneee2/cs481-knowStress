@@ -47,8 +47,10 @@ The project is deployed at https://uplife-dv.herokuapp.com/.
 
 ## Web Images
 ### MyStressPattern Page
-![KakaoTalk_Photo_2023-05-23-15-29-49 001](https://github.com/hermioneee2/cs481-knowStress/assets/67997772/e7a7be64-efd1-4a7f-8886-7766e93a2164)
+![KakaoTalk_Photo_2023-05-23-23-01-49 002](https://github.com/hermioneee2/cs481-knowStress/assets/67997772/afd33091-24b2-4af9-a13c-ee81b466bff6)
+
 
 ### MeAndOthers Page
-![KakaoTalk_Photo_2023-05-23-15-29-50 002](https://github.com/hermioneee2/cs481-knowStress/assets/67997772/04fb95a4-8f6a-4190-81cc-06b468aa0f23)
+![KakaoTalk_Photo_2023-05-23-23-01-49 001](https://github.com/hermioneee2/cs481-knowStress/assets/67997772/ad1f3bd2-debd-41f7-8cf8-1fdfafb5bc89)
+
 
