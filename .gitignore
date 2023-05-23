@@ -29,4 +29,4 @@ yarn-error.log*
 #pycache
 /data_processing/__pycache__
 
-.env
+config.yaml
