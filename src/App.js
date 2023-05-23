@@ -7,8 +7,14 @@ import { Route, Routes, BrowserRouter, useNavigate } from "react-router-dom";
 import Header from "./components/Header";
 import MyStressPattern from "./routes/MyStressPattern";
 import MeAndOthers from "./routes/MeAndOthers";
+import { useLocation } from "react-router-dom";
 
 function App() {
+  // const activeTabApp =
+  //   useLocation().pathname === "/cs481-knowStress/meAndOthers"
+  //     ? "me-and-others"
+  //     : "my-stress-pattern";
+
   const RedirectComponent = () => {
     const navigate = useNavigate();
 
