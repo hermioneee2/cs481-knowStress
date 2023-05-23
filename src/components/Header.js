@@ -6,7 +6,8 @@ import { useLocation } from "react-router-dom";
 
 const Header = () => {
   const activeTabApp =
-    useLocation().pathname === "/cs481-knowStress"
+    useLocation().pathname === "/cs481-knowStress" ||
+    useLocation().pathname === "/cs481-knowStress/"
       ? "my-stress-pattern"
       : "me-and-others";
 
