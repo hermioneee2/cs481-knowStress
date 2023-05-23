@@ -226,28 +226,6 @@ const Dashboard4 = () => {
   };
 
   //map
-  // const onDragEnd = useCallback(async (event) => {
-  //   const center = mapRef.current.getCenter();
-  //   const lat = center.lat();
-  //   const lng = center.lng();
-  //   console.log(lat);
-  //   console.log(lng);
-  //   setLocation({
-  //     lat: lat,
-  //     lng: lng,
-  //   });
-
-  //   setAddress(await getAddress(center.lat(), center.lng()));
-
-  //   getBoxPlotData(
-  //     ageRange,
-  //     appUsageRange,
-  //     movedDistanceRange,
-  //     location,
-  //     locationRadius
-  //   );
-  // }, []);
-
   const onDragEnd = async () => {
     if (mapRef.current) {
       const center = mapRef.current.getCenter();
@@ -705,6 +683,8 @@ const AddressWrapper = styled.div`
   padding-left: 13px;
   padding-right: 13px;
   border-radius: 10px;
+  max-width: 280px;
+  margin-bottom: 5px;
   color: ${(props) => props.theme.colors.selectionBlue};
   background-color: ${(props) => props.theme.colors.selectionTransparent};
 `;
