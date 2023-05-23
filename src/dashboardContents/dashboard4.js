@@ -175,7 +175,7 @@ const Dashboard4 = () => {
   });
 
   useEffect(() => {
-    fetch(`http://riyuna.pythonanywhere.com/user?${queryString}`)
+    fetch(`https://riyuna.pythonanywhere.com/user?${queryString}`)
       .then((response) => response.json())
       .then((data) => {
         setMyValue(data.my_stress);
@@ -209,7 +209,7 @@ const Dashboard4 = () => {
       rad: convertPixToKm(locationRadiusB), // TODO: need conversion
     });
 
-    fetch(`http://riyuna.pythonanywhere.com/user?${queryString}`)
+    fetch(`https://riyuna.pythonanywhere.com/user?${queryString}`)
       .then((response) => response.json())
       .then((data) => {
         setMyValue(data.my_stress);
