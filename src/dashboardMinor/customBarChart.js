@@ -316,15 +316,15 @@ const CustomBarChart = ({ category }) => {
         /> 
 
         <VictoryLabel
-        x={10}
-        y={-20}
+        x={5}
+        y={-0}
         text='Very Stressed'
         style={{fontFamily: 'Open Sans', fontStyle:'italic', fontWeight:300, fill:theme.colors.blackKS, size:'10px'}}
         />         
         <VictoryLabel
-        x={30}
+        x={10}
         y={350}
-        text='No Stress'
+        text='Not Stressed'
         style={{fontFamily: 'Open Sans', fontStyle:'italic', fontWeight:300, fill:theme.colors.blackKS, size:'10px'}}
         /> 
         <div style={{marginBottom: '10px'}}></div>
