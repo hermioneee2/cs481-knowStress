@@ -234,13 +234,13 @@ const CustomBarChart = ({ category }) => {
         <defs>
         <linearGradient
             id="YGradient"
-            x1="0%"
-            x2="100%"
+            y1="0%"
+            y2="100%"
             gradientUnits="userSpaceOnUse"
         >
-            <stop offset="0%" stopColor={theme.colors.stress3} />
+            <stop offset="0%" stopColor={theme.colors.stress6} />
             <stop offset="50%" stopColor={theme.colors.stress2} />
-            <stop offset="100%" stopColor={theme.colors.stress1} />
+            <stop offset="100%" stopColor={theme.colors.stress0} />
         </linearGradient>
         </defs>
         <VictoryAxis
@@ -267,6 +267,22 @@ const CustomBarChart = ({ category }) => {
                 axis: {stroke: "transparent"},
             }}
         />
+
+        {/* Bar */}
+        <defs>
+        <linearGradient
+            id="BarGradient"
+            y1="0%"
+            y2="100%"
+            x1="0%"
+            x2="0%"
+            gradientUnits="userSpaceOnUse"
+        >
+            <stop offset="0%" stopColor={theme.colors.stress6} />
+            <stop offset="50%" stopColor={theme.colors.stress3} />
+            <stop offset="100%" stopColor={theme.colors.stress0} />
+        </linearGradient>
+        </defs>
         <VictoryBar
           barRatio={0.9}
           style={{ 
@@ -276,7 +292,7 @@ const CustomBarChart = ({ category }) => {
                 fontSize: 10,
                 backgroundColor: "black"
               },
-            data: { fill: theme.colors.stress2},
+            data: { fill: 'url(#BarGradient)'},
         }}
           alignment="start"
           labelComponent={<VictoryTooltip
@@ -316,13 +332,13 @@ const CustomBarChart = ({ category }) => {
         /> 
 
         <VictoryLabel
-        x={10}
-        y={-20}
+        x={5}
+        y={3}
         text='Very Stressed'
         style={{fontFamily: 'Open Sans', fontStyle:'italic', fontWeight:300, fill:theme.colors.blackKS, size:'10px'}}
         />         
         <VictoryLabel
-        x={30}
+        x={10}
         y={350}
         text='Not Stressed'
         style={{fontFamily: 'Open Sans', fontStyle:'italic', fontWeight:300, fill:theme.colors.blackKS, size:'10px'}}
