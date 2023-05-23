@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "4085e6562b38a5e04c77",
+    "revision": "ca76e3cb6800e00053f1",
     "url": "/cs481-knowStress/static/css/main.833fad74.chunk.css"
   },
   {
-    "revision": "4085e6562b38a5e04c77",
-    "url": "/cs481-knowStress/static/js/main.2e6e44db.chunk.js"
+    "revision": "ca76e3cb6800e00053f1",
+    "url": "/cs481-knowStress/static/js/main.c7c05e65.chunk.js"
   },
   {
     "revision": "b91ceab629eda04f6d56",
@@ -56,7 +56,7 @@ self.__precacheManifest = [
     "url": "/cs481-knowStress/static/media/카카오톡.314c41e4.png"
   },
   {
-    "revision": "8eb3554da60536c2aacca73e0c406a7a",
+    "revision": "25f96b8f877cefb1a70c0d973b749a46",
     "url": "/cs481-knowStress/index.html"
   }
 ];
