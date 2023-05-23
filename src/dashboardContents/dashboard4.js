@@ -65,18 +65,20 @@ const Dashboard4 = () => {
     lng: 127.3605726960359,
   });
   const [locationRadius, setLocationRadius] = useState(130);
-  const [myValue, setMyValue] = useState(3.4);
-  const [numOfPeople, setNumOfPeople] = useState(77);
-  const [topValue, setTopValue] = useState(20);
-  const [lowerQuartile, setLowerQuartile] = useState(2.3);
-  const [median, setMedian] = useState(3.8);
-  const [upperQuartile, setUpperQuartile] = useState(4);
-  const [min, setMin] = useState(1);
-  const [max, setMax] = useState(5.8);
+  const [myValue, setMyValue] = useState(3.41);
+  const [numOfPeople, setNumOfPeople] = useState(29);
+  const [topValue, setTopValue] = useState(34.5);
+  const [lowerQuartile, setLowerQuartile] = useState(1.92);
+  const [median, setMedian] = useState(2.91);
+  const [upperQuartile, setUpperQuartile] = useState(3.635);
+  const [min, setMin] = useState(1.05);
+  const [max, setMax] = useState(4.19);
 
   //map
   const mapRef = useRef(null);
-  const [address, setAddress] = useState("대한민국 대전광역시 한국과학기술원");
+  const [address, setAddress] = useState(
+    "대한민국 대전광역시 한국과학기술원본관"
+  );
   const [zoomLevel, setZoomLevel] = useState(14);
 
   const { isLoaded, loadError } = useLoadScript({
