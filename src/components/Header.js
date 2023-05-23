@@ -6,9 +6,9 @@ import { useLocation } from "react-router-dom";
 
 const Header = () => {
   const activeTabApp =
-    useLocation().pathname === "/cs481-knowStress/meAndOthers"
-      ? "me-and-others"
-      : "my-stress-pattern";
+    useLocation().pathname === "/cs481-knowStress"
+      ? "my-stress-pattern"
+      : "me-and-others";
 
   const [activeTab, setActiveTab] = useState(activeTabApp);
 
