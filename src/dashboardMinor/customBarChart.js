@@ -185,9 +185,9 @@ const CustomBarChart = ({ category }) => {
           { x: "40", y: 3.43 , range: "40 ~ 44", category: category},
           { x: "45", y: 0 , range: "45 ~ 49", category: category},
           { x: "50", y: 0 , range: "50 ~ 54", category: category},
-          { x: "55", y: 0 , range: "55 ~ 59", category: category},
-          { x: "60", y: 0, range: "60 ~ 64" , category: category},
-          { x: "65", y: 0, range: "65 ~ 69", category: category},
+        //   { x: "55", y: 0 , range: "55 ~ 59", category: category},
+        //   { x: "60", y: 0, range: "60 ~ 64" , category: category},
+        //   { x: "65", y: 0, range: "65 ~ 69", category: category},
         ];
         userX = 2;
         labelText1 = "";
@@ -219,7 +219,7 @@ const CustomBarChart = ({ category }) => {
         return <circle cx={props.x1} cy={props.y1} r={'5px'} fill={'transparent'}/>
     }
     const XTick = category === "Age"
-    ? [15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65]
+    ? [15, 20, 25, 30, 35, 40, 45, 50]
     : [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
             
     return (!isnull)&&(
@@ -234,13 +234,13 @@ const CustomBarChart = ({ category }) => {
         <defs>
         <linearGradient
             id="YGradient"
-            y1="0%"
-            y2="100%"
+            x1="0%"
+            x2="100%"
             gradientUnits="userSpaceOnUse"
         >
-            <stop offset="0%" stopColor={theme.colors.stress6} />
+            <stop offset="0%" stopColor={theme.colors.stress3} />
             <stop offset="50%" stopColor={theme.colors.stress2} />
-            <stop offset="100%" stopColor={theme.colors.stress0} />
+            <stop offset="100%" stopColor={theme.colors.stress1} />
         </linearGradient>
         </defs>
         <VictoryAxis
@@ -284,7 +284,7 @@ const CustomBarChart = ({ category }) => {
         </linearGradient>
         </defs>
         <VictoryBar
-          barRatio={0.9}
+          barRatio={category==="Age"?1.15:1.05}
           style={{ 
             labels: {
                 fill: "white",
@@ -292,19 +292,19 @@ const CustomBarChart = ({ category }) => {
                 fontSize: 10,
                 backgroundColor: "black"
               },
-            data: { fill: 'url(#BarGradient)'},
+              data: { fill: 'url(#BarGradient)'},
         }}
           alignment="start"
           labelComponent={<VictoryTooltip
             flyoutStyle={{fill: "black", opacity:0.8}}
             flyoutPadding={({ text }) =>
             text.length > 1
-              ? { top: 3, bottom: 3, left: 7, right: 7 }
-              : 7}
+              ? { top: 5, bottom: 5, left: 10, right: 10 }
+              : 10}
             pointerOrientation="bottom"
             dx={13}
             textAnchor="start"
-            style = {{textAnchor: "start", fill:"white", fontFamily: "open Sans", fontSize: 20, fontweight:500, fontStyle:'bold'}}
+            style = {{textAnchor: "start", fill:"white", fontFamily: "open Sans", fontSize: 15, fontweight:500, fontStyle:'bold', lineHeight: 1.25}}
             />
         }
             labels={({ datum }) => String(getTooltipText(datum.category, datum.range, datum.percent, datum.y))}
@@ -333,7 +333,7 @@ const CustomBarChart = ({ category }) => {
 
         <VictoryLabel
         x={5}
-        y={3}
+        y={-0}
         text='Very Stressed'
         style={{fontFamily: 'Open Sans', fontStyle:'italic', fontWeight:300, fill:theme.colors.blackKS, size:'10px'}}
         />         
