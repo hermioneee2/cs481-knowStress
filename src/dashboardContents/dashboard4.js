@@ -12,8 +12,8 @@ import dotenv from "dotenv";
 // For sliders
 const age_marks = {
   15: "15",
-  26: "me",
-  75: "75",
+  23: "me",
+  50: "50",
 };
 
 const app_usage_marks = {
@@ -24,7 +24,7 @@ const app_usage_marks = {
 
 const moved_distance_marks = {
   100: "Least Active",
-  26: "me",
+  19: "me",
   1: "Most Active",
 };
 
@@ -58,7 +58,7 @@ dotenv.config();
 
 const Dashboard4 = () => {
   //sliders: input values
-  const [ageRange, setAgeRange] = useState([15, 75]);
+  const [ageRange, setAgeRange] = useState([15, 50]);
   const [appUsageRange, setAppUsageRange] = useState([1, 100]);
   const [movedDistanceRange, setMovedDistanceRange] = useState([1, 100]);
   const [location, setLocation] = useState({
@@ -429,8 +429,8 @@ const Dashboard4 = () => {
             range
             marks={age_marks}
             min={15}
-            max={75}
-            defaultValue={[15, 75]}
+            max={50}
+            defaultValue={[15, 50]}
             style={{ width: "200px" }}
             onAfterChange={(value) => onAfterChangeSlider(value, "age")}
           />
