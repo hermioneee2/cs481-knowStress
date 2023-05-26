@@ -4,6 +4,8 @@ import {theme} from '../styles/Theme'
 import StressCode from "../dashboardMinor/StressCode";
 import styled from "styled-components";
 import { Tooltip } from 'antd';
+import { alpha } from "@mui/material";
+
 
 
 import SquareIcon from '@mui/icons-material/Square';
@@ -62,7 +64,7 @@ const Dashboard1 = () => {
       {v.map((value, j) => (
         <div style={{display: 'block'}} key={j}>
           {value === -1 ? 
-          <DisabledByDefaultIcon fontSize={'inherit'}  sx={{color: '#CDCDCD', margin:-0.3,marginTop:-0.7, fontSize:'30px'}}/> 
+          <DisabledByDefaultIcon fontSize={'inherit'}  sx={{color: alpha('#CDCDCD', 0.7), margin:-0.3,marginTop:-0.7, fontSize:'30px'}}/> 
           : 
           <div>
              <Tooltip title={value.toFixed(1)}>

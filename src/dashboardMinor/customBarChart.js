@@ -234,8 +234,8 @@ const CustomBarChart = ({ category }) => {
         <defs>
         <linearGradient
             id="YGradient"
-            x1="0%"
-            x2="100%"
+            y1="0%"
+            y2="100%"
             gradientUnits="userSpaceOnUse"
         >
             <stop offset="0%" stopColor={theme.colors.stress6} />

@@ -12,7 +12,7 @@ const BarChart = ({color, dash2Data}) => {
         type: "bar",
         orientation: "h",
         marker: {color: color, height: 0.1, width:0.1,}, //d.color - 얘도 category 별 색상을 가져와야 할 듯
-        hoverinfo: 'skip',
+        // hoverinfo: 'skip',
         width: 0.6,
         // height: 0.1,
     },];
