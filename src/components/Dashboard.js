@@ -17,7 +17,7 @@ const Dashboard = ({ title, page1, subtitle, dashboardNum }) => {
       {dashboardNum === 4 || dashboardNum === 5 ? (
         <Dashboard4Container>
           <DashboardTitleWrapper>
-            <QuestionCircleOutlined style={iconStyle} />
+            {/* <QuestionCircleOutlined style={iconStyle} /> */}
             <DashboardTitle>{title}</DashboardTitle>
           </DashboardTitleWrapper>
           <DashboardContentSwitcher dashboardNum={dashboardNum} />
