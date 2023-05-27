@@ -2,9 +2,16 @@ import { Affix } from "antd";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const Header = () => {
-  const [activeTab, setActiveTab] = useState("my-stress-pattern");
+  const activeTabApp =
+    useLocation().pathname === "/cs481-knowStress" ||
+    useLocation().pathname === "/cs481-knowStress/"
+      ? "my-stress-pattern"
+      : "me-and-others";
+
+  const [activeTab, setActiveTab] = useState(activeTabApp);
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);

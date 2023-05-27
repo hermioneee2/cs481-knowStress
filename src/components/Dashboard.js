@@ -14,7 +14,7 @@ const Dashboard = ({ title, page1, subtitle, dashboardNum }) => {
 
   return (
     <div>
-      {dashboardNum === 4 ? (
+      {dashboardNum === 4 || dashboardNum === 5 ? (
         <Dashboard4Container>
           <DashboardTitleWrapper>
             <QuestionCircleOutlined style={iconStyle} />
@@ -44,8 +44,11 @@ const Dashboard = ({ title, page1, subtitle, dashboardNum }) => {
 
 const DashboardContainer = styled(Layout.Content)`
   background-color: ${(props) => props.theme.colors.white};
-  margin-left: 300px;
-  margin-right: 300px;
+  // margin-left: 300px;
+  // margin-right: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 65%;
   margin-top: 20px;
   margin-bottom: 20px;
   padding-top: 30px;

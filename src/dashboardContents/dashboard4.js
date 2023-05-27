@@ -12,8 +12,8 @@ import dotenv from "dotenv";
 // For sliders
 const age_marks = {
   15: "15",
-  26: "me",
-  75: "75",
+  23: "me",
+  50: "50",
 };
 
 const app_usage_marks = {
@@ -24,7 +24,7 @@ const app_usage_marks = {
 
 const moved_distance_marks = {
   100: "Least Active",
-  26: "me",
+  19: "me",
   1: "Most Active",
 };
 
@@ -43,11 +43,6 @@ const formatter = (value) => {
   return `Top ${value}%`;
 };
 
-// // TODO: Scale this value
-// const locationRadiusFormatter = (value) => {
-//   return `Top ${value}%`;
-// };
-
 // textbox
 const { Panel } = Collapse;
 
@@ -62,26 +57,28 @@ dotenv.config();
 
 const Dashboard4 = () => {
   //sliders: input values
-  const [ageRange, setAgeRange] = useState([15, 75]);
+  const [ageRange, setAgeRange] = useState([15, 50]);
   const [appUsageRange, setAppUsageRange] = useState([1, 100]);
   const [movedDistanceRange, setMovedDistanceRange] = useState([1, 100]);
   const [location, setLocation] = useState({
     lat: 36.370053712983704,
     lng: 127.3605726960359,
   });
-  const [locationRadius, setLocationRadius] = useState(120);
-  const [myValue, setMyValue] = useState(3.4);
-  const [numOfPeople, setNumOfPeople] = useState(77);
-  const [topValue, setTopValue] = useState(20);
-  const [lowerQuartile, setLowerQuartile] = useState(2.3);
-  const [median, setMedian] = useState(3.8);
-  const [upperQuartile, setUpperQuartile] = useState(4);
-  const [min, setMin] = useState(1);
-  const [max, setMax] = useState(5.8);
+  const [locationRadius, setLocationRadius] = useState(130);
+  const [myValue, setMyValue] = useState(3.41);
+  const [numOfPeople, setNumOfPeople] = useState(29);
+  const [topValue, setTopValue] = useState(34.5);
+  const [lowerQuartile, setLowerQuartile] = useState(1.92);
+  const [median, setMedian] = useState(2.91);
+  const [upperQuartile, setUpperQuartile] = useState(3.635);
+  const [min, setMin] = useState(1.05);
+  const [max, setMax] = useState(4.19);
 
   //map
   const mapRef = useRef(null);
-  const [address, setAddress] = useState("대한민국 대전광역시 한국과학기술원");
+  const [address, setAddress] = useState(
+    "대한민국 대전광역시 한국과학기술원본관"
+  );
   const [zoomLevel, setZoomLevel] = useState(14);
 
   const { isLoaded, loadError } = useLoadScript({
@@ -98,6 +95,15 @@ const Dashboard4 = () => {
     );
     const data = await response.json();
     return data.results[0].formatted_address;
+  };
+
+  const convertPixToKm = (pix) => {
+    return (pix / 130) * 2 ** (14 - zoomLevel);
+  };
+
+  const locationRadiusFormatter = (value) => {
+    const formattedValue = convertPixToKm(value).toFixed(2);
+    return `${formattedValue}km`;
   };
 
   const onAfterChangeSlider = (value, sliderName) => {
@@ -167,11 +173,11 @@ const Dashboard4 = () => {
     max_apptime: appUsageRange[1],
     lat: location.lat,
     lon: location.lng,
-    rad: locationRadius, // TODO: need conversion
+    rad: convertPixToKm(locationRadius), // TODO: need conversion
   });
 
   useEffect(() => {
-    fetch(`http://riyuna.pythonanywhere.com/user?${queryString}`)
+    fetch(`https://riyuna.pythonanywhere.com/user?${queryString}`)
       .then((response) => response.json())
       .then((data) => {
         setMyValue(data.my_stress);
@@ -202,10 +208,10 @@ const Dashboard4 = () => {
       max_apptime: appUsageRangeB[1],
       lat: locationB.lat,
       lon: locationB.lng,
-      rad: locationRadiusB, // TODO: need conversion
+      rad: convertPixToKm(locationRadiusB), // TODO: need conversion
     });
 
-    fetch(`http://riyuna.pythonanywhere.com/user?${queryString}`)
+    fetch(`https://riyuna.pythonanywhere.com/user?${queryString}`)
       .then((response) => response.json())
       .then((data) => {
         setMyValue(data.my_stress);
@@ -220,21 +226,49 @@ const Dashboard4 = () => {
   };
 
   //map
-  const onDragEnd = useCallback(async (event) => {
-    const center = mapRef.current.getCenter();
+  const onDragEnd = async () => {
+    if (mapRef.current) {
+      const center = mapRef.current.getCenter();
+      const lat = center.lat();
+      const lng = center.lng();
+      setLocation({
+        lat: lat,
+        lng: lng,
+      });
 
-    setLocation({
-      lat: center.lat(),
-      lng: center.lng(),
-    });
+      setAddress(await getAddress(lat, lng));
 
-    setAddress(await getAddress(center.lat(), center.lng()));
-  }, []);
+      getBoxPlotData(
+        ageRange,
+        appUsageRange,
+        movedDistanceRange,
+        {
+          lat: lat,
+          lng: lng,
+        },
+        locationRadius
+      );
+    }
+  };
 
   const [overlayLoaded, setOverlayLoaded] = useState(false);
 
   const onOverlayLoad = () => {
     setOverlayLoaded(true);
+  };
+
+  const handleZoomChange = () => {
+    if (mapRef.current) {
+      const newZoomLevel = mapRef.current.zoom;
+      setZoomLevel(newZoomLevel);
+      getBoxPlotData(
+        ageRange,
+        appUsageRange,
+        movedDistanceRange,
+        location,
+        locationRadius
+      );
+    }
   };
 
   const locationRangeCircleStyle = {
@@ -301,7 +335,7 @@ const Dashboard4 = () => {
 
   const PeoplRangeExplanation = (
     <>
-      Among{" "}
+      Compared to{" "}
       <span
         style={{
           fontWeight: 700,
@@ -317,8 +351,8 @@ const Dashboard4 = () => {
   const boxplotExplanation1 = (
     <>
       <span style={{ color: theme.colors.stress3 }}>
-        My average stress level of {myValue} ranked in top {topValue}% among{" "}
-        {numOfPeople} people in the group.
+        My average stress level of {myValue} ranked in top {topValue}% compared
+        to {numOfPeople} people in the group.
       </span>{" "}
       Top 1% indicates the most stressed and top 100% indicates the least
       stressed in the group. The closer your ranking is to top 1%, the more
@@ -366,9 +400,9 @@ const Dashboard4 = () => {
             range
             marks={age_marks}
             min={15}
-            max={75}
-            defaultValue={[15, 75]}
-            style={{ width: "150px" }}
+            max={50}
+            defaultValue={[15, 50]}
+            style={{ width: "200px" }}
             onAfterChange={(value) => onAfterChangeSlider(value, "age")}
           />
         </SliderWrapper>
@@ -382,12 +416,12 @@ const Dashboard4 = () => {
             defaultValue={[1, 100]}
             tooltip={{ formatter }}
             reverse={true}
-            style={{ width: "150px" }}
+            style={{ width: "200px" }}
             onAfterChange={(value) => onAfterChangeSlider(value, "appUsage")}
           />
         </SliderWrapper>
         <SliderWrapper>
-          <SliderHeader>Moved Distance</SliderHeader>
+          <SliderHeader>Movement</SliderHeader>
           <Slider
             range
             marks={moved_distance_marks}
@@ -396,7 +430,7 @@ const Dashboard4 = () => {
             defaultValue={[1, 100]}
             tooltip={{ formatter }}
             reverse={true}
-            style={{ width: "150px" }}
+            style={{ width: "200px" }}
             onAfterChange={(value) =>
               onAfterChangeSlider(value, "movedDistance")
             }
@@ -417,6 +451,7 @@ const Dashboard4 = () => {
               disableDefaultUI: true,
               zoomControl: true,
             }}
+            onZoomChanged={handleZoomChange} // Add this event handler
           >
             <LocationPin />
             <LocationRangeCircle />
@@ -431,8 +466,8 @@ const Dashboard4 = () => {
             min={20}
             max={140}
             defaultValue={locationRadius}
-            // tooltip={{ locationRadiusFormatter }}
-            tooltip={{ formatter: null }}
+            tooltip={{ formatter: locationRadiusFormatter }}
+            // tooltip={{ formatter: null }}
             style={{ width: "140px" }}
             onAfterChange={(value) =>
               onAfterChangeSlider(value, "locationRadius")
@@ -648,12 +683,14 @@ const AddressWrapper = styled.div`
   padding-left: 13px;
   padding-right: 13px;
   border-radius: 10px;
+  max-width: 280px;
+  margin-bottom: 5px;
   color: ${(props) => props.theme.colors.selectionBlue};
   background-color: ${(props) => props.theme.colors.selectionTransparent};
 `;
 
 const StressYAxis = styled.div`
-  height: 212px;
+  height: 219px;
   width: 2px;
   background: linear-gradient(
     ${(props) => props.theme.colors.stress5},
@@ -663,13 +700,11 @@ const StressYAxis = styled.div`
   z-index: 2;
   position: absolute;
   margin-top: 8px;
-  margin-left: 88px;
+  margin-left: 76px;
 `;
 
 const BoxplotWrapper = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: center;
 `;
 
 const BoxplotGraph = styled.div`
