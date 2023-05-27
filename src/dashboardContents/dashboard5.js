@@ -402,7 +402,7 @@ const ContentLayout = styled.div`
 const CategorySelectionLayout = styled.div``;
 
 const ResultGraphLayout = styled.div`
-  margin-left: 60px;
+  margin-left: 100px;
 `;
 
 const StepWrapper = styled.div`
