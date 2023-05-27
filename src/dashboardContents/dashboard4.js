@@ -51,7 +51,7 @@ const { Panel } = Collapse;
 const mapContainerStyle = {
   width: "270px",
   height: "270px",
-  marginLeft: "100px",
+  marginLeft: "110px",
 };
 
 dotenv.config();
@@ -355,9 +355,8 @@ const Dashboard4 = () => {
         My average stress level of {myValue} ranked in top {topValue}% compared
         to {numOfPeople} people in the group.
       </span>{" "}
-      Top 1% indicates the most stressed and top 100% indicates the least
-      stressed in the group. The closer your ranking is to top 1%, the more
-      stressed you are compared to the group.
+      Top 1% indicates the most stressed in the group, so the closer your
+      ranking is to top 1%, the more stressed you are compared to the group.
     </>
   );
 
@@ -403,7 +402,7 @@ const Dashboard4 = () => {
             min={15}
             max={50}
             defaultValue={[15, 50]}
-            style={{ width: "200px" }}
+            style={{ width: "220px" }}
             onAfterChange={(value) => onAfterChangeSlider(value, "age")}
           />
         </SliderWrapper>
@@ -417,7 +416,7 @@ const Dashboard4 = () => {
             defaultValue={[1, 100]}
             tooltip={{ formatter }}
             reverse={true}
-            style={{ width: "200px" }}
+            style={{ width: "220px" }}
             onAfterChange={(value) => onAfterChangeSlider(value, "appUsage")}
           />
         </SliderWrapper>
@@ -431,7 +430,7 @@ const Dashboard4 = () => {
             defaultValue={[1, 100]}
             tooltip={{ formatter }}
             reverse={true}
-            style={{ width: "200px" }}
+            style={{ width: "220px" }}
             onAfterChange={(value) =>
               onAfterChangeSlider(value, "movedDistance")
             }
@@ -479,7 +478,7 @@ const Dashboard4 = () => {
             defaultValue={locationRadius}
             tooltip={{ formatter: locationRadiusFormatter }}
             // tooltip={{ formatter: null }}
-            style={{ width: "140px" }}
+            style={{ width: "180px" }}
             onAfterChange={(value) =>
               onAfterChangeSlider(value, "locationRadius")
             }
@@ -571,7 +570,7 @@ const Dashboard4 = () => {
         </BoxplotWrapper>
         <Collapse
           bordered={false}
-          // defaultActiveKey={["1"]}
+          defaultActiveKey={["1"]}
           expandIcon={({ isActive }) => (
             <DownOutlined rotate={isActive ? 180 : 0} />
           )}
@@ -621,7 +620,7 @@ const ContentLayout = styled.div`
 const SliderLayout = styled.div``;
 
 const BoxplotLayout = styled.div`
-  margin-left: 60px;
+  margin-left: 100px;
 `;
 
 const StepWrapper = styled.div`
@@ -662,11 +661,12 @@ const SliderWrapper = styled.div`
   align-items: center;
   width: 300px
   padding-top: 10px;
+  margin-bottom: 10px;
   margin-left: 10px;
 `;
 
 const SliderHeader = styled.div`
-  width: 100px;
+  width: 80px;
   font-family: "Open Sans";
   font-size: 13px;
   font-weight: 300;
@@ -681,7 +681,7 @@ const LocationHeader = styled.div`
   font-size: 13px;
   font-weight: 300;
   margin-right: 10px;
-  padding-bottom: 15px;
+  padding-top: 10px;
   color: ${(props) => props.theme.colors.grayKS};
 `;
 
@@ -717,7 +717,7 @@ const AddressWrapper = styled.div`
   padding-right: 13px;
   border-radius: 10px;
   max-width: 280px;
-  margin-bottom: 5px;
+  margin-top: 10px;
   color: ${(props) => props.theme.colors.selectionBlue};
   background-color: ${(props) => props.theme.colors.selectionTransparent};
 `;

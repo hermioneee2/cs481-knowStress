@@ -38,7 +38,7 @@ const Dashboard5 = () => {
       borderRadius: "7px",
 
       display: "inline",
-      '&:hover': { backgroundColor: alpha(color, 0.3),  }
+      "&:hover": { backgroundColor: alpha(color, 0.3) },
     };
   };
 
@@ -67,7 +67,7 @@ const Dashboard5 = () => {
       lineHeight: "19px",
       color: color,
       fontFamily: "Open Sans",
-      '&:hover': { backgroundColor: alpha(color, 0.3),  }
+      "&:hover": { backgroundColor: alpha(color, 0.3) },
     };
   };
   const changeColor = (buttonId) => {
@@ -84,19 +84,19 @@ const Dashboard5 = () => {
       case "Movement":
         return (
           <>
-            This histogram shows average stress level distribution according to the movement
-            time.
+            This histogram shows average stress level distribution according to
+            the movement time.
             <br />
             <br />
-            According to histogram, it seems: movement is not really related with
-            stress level.
+            According to histogram, it seems: movement is not really related
+            with stress level.
           </>
         );
       case "Sleep Time":
         return (
           <>
-            This histogram shows average stress level distribution according to the sleep
-            time.
+            This histogram shows average stress level distribution according to
+            the sleep time.
             <br />
             <br />
             According to histogram, it seems:{" "}
@@ -109,19 +109,19 @@ const Dashboard5 = () => {
       case "Social Media":
         return (
           <>
-            This histogram shows average stress level distribution according to the usage
-            time of social media apps.
+            This histogram shows average stress level distribution according to
+            the usage time of social media apps.
             <br />
             <br />
-            According to histogram, it seems: social media usage time is not really
-            related with stress level.
+            According to histogram, it seems: social media usage time is not
+            really related with stress level.
           </>
         );
       case "Game":
         return (
           <>
-            This histogram shows average stress level distribution according to the game
-            apps.
+            This histogram shows average stress level distribution according to
+            the game apps.
             <br />
             <br />
             According to histogram, it seems:{" "}
@@ -134,8 +134,8 @@ const Dashboard5 = () => {
       case "Messenger":
         return (
           <>
-            This histogram shows average stress level distribution according to the
-            messenger apps.
+            This histogram shows average stress level distribution according to
+            the messenger apps.
             <br />
             <br />
             According to histogram, it seems: messenger usage time is not really
@@ -145,8 +145,8 @@ const Dashboard5 = () => {
       case "Video/Contents":
         return (
           <>
-            This histogram shows average stress level distribution according to the
-            video/contents apps.
+            This histogram shows average stress level distribution according to
+            the video/contents apps.
             <br />
             <br />
             According to histogram, it seems:{" "}
@@ -160,8 +160,8 @@ const Dashboard5 = () => {
       case "Browser":
         return (
           <>
-            This histogram shows average stress level distribution according to the browser
-            apps.
+            This histogram shows average stress level distribution according to
+            the browser apps.
             <br />
             <br />
             According to histogram, it seems:{" "}
@@ -175,8 +175,8 @@ const Dashboard5 = () => {
       case "Utility":
         return (
           <>
-            This histogram shows average stress level distribution according to the browser
-            apps.
+            This histogram shows average stress level distribution according to
+            the browser apps.
             <br />
             <br />
             According to histogram, it seems:{" "}
@@ -189,7 +189,8 @@ const Dashboard5 = () => {
       default:
         return (
           <>
-            This histogram shows average stress level distribution according to the age.
+            This histogram shows average stress level distribution according to
+            the age.
             <br />
             <br />
             According to histogram, it seems:{" "}
@@ -402,7 +403,7 @@ const ContentLayout = styled.div`
 const CategorySelectionLayout = styled.div``;
 
 const ResultGraphLayout = styled.div`
-  margin-left: 60px;
+  margin-left: 100px;
 `;
 
 const StepWrapper = styled.div`
