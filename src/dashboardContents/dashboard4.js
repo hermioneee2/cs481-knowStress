@@ -8,6 +8,7 @@ import { GoogleMap, useLoadScript, OverlayView } from "@react-google-maps/api";
 import StressCodeBoxPlot from "../dashboardMinor/StressCodeBoxPlot";
 import BoxPlot from "../dashboardMinor/BoxPlot";
 import dotenv from "dotenv";
+import CustomYAxis from "../dashboardMinor/customYAxis";
 
 // For sliders
 const age_marks = {
@@ -494,7 +495,18 @@ const Dashboard4 = () => {
         </p>
         <BoxplotWrapper>
           <BoxplotGraph>
-            <div style={{ marginTop: 0 }}>
+            <div
+              style={{
+                height: "306px",
+                width: "306px",
+                zIndex: 5,
+                position: "absolute",
+                marginTop: "-37px",
+              }}
+            >
+              <CustomYAxis />
+            </div>
+            {/* <div style={{ marginTop: 0 }}>
               <StressYAxis />
               <div
                 style={{
@@ -520,8 +532,15 @@ const Dashboard4 = () => {
                   lev={"Not Stressed"}
                 />
               </div>
-            </div>
-            <div style={{ marginTop: 12, marginLeft: 75, width: 150 }}>
+            </div> */}
+            <div
+              style={{
+                marginTop: 12,
+                marginLeft: 75,
+                width: 150,
+                zIndex: 0,
+              }}
+            >
               <BoxPlot
                 lowerQuartile={lowerQuartile}
                 median={median}
