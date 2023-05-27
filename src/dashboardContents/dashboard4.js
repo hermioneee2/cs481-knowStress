@@ -5,29 +5,9 @@ import { DownOutlined, EnvironmentFilled } from "@ant-design/icons";
 import { Slider, Collapse, theme as antdTheme, Space, Tooltip } from "antd";
 import { GoogleMap, useLoadScript, OverlayView } from "@react-google-maps/api";
 
-import StressCodeBoxPlot from "../dashboardMinor/StressCodeBoxPlot";
 import BoxPlot from "../dashboardMinor/BoxPlot";
 import dotenv from "dotenv";
 import CustomYAxis from "../dashboardMinor/customYAxis";
-
-// For sliders
-const age_marks = {
-  15: "15",
-  23: "me",
-  50: "50",
-};
-
-const app_usage_marks = {
-  100: "Least Usage",
-  26: "me",
-  1: "Most Usage",
-};
-
-const moved_distance_marks = {
-  100: "Least Active",
-  19: "me",
-  1: "Most Active",
-};
 
 const applyCommonMarkStyle = (marks) => {
   for (const key in marks) {
@@ -74,6 +54,9 @@ const Dashboard4 = () => {
   const [upperQuartile, setUpperQuartile] = useState(3.635);
   const [min, setMin] = useState(1.05);
   const [max, setMax] = useState(4.19);
+  const [myAge, setMyAge] = useState(27);
+  const [myApp, setMyApp] = useState(26);
+  const [myMovement, setMyMovement] = useState(19);
 
   //map
   const mapRef = useRef(null);
@@ -189,8 +172,34 @@ const Dashboard4 = () => {
         setUpperQuartile(data.Q3);
         setMin(data.min);
         setMax(data.max);
+        // setMyAge(data.my_age);
+        // setMyApp(data.my_apptime * 100);
+        // setMyMovement(data.my_activity * 100);
       });
   }, []);
+
+  // For sliders
+  const age_marks = {
+    15: "15",
+    [myAge]: "me",
+    50: "50",
+  };
+
+  const app_usage_marks = {
+    100: "Least Usage",
+    [myApp]: "me",
+    1: "Most Usage",
+  };
+
+  const moved_distance_marks = {
+    100: "Least Active",
+    [myMovement]: "me",
+    1: "Most Active",
+  };
+
+  applyCommonMarkStyle(age_marks);
+  applyCommonMarkStyle(app_usage_marks);
+  applyCommonMarkStyle(moved_distance_marks);
 
   const getBoxPlotData = (
     ageRangeB,
@@ -402,7 +411,7 @@ const Dashboard4 = () => {
             min={15}
             max={50}
             defaultValue={[15, 50]}
-            style={{ width: "220px" }}
+            style={{ width: "210px" }}
             onAfterChange={(value) => onAfterChangeSlider(value, "age")}
           />
         </SliderWrapper>
@@ -416,7 +425,7 @@ const Dashboard4 = () => {
             defaultValue={[1, 100]}
             tooltip={{ formatter }}
             reverse={true}
-            style={{ width: "220px" }}
+            style={{ width: "210px" }}
             onAfterChange={(value) => onAfterChangeSlider(value, "appUsage")}
           />
         </SliderWrapper>
@@ -430,7 +439,7 @@ const Dashboard4 = () => {
             defaultValue={[1, 100]}
             tooltip={{ formatter }}
             reverse={true}
-            style={{ width: "220px" }}
+            style={{ width: "210px" }}
             onAfterChange={(value) =>
               onAfterChangeSlider(value, "movedDistance")
             }
@@ -515,33 +524,6 @@ const Dashboard4 = () => {
             >
               <CustomYAxis />
             </div>
-            {/* <div style={{ marginTop: 0 }}>
-              <StressYAxis />
-              <div
-                style={{
-                  display: "block",
-                  zIndex: 3,
-                  position: "absolute",
-                  marginTop: 5,
-                }}
-              >
-                <StressCodeBoxPlot
-                  color={theme.colors.stress6}
-                  t={6}
-                  lev={"Very Stressed"}
-                />
-                <StressCodeBoxPlot color={theme.colors.stress5} t={5} />
-                <StressCodeBoxPlot color={theme.colors.stress4} t={4} />
-                <StressCodeBoxPlot color={theme.colors.stress3} t={3} />
-                <StressCodeBoxPlot color={theme.colors.stress2} t={2} />
-                <StressCodeBoxPlot color={theme.colors.stress1} t={1} />
-                <StressCodeBoxPlot
-                  color={theme.colors.stress0}
-                  t={0}
-                  lev={"Not Stressed"}
-                />
-              </div>
-            </div> */}
             <div
               style={{
                 marginTop: 12,
@@ -581,11 +563,7 @@ const Dashboard4 = () => {
             width: "400px",
           }}
         >
-          <Panel
-            header="My Stress Ranking Explanation"
-            key="1"
-            style={panelStyle}
-          >
+          <Panel header="My Stress Ranking" key="1" style={panelStyle}>
             <p
               style={{
                 margin: 0,
@@ -701,10 +679,6 @@ const commonMarkStyle = {
   marginTop: "5px",
   width: "60px",
 };
-
-applyCommonMarkStyle(age_marks);
-applyCommonMarkStyle(app_usage_marks);
-applyCommonMarkStyle(moved_distance_marks);
 
 const AddressWrapper = styled.div`
   // margin-top: -10px;
