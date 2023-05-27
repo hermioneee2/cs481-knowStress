@@ -9,51 +9,19 @@ function getTooltipText(category, range, percentile, stressLevel) {
     const usageTimeText = `${category}\n${range}\n`;
     const percentileText = (percentile | percentile===0)? `(Top ${percentile} ~ ${percentile + 10} %)\n　\n` : "　\n";
     const stressLevelText = `Average Stress Level\n${stressLevel}`;
-
-    console.log(usageTimeText);
-    console.log(percentileText);
-    console.log(stressLevelText);
   
     return `${usageTimeText}${percentileText}${stressLevelText}`;
 }
 
-const CustomBarChart = ({ category }) => {
-    let data, userX, userY, labelText1, labelText2, isnull;
-    userX = 0;
-    userY = 3.44;
+const CustomBarChart = ({ category, data, userX, userY }) => {
+    let  isnull, labelText1, labelText2;
     labelText1 = "Least Usage";
     labelText2 = "Most Usage";
     isnull=false;
     if (category === "Total App Usage") {
-        data=[
-            { x: 'Top\n1%', y: 3.12, range: "1hr 26min ~ 2hr 26min", percent: 0, category: category},
-            { x: 'Top\n10%', y: 2.71, range: "2hr 30min ~ 2hr 56min", percent: 10, category: category},
-            { x: 'Top\n20%', y: 2.62, range: "3hr 14min ~ 3hr 42min", percent: 20, category: category},
-            { x: 'Top\n30%', y: 2.74, range: "3hr 44min ~ 4hr 05min", percent: 30, category: category},
-            { x: 'Top\n40%', y: 3.33, range: "4hr 08min ~ 4hr 54min", percent: 40, category: category},
-            { x: 'Top\n50%', y: 2.68, range: "4hr 56min ~ 5hr 29min", percent: 50, category: category},
-            { x: 'Top\n60%', y: 2.75, range: "5hr 32min ~ 6hr 00min", percent: 60, category: category},
-            { x: 'Top\n70%', y: 2.20, range: "6hr 06min ~ 6hr 47min", percent: 70, category: category},
-            { x: 'Top\n80%', y: 2.91, range: "6hr 50min ~ 7hr 15min", percent: 80, category: category},
-            { x: 'Top\n90%', y: 2.88, range: "7hr 16min ~ 14hr 28min", percent: 90, category: category},
-            { x: 'Top\n100%',y: 0, range: ""}
-        ];
         userX=3;
     }
     else if (category==="Movement"){
-        data=[
-            { x: 'Top\n1%', y: 2.82, range: "1hr 33min ~ 3hr 54min", percent: 0, category: category},
-            { x: 'Top\n10%', y: 2.80, range: "4hr 10min ~ 5hr 15min", percent: 10, category: category},
-            { x: 'Top\n20%', y: 2.61, range: "5hr 18min ~ 6hr 07min", percent: 20, category: category},
-            { x: 'Top\n30%', y: 2.64, range: "6hr 11min ~ 6hr 26min", percent: 30, category: category},
-            { x: 'Top\n40%', y: 2.99, range: "6hr 29min ~ 6hr 45min", percent: 40, category: category},
-            { x: 'Top\n50%', y: 2.50, range: "6hr 53min ~ 7hr 17min", percent: 50, category: category},
-            { x: 'Top\n60%', y: 3.31, range: "7hr 17min ~ 7hr 35min", percent: 60, category: category},
-            { x: 'Top\n70%', y: 2.66, range: "7hr 36min ~ 8hr 48min", percent: 70, category: category},
-            { x: 'Top\n80%', y: 2.36, range: "8hr 49min ~ 9hr 34min", percent: 80, category: category},
-            { x: 'Top\n90%', y: 3.30, range: "9hr 42min ~ 15hr 04min", percent: 90, category: category},
-            { x: 'Top\n100%',y: 0}
-        ];
         userX=1;
         labelText1 = "Least Activity";
         labelText2 = "Most Activity";
@@ -78,68 +46,16 @@ const CustomBarChart = ({ category }) => {
         labelText2 = "Most Sleep";
     }
     else if (category==="Social Media"){
-        data=[
-            { x: 'Top\n1%', y: 2.97, range: "0hr 00min ~ 0hr 02min", percent: 0, category: `${category} Usage`},
-            { x: 'Top\n10%', y: 3.29, range: "0hr 02min ~ 0hr 06min", percent: 10, category: `${category} Usage`},
-            { x: 'Top\n20%', y: 2.88, range: "0hr 07min ~ 0hr 11min", percent: 20, category: `${category} Usage`},
-            { x: 'Top\n30%', y: 2.96, range: "0hr 12min ~ 0hr 25min", percent: 30, category: `${category} Usage`},
-            { x: 'Top\n40%', y: 3.10, range: "0hr 26min ~ 0hr 28min", percent: 40, category: `${category} Usage`},
-            { x: 'Top\n50%', y: 2.52, range: "0hr 31min ~ 0hr 45min", percent: 50, category: `${category} Usage`},
-            { x: 'Top\n60%', y: 2.90, range: "0hr 47min ~ 1hr 14min", percent: 60, category: `${category} Usage`},
-            { x: 'Top\n70%', y: 2.25, range: "1hr 14min ~ 1hr 34min", percent: 70, category: `${category} Usage`},
-            { x: 'Top\n80%', y: 2.43, range: "1hr 35min ~ 1hr 56min", percent: 80, category: `${category} Usage`},
-            { x: 'Top\n90%', y: 2.98, range: "2hr 00min ~ 4hr 51min", percent: 90, category: `${category} Usage`},
-            { x: 'Top\n100%',y: 0}
-        ];
-        userX=4;
+        // userX=4;
     }
     else if (category==="Game"){
-        data=[
-            { x: 'Top\n1%', y: 2.75, range: "0hr 06min ~ 0hr 01min", percent: 0, category: `${category} Usage`},
-            { x: 'Top\n10%', y: 2.58, range: "0hr 25min ~ 0hr 01min", percent: 10, category: `${category} Usage`},
-            { x: 'Top\n20%', y: 2.88, range: "0hr 31min ~ 0hr 01min", percent: 20, category: `${category} Usage`},
-            { x: 'Top\n30%', y: 3.03, range: "0hr 38min ~ 0hr 01min", percent: 30, category: `${category} Usage`},
-            { x: 'Top\n40%', y: 2.53, range: "0hr 43min ~ 0hr 01min", percent: 40, category: `${category} Usage`},
-            { x: 'Top\n50%', y: 2.50, range: "0hr 46min ~ 0hr 01min", percent: 50, category: `${category} Usage`},
-            { x: 'Top\n60%', y: 3.00, range: "0hr 57min ~ 1hr 01min", percent: 60, category: `${category} Usage`},
-            { x: 'Top\n70%', y: 2.70, range: "1hr 23min ~ 2hr 01min", percent: 70, category: `${category} Usage`},
-            { x: 'Top\n80%', y: 3.17, range: "2hr 23min ~ 6hr 01min", percent: 80, category: `${category} Usage`},
-            { x: 'Top\n90%', y: 2.87, range: "6hr 48min ~ 7hr 23min", percent: 90, category: `${category} Usage`},
-            { x: 'Top\n100%',y: 0}
-        ];
-        userX=1;
+        // userX=1;
     }
     else if (category==="Messenger"){
-        data=[
-            { x: 'Top\n1%', y: 2.80, range: "0hr 05min ~ 0hr 20min", percent: 0, category: `${category} Usage`},
-            { x: 'Top\n10%', y: 2.80, range: "0hr 21min ~ 0hr 31min", percent: 10, category: `${category} Usage`},
-            { x: 'Top\n20%', y: 2.62, range: "0hr 31min ~ 0hr 44min", percent: 20, category: `${category} Usage`},
-            { x: 'Top\n30%', y: 3.03, range: "0hr 44min ~ 0hr 56min", percent: 30, category: `${category} Usage`},
-            { x: 'Top\n40%', y: 2.99, range: "1hr 00min ~ 1hr 03min", percent: 40, category: `${category} Usage`},
-            { x: 'Top\n50%', y: 2.58, range: "1hr 04min ~ 1hr 13min", percent: 50, category: `${category} Usage`},
-            { x: 'Top\n60%', y: 2.83, range: "1hr 15min ~ 1hr 31min", percent: 60, category: `${category} Usage`},
-            { x: 'Top\n70%', y: 2.58, range: "1hr 31min ~ 1hr 52min", percent: 70, category: `${category} Usage`},
-            { x: 'Top\n80%', y: 3.19, range: "1hr 55min ~ 2hr 28min", percent: 80, category: `${category} Usage`},
-            { x: 'Top\n90%', y: 2.56, range: "2hr 38min ~ 4hr 51min", percent: 90, category: `${category} Usage`},
-            { x: 'Top\n100%',y: 0}
-        ];
-        userX=6;
+        // userX=6;
     }
     else if (category==="Video/Contents"){
-        data=[
-            { x: 'Top\n1%', y: 2.46, range: "0hr 00min ~ 0hr 02min", percent: 0, category: `${category} Usage`},
-            { x: 'Top\n10%', y: 3.33, range: "0hr 02min ~ 0hr 09min", percent: 10, category: `${category} Usage`},
-            { x: 'Top\n20%', y: 3.14, range: "0hr 09min ~ 0hr 26min", percent: 20, category: `${category} Usage`},
-            { x: 'Top\n30%', y: 2.80, range: "0hr 27min ~ 0hr 41min", percent: 30, category: `${category} Usage`},
-            { x: 'Top\n40%', y: 2.92, range: "0hr 43min ~ 1hr 01min", percent: 40, category: `${category} Usage`},
-            { x: 'Top\n50%', y: 2.83, range: "1hr 02min ~ 1hr 28min", percent: 50, category: `${category} Usage`},
-            { x: 'Top\n60%', y: 2.64, range: "1hr 34min ~ 2hr 24min", percent: 60, category: `${category} Usage`},
-            { x: 'Top\n70%', y: 2.36, range: "2hr 24min ~ 3hr 04min", percent: 70, category: `${category} Usage`},
-            { x: 'Top\n80%', y: 2.87, range: "3hr 11min ~ 4hr 19min", percent: 80, category: `${category} Usage`},
-            { x: 'Top\n90%', y: 2.66, range: "5hr 05min ~ 6hr 53min", percent: 90, category: `${category} Usage`},
-            { x: 'Top\n100%',y: 0}
-        ];
-        userX=4;
+        // userX=4;
     }
     else if (category==="Browser"){
         //not exist yet, fake data
@@ -159,40 +75,15 @@ const CustomBarChart = ({ category }) => {
         userX=5;
     }
     else if (category==="Utility"){
-        data=[
-            { x: 'Top\n1%', y: 2.47, range: "0hr 42min ~ 1hr 03min", percent: 0, category: `${category} Usage`},
-            { x: 'Top\n10%', y: 2.62, range: "1hr 08min ~ 1hr 25min", percent: 10, category: `${category} Usage`},
-            { x: 'Top\n20%', y: 3.07, range: "1hr 28min ~ 1hr 50min", percent: 20, category: `${category} Usage`},
-            { x: 'Top\n30%', y: 2.97, range: "1hr 51min ~ 2hr 00min", percent: 30, category: `${category} Usage`},
-            { x: 'Top\n40%', y: 2.91, range: "2hr 04min ~ 2hr 20min", percent: 40, category: `${category} Usage`},
-            { x: 'Top\n50%', y: 2.82, range: "2hr 24min ~ 2hr 37min", percent: 50, category: `${category} Usage`},
-            { x: 'Top\n60%', y: 2.86, range: "2hr 39min ~ 2hr 57min", percent: 60, category: `${category} Usage`},
-            { x: 'Top\n70%', y: 2.80, range: "2hr 58min ~ 3hr 27min", percent: 70, category: `${category} Usage`},
-            { x: 'Top\n80%', y: 2.83, range: "3hr 28min ~ 4hr 37min", percent: 80, category: `${category} Usage`},
-            { x: 'Top\n90%', y: 2.69, range: "6hr 05min ~ 11hr 23min", percent: 90, category: `${category} Usage`},
-            { x: 'Top\n100%',y: 0}
-        ];
-        userX=6;
+        // userX=6;
     }
     else{
         category="Age";
-        data = [
-          { x: "15", y: 2.63, range: "15 ~ 19", category: category},
-          { x: "20", y: 2.74, range: "20 ~ 24", category: category},
-          { x: "25", y: 2.88, range: "25 ~ 29", category: category},
-          { x: "30", y: 2.82, range: "30 ~ 34", category: category},
-          { x: "35", y: 0 , range: "35 ~ 39", category: category},
-          { x: "40", y: 3.43 , range: "40 ~ 44", category: category},
-          { x: "45", y: 0 , range: "45 ~ 49", category: category},
-          { x: "50", y: 0 , range: "50 ~ 54", category: category},
-        //   { x: "55", y: 0 , range: "55 ~ 59", category: category},
-        //   { x: "60", y: 0, range: "60 ~ 64" , category: category},
-        //   { x: "65", y: 0, range: "65 ~ 69", category: category},
-        ];
-        userX = 2;
+        // userX = 2;
         labelText1 = "";
         labelText2 = "";
       }
+
     const CircleTick = (props) =>{
         let stressColor;
         if (props.index === 0) {
@@ -312,7 +203,7 @@ const CustomBarChart = ({ category }) => {
 
         />
         {userX&&(<VictoryScatter
-            data={[{x:userX+0.4, y:userY}]}
+            data={[{x:userX+0.5, y:userY}]}
             size={6}
             style={{data:{fill:theme.colors.me, grid:{stroke:"transparent"}}}}
             labels = {({datum})=>((userX>0)?"me":"")}

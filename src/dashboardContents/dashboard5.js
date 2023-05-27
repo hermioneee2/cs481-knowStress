@@ -10,6 +10,9 @@ const Dashboard5 = () => {
   const newArray = [];
   const [arrColor, setArrColor] = useState([...newArray]);
   const [activeButton, setActiveButton] = useState("Age");
+  const [data, setData] = useState([]);
+  const [myX, setMyX] = useState(0);
+  const [myY, setMyY] = useState(3.41);
   const buttonStyle = ({ color, buttonId }) => {
     const isActive = buttonId === activeButton;
     return {
@@ -71,8 +74,75 @@ const Dashboard5 = () => {
     };
   };
   const changeColor = (buttonId) => {
-    setActiveButton(buttonId);
+    setActiveButton(buttonId)
   };
+
+
+
+  const queryString = (activeButton) => {
+    switch (activeButton){
+        case "Movement":
+            return 'activity'
+        case "Sleep Time":
+        case "Age":
+            return activeButton.toLowerCase();
+        case "Total App Usage":
+            return 'total_app'
+        case "Video/Contents":
+            return "video_contents_app";
+        default:
+            return `${activeButton.toLowerCase()}_app`
+    }
+  }
+
+  const updateGraph = (activeButton) => {
+    if(['Social Media', 'Game', 'Messenger', 'Video/Contents', 'Utility', 'Movement', 'Total App Usage'].includes(activeButton)){
+        fetch(`https://riyuna.pythonanywhere.com/histogram?category=${queryString(activeButton)}`)
+        .then((response) => response.json())
+        .then((dt) =>{
+            const newData=[
+                { x: 'Top\n1%', y: dt["0%~10%"].stress, range: `${dt["0%~10%"].mintime} ~ ${dt["0%~10%"].maxtime}`, percent: 0, category: `${activeButton}`},
+                { x: 'Top\n10%', y: dt["10%~20%"].stress, range: `${dt["10%~20%"].mintime} ~ ${dt["10%~20%"].maxtime}`, percent: 10, category: `${activeButton}`},
+                { x: 'Top\n20%', y: dt["20%~30%"].stress, range: `${dt["20%~30%"].mintime} ~ ${dt["20%~30%"].maxtime}`, percent: 20, category: `${activeButton}`},
+                { x: 'Top\n30%', y: dt["30%~40%"].stress, range: `${dt["30%~40%"].mintime} ~ ${dt["30%~40%"].maxtime}`, percent: 30, category: `${activeButton}`},
+                { x: 'Top\n40%', y: dt["40%~50%"].stress, range: `${dt["40%~50%"].mintime} ~ ${dt["40%~50%"].maxtime}`, percent: 40, category: `${activeButton}`},
+                { x: 'Top\n50%', y: dt["50%~60%"].stress, range: `${dt["50%~60%"].mintime} ~ ${dt["50%~60%"].maxtime}`, percent: 50, category: `${activeButton}`},
+                { x: 'Top\n60%', y: dt["60%~70%"].stress, range: `${dt["60%~70%"].mintime} ~ ${dt["60%~70%"].maxtime}`, percent: 60, category: `${activeButton}`},
+                { x: 'Top\n70%', y: dt["70%~80%"].stress, range: `${dt["70%~80%"].mintime} ~ ${dt["70%~80%"].maxtime}`, percent: 70, category: `${activeButton}`},
+                { x: 'Top\n80%', y: dt["80%~90%"].stress, range: `${dt["80%~90%"].mintime} ~ ${dt["80%~90%"].maxtime}`, percent: 80, category: `${activeButton}`},
+                { x: 'Top\n90%', y: dt["90%~100%"].stress, range: `${dt["90%~100%"].mintime} ~ ${dt["90%~100%"].maxtime}`, percent: 90, category: `${activeButton}`},
+                { x: 'Top\n100%',y: 0}
+            ];
+            setData(newData);
+            setMyX(dt['myX'])
+            setMyY(dt['myY'])
+        });
+    }
+    else if(activeButton === 'Age'){
+        fetch(`https://riyuna.pythonanywhere.com/histogram?category=${queryString(activeButton)}`)
+        .then((response) => response.json())
+        .then((dt) =>{
+            const newData=[
+                { x: "15", y: dt['15~19'], range: "15 ~ 19", category: `${activeButton}`},
+                { x: "20", y: dt['20~24'], range: "20 ~ 24", category: `${activeButton}`},
+                { x: "25", y: dt['25~29'], range: "25 ~ 29", category: `${activeButton}`},
+                { x: "30", y: dt['30~34'], range: "30 ~ 34", category: `${activeButton}`},
+                { x: "35", y: dt['35~39'], range: "35 ~ 39", category: `${activeButton}`},
+                { x: "40", y: dt['40~44'], range: "40 ~ 44", category: `${activeButton}`},
+                { x: "45", y: dt['45~49'], range: "45 ~ 49", category: `${activeButton}`},
+                { x: "50", y: 0, range: "50 ~ 54", category: `${activeButton}`},
+            ];
+            setData(newData);
+            setMyX(dt['myX'])
+            setMyY(dt['myY'])
+        });
+    }
+    else{setData([])}
+}
+    useEffect(() => {
+        updateGraph(activeButton);
+    }, [activeButton]);
+
 
   const HistogramExplanation = activeButton ? (
     <>Relationship between Stress Level and {activeButton}</>
@@ -376,7 +446,7 @@ const Dashboard5 = () => {
           {HistogramExplanation}
         </p>
         <div style={{ height: "400px", width: "400px" }}>
-          <CustomBarChart category={activeButton} />
+          <CustomBarChart category={activeButton} data={data} userX={myX} userY={myY} />
         </div>
         <div style={{ marginBottom: "0px" }}></div>
         <BarChartExplanation>
