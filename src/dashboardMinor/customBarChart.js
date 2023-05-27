@@ -9,22 +9,24 @@ function getTooltipText(category, range, percentile, stressLevel) {
     const usageTimeText = `${category}\n${range}\n`;
     const percentileText = (percentile | percentile===0)? `(Top ${percentile} ~ ${percentile + 10} %)\n　\n` : "　\n";
     const stressLevelText = `Average Stress Level\n${stressLevel}`;
-
-    console.log(usageTimeText);
-    console.log(percentileText);
-    console.log(stressLevelText);
   
     return `${usageTimeText}${percentileText}${stressLevelText}`;
 }
 
-const CustomBarChart = ({ category }) => {
-    let data, userX, userY, labelText1, labelText2, isnull;
-    userX = 0;
-    userY = 3.44;
+const CustomBarChart = ({ category, data, userX, userY }) => {
+    let  isnull, labelText1, labelText2;
     labelText1 = "Least Usage";
     labelText2 = "Most Usage";
     isnull=false;
-    if (category==="Sleep Time"){
+    if (category === "Total App Usage") {
+        userX=3;
+    }
+    else if (category==="Movement"){
+        userX=1;
+        labelText1 = "Least Activity";
+        labelText2 = "Most Activity";
+    }
+    else if (category==="Sleep Time"){
         //not exist yet, fake data
         data=[
             { x: 'Top\n1%', y: 3.71, range: "4hr 38min ~ 5hr 01min", percent: 0, category: category},
@@ -43,26 +45,17 @@ const CustomBarChart = ({ category }) => {
         labelText1 = "Least Sleep";
         labelText2 = "Most Sleep";
     }
-    else if (category==="Movement"){
-        fetch(`https://riyuna.pythonanywhere.com/histgram?${category.toLowerCase()}`)
-        .then((response) => response.json())
-        .then((dt) => {
-        data=[
-            { x: 'Top\n1%', y: dt["0%~10%"].stress, range: `${dt["0%~10%"].mintime} ~ ${dt["0%~10%"].mintime}`, percent: 0, category: `${category}`},
-            { x: 'Top\n10%', y: dt["10%~20%"].stress, range: `${dt["10%~20%"].mintime} ~ ${dt["10%~20%"].mintime}`, percent: 10, category: `${category}`},
-            { x: 'Top\n20%', y: dt["20%~30%"].stress, range: `${dt["20%~30%"].mintime} ~ ${dt["20%~30%"].mintime}`, percent: 20, category: `${category}`},
-            { x: 'Top\n30%', y: dt["30%~40%"].stress, range: `${dt["30%~40%"].mintime} ~ ${dt["30%~40%"].mintime}`, percent: 30, category: `${category}`},
-            { x: 'Top\n40%', y: dt["40%~50%"].stress, range: `${dt["40%~50%"].mintime} ~ ${dt["40%~50%"].mintime}`, percent: 40, category: `${category}`},
-            { x: 'Top\n50%', y: dt["50%~60%"].stress, range: `${dt["50%~60%"].mintime} ~ ${dt["50%~60%"].mintime}`, percent: 50, category: `${category}`},
-            { x: 'Top\n60%', y: dt["60%~70%"].stress, range: `${dt["60%~70%"].mintime} ~ ${dt["60%~70%"].mintime}`, percent: 60, category: `${category}`},
-            { x: 'Top\n70%', y: dt["70%~80%"].stress, range: `${dt["70%~80%"].mintime} ~ ${dt["70%~80%"].mintime}`, percent: 70, category: `${category}`},
-            { x: 'Top\n80%', y: dt["80%~90%"].stress, range: `${dt["80%~90%"].mintime} ~ ${dt["80%~90%"].mintime}`, percent: 80, category: `${category}`},
-            { x: 'Top\n90%', y: dt["90%~100%"].stress, range: `${dt["90%~100%"].mintime} ~ ${dt["90%~100%"].mintime}`, percent: 90, category: `${category}`},
-            { x: 'Top\n100%',y: 0}
-        ];});
-        userX=1;
-        labelText1 = "Least Activity";
-        labelText2 = "Most Activity";
+    else if (category==="Social Media"){
+        // userX=4;
+    }
+    else if (category==="Game"){
+        // userX=1;
+    }
+    else if (category==="Messenger"){
+        // userX=6;
+    }
+    else if (category==="Video/Contents"){
+        // userX=4;
     }
     else if (category==="Browser"){
         //not exist yet, fake data
@@ -81,42 +74,15 @@ const CustomBarChart = ({ category }) => {
         ];
         userX=5;
     }
-    else if (category === "Age"){
+    else if (category==="Utility"){
+        // userX=6;
+    }
+    else{
         category="Age";
-        data = [
-          { x: "15", y: 2.63, range: "15 ~ 19", category: category},
-          { x: "20", y: 2.74, range: "20 ~ 24", category: category},
-          { x: "25", y: 2.88, range: "25 ~ 29", category: category},
-          { x: "30", y: 2.82, range: "30 ~ 34", category: category},
-          { x: "35", y: 0 , range: "35 ~ 39", category: category},
-          { x: "40", y: 3.43 , range: "40 ~ 44", category: category},
-          { x: "45", y: 0 , range: "45 ~ 49", category: category},
-          { x: "50", y: 0 , range: "50 ~ 54", category: category},
-        ];
-        userX = 2;
+        // userX = 2;
         labelText1 = "";
         labelText2 = "";
       }
-    else{
-        fetch(`https://riyuna.pythonanywhere.com/histgram?${category.toLowerCase()}_app`)
-        .then((response) => response.json())
-        .then((dt) => {
-        data=[
-            { x: 'Top\n1%', y: dt["0%~10%"].stress, range: `${dt["0%~10%"].mintime} ~ ${dt["0%~10%"].mintime}`, percent: 0, category: `${category} Usage`},
-            { x: 'Top\n10%', y: dt["10%~20%"].stress, range: `${dt["10%~20%"].mintime} ~ ${dt["10%~20%"].mintime}`, percent: 10, category: `${category} Usage`},
-            { x: 'Top\n20%', y: dt["20%~30%"].stress, range: `${dt["20%~30%"].mintime} ~ ${dt["20%~30%"].mintime}`, percent: 20, category: `${category} Usage`},
-            { x: 'Top\n30%', y: dt["30%~40%"].stress, range: `${dt["30%~40%"].mintime} ~ ${dt["30%~40%"].mintime}`, percent: 30, category: `${category} Usage`},
-            { x: 'Top\n40%', y: dt["40%~50%"].stress, range: `${dt["40%~50%"].mintime} ~ ${dt["40%~50%"].mintime}`, percent: 40, category: `${category} Usage`},
-            { x: 'Top\n50%', y: dt["50%~60%"].stress, range: `${dt["50%~60%"].mintime} ~ ${dt["50%~60%"].mintime}`, percent: 50, category: `${category} Usage`},
-            { x: 'Top\n60%', y: dt["60%~70%"].stress, range: `${dt["60%~70%"].mintime} ~ ${dt["60%~70%"].mintime}`, percent: 60, category: `${category} Usage`},
-            { x: 'Top\n70%', y: dt["70%~80%"].stress, range: `${dt["70%~80%"].mintime} ~ ${dt["70%~80%"].mintime}`, percent: 70, category: `${category} Usage`},
-            { x: 'Top\n80%', y: dt["80%~90%"].stress, range: `${dt["80%~90%"].mintime} ~ ${dt["80%~90%"].mintime}`, percent: 80, category: `${category} Usage`},
-            { x: 'Top\n90%', y: dt["90%~100%"].stress, range: `${dt["90%~100%"].mintime} ~ ${dt["90%~100%"].mintime}`, percent: 90, category: `${category} Usage`},
-            { x: 'Top\n100%',y: 0}
-        ];});
-
-        userX=6;
-    }
 
     const CircleTick = (props) =>{
         let stressColor;
@@ -237,7 +203,7 @@ const CustomBarChart = ({ category }) => {
 
         />
         {userX&&(<VictoryScatter
-            data={[{x:userX+0.4, y:userY}]}
+            data={[{x:userX+0.5, y:userY}]}
             size={6}
             style={{data:{fill:theme.colors.me, grid:{stroke:"transparent"}}}}
             labels = {({datum})=>((userX>0)?"me":"")}
