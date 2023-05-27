@@ -582,7 +582,11 @@ const Dashboard4 = () => {
             width: "400px",
           }}
         >
-          <Panel header="My Stress Ranking" key="1" style={panelStyle}>
+          <Panel
+            header="My Stress Ranking Explanation"
+            key="1"
+            style={panelStyle}
+          >
             <p
               style={{
                 margin: 0,
