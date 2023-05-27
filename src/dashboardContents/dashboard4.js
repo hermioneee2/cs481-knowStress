@@ -55,8 +55,8 @@ const Dashboard4 = () => {
   const [min, setMin] = useState(1.05);
   const [max, setMax] = useState(4.19);
   const [myAge, setMyAge] = useState(27);
-  const [myApp, setMyApp] = useState(26);
-  const [myMovement, setMyMovement] = useState(19);
+  const [myApp, setMyApp] = useState(79);
+  const [myMovement, setMyMovement] = useState(82);
 
   //map
   const mapRef = useRef(null);
