@@ -2,7 +2,7 @@ import React, { useState, useCallback, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { theme } from "../styles/Theme";
 import { DownOutlined, EnvironmentFilled } from "@ant-design/icons";
-import { Slider, Collapse, theme as antdTheme } from "antd";
+import { Slider, Collapse, theme as antdTheme, Space, Tooltip } from "antd";
 import { GoogleMap, useLoadScript, OverlayView } from "@react-google-maps/api";
 
 import StressCodeBoxPlot from "../dashboardMinor/StressCodeBoxPlot";
@@ -49,8 +49,8 @@ const { Panel } = Collapse;
 
 //map
 const mapContainerStyle = {
-  width: "300px",
-  height: "300px",
+  width: "270px",
+  height: "270px",
   marginLeft: "100px",
 };
 
@@ -439,7 +439,17 @@ const Dashboard4 = () => {
         </SliderWrapper>
         <SliderWrapper>
           <LocationHeader>Location near</LocationHeader>
-          <AddressWrapper>{address}</AddressWrapper>
+          <Space wrap>
+            <Tooltip
+              title="Change the address by panning the map"
+              placement="bottomLeft"
+              color={"#108ee9"}
+              key={"#108ee9"}
+              overlayInnerStyle={{ width: "270px" }}
+            >
+              <AddressWrapper>{address}</AddressWrapper>
+            </Tooltip>
+          </Space>
         </SliderWrapper>
         {isLoaded ? (
           <GoogleMap
@@ -561,7 +571,7 @@ const Dashboard4 = () => {
         </BoxplotWrapper>
         <Collapse
           bordered={false}
-          defaultActiveKey={["1"]}
+          // defaultActiveKey={["1"]}
           expandIcon={({ isActive }) => (
             <DownOutlined rotate={isActive ? 180 : 0} />
           )}
