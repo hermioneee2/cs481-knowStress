@@ -7,7 +7,7 @@ import {
 
 function getTooltipText(category, range, percentile, stressLevel) {
     const usageTimeText = `${category}\n${range}\n`;
-    const percentileText = (percentile | percentile===0)? `(Top ${percentile} ~ ${percentile + 10} %)\n　\n` : "　\n";
+    const percentileText = (percentile|percentile===0)? `(Top ${(percentile)?percentile:1} ~ ${percentile + 10} %)\n　\n` : "　\n";
     const stressLevelText = `Average Stress Level\n${stressLevel}`;
   
     return `${usageTimeText}${percentileText}${stressLevelText}`;
@@ -27,17 +27,18 @@ const CustomBarChart = ({ category, data, userX, userY }) => {
     else if (category==="Sleep Time"){
         //not exist yet, fake data
         data=[
-            { x: 'Top\n1%', y: 3.71, range: "4hr 38min ~ 5hr 01min", percent: 0, category: category},
-            { x: 'Top\n10%', y: 3.04, range: "5hr 05min ~ 5hr 54min", percent: 10, category: category},
-            { x: 'Top\n20%', y: 2.96, range: "6hr 03min ~ 6hr 31min", percent: 20, category: category},
-            { x: 'Top\n30%', y: 3.11, range: "6hr 33min ~ 6hr 57min", percent: 30, category: category},
-            { x: 'Top\n40%', y: 2.76, range: "6hr 59min ~ 7hr 12min", percent: 40, category: category},
-            { x: 'Top\n50%', y: 2.50, range: "7hr 15min ~ 7hr 49min", percent: 50, category: category},
-            { x: 'Top\n60%', y: 2.21, range: "7hr 50min ~ 8hr 02min", percent: 60, category: category},
-            { x: 'Top\n70%', y: 2.46, range: "8hr 05min ~ 8hr 41min", percent: 70, category: category},
-            { x: 'Top\n80%', y: 2.66, range: "8hr 50min ~ 9hr 27min", percent: 80, category: category},
-            { x: 'Top\n90%', y: 3.31, range: "9hr 33min ~ 10hr 54min", percent: 90, category: category},
-            { x: 'Top\n100%',y: 0}
+            { x: 'Top\n100%', y: 3.31, range: "4hr 38min ~ 5hr 01min", percent: 90, category: category},
+            { x: 'Top\n90%', y: 2.66, range: "5hr 05min ~ 5hr 54min", percent: 80, category: category},
+            { x: 'Top\n80%', y: 2.46, range: "6hr 03min ~ 6hr 31min", percent: 70, category: category},
+            { x: 'Top\n70%', y: 2.21, range: "6hr 33min ~ 6hr 57min", percent: 60, category: category},
+            { x: 'Top\n60%', y: 2.50, range: "6hr 59min ~ 7hr 12min", percent: 50, category: category},
+            { x: 'Top\n50%', y: 2.76, range: "7hr 15min ~ 7hr 49min", percent: 40, category: category},
+            { x: 'Top\n40%', y: 3.11, range: "7hr 50min ~ 8hr 02min", percent: 30, category: category},
+            { x: 'Top\n30%', y: 2.96, range: "8hr 05min ~ 8hr 41min", percent: 20, category: category},
+            { x: 'Top\n20%', y: 3.04, range: "8hr 50min ~ 9hr 27min", percent: 10, category: category},
+            { x: 'Top\n10%', y: 3.71, range: "9hr 33min ~ 10hr 54min", percent: 0, category: category},
+            { x: 'Top\n1%',y: 0}
+
         ];
         userX=3;
         labelText1 = "Least Sleep";
@@ -46,17 +47,17 @@ const CustomBarChart = ({ category, data, userX, userY }) => {
     else if (category==="Browser"){
         //not exist yet, fake data
         data=[
-            { x: 'Top\n1%', y: 3.71, range: "0hr 00min ~ 0hr 02min", percent: 0, category: `${category} Usage`},
-            { x: 'Top\n10%', y: 3.04, range: "0hr 02min ~ 0hr 09min", percent: 10, category: `${category} Usage`},
-            { x: 'Top\n20%', y: 2.96, range: "0hr 09min ~ 0hr 26min", percent: 20, category: `${category} Usage`},
-            { x: 'Top\n30%', y: 3.11, range: "0hr 27min ~ 0hr 41min", percent: 30, category: `${category} Usage`},
-            { x: 'Top\n40%', y: 2.76, range: "0hr 43min ~ 1hr 01min", percent: 40, category: `${category} Usage`},
-            { x: 'Top\n50%', y: 2.50, range: "1hr 02min ~ 1hr 28min", percent: 50, category: `${category} Usage`},
-            { x: 'Top\n60%', y: 2.21, range: "1hr 34min ~ 2hr 24min", percent: 60, category: `${category} Usage`},
-            { x: 'Top\n70%', y: 2.46, range: "2hr 24min ~ 3hr 04min", percent: 70, category: `${category} Usage`},
-            { x: 'Top\n80%', y: 2.66, range: "3hr 11min ~ 4hr 19min", percent: 80, category: `${category} Usage`},
-            { x: 'Top\n90%', y: 3.31, range: "5hr 05min ~ 6hr 53min", percent: 90, category: `${category} Usage`},
-            { x: 'Top\n100%',y: 0}
+            { x: 'Top\n100%', y: 3.31, range: "0hr 00min ~ 0hr 02min", percent: 90, category: `${category} Usage`},
+            { x: 'Top\n90%', y: 2.66, range: "0hr 02min ~ 0hr 09min", percent: 80, category: `${category} Usage`},
+            { x: 'Top\n80%', y: 2.46, range: "0hr 09min ~ 0hr 26min", percent: 70, category: `${category} Usage`},
+            { x: 'Top\n70%', y: 2.21, range: "0hr 27min ~ 0hr 41min", percent: 60, category: `${category} Usage`},
+            { x: 'Top\n60%', y: 2.50, range: "0hr 43min ~ 1hr 01min", percent: 50, category: `${category} Usage`},
+            { x: 'Top\n50%', y: 2.76, range: "1hr 02min ~ 1hr 28misn", percent: 40, category: `${category} Usage`},
+            { x: 'Top\n40%', y: 3.11, range: "1hr 34min ~ 2hr 24min", percent: 30, category: `${category} Usage`},
+            { x: 'Top\n30%', y: 2.96, range: "2hr 24min ~ 3hr 04min", percent: 20, category: `${category} Usage`},
+            { x: 'Top\n20%', y: 3.04, range: "3hr 11min ~ 4hr 19min", percent: 10, category: `${category} Usage`},
+            { x: 'Top\n10%', y: 3.71, range: "5hr 05min ~ 6hr 53min", percent: 0, category: `${category} Usage`},
+            { x: 'Top\n1%',y: 0}
         ];
         userX=5;
     }
@@ -66,26 +67,7 @@ const CustomBarChart = ({ category, data, userX, userY }) => {
     else if (category==="Video/Contents"){}
     else if (category==="Utility"){}
 
-    else if(category==="Sleep Time"){
-        console.log(category, data)
-        //not exist yet, fake data
-        data=[
-            { x: 'Top\n1%', y: 3.71, range: "0hr 00min ~ 0hr 02min", percent: 0, category: `${category} Usage`},
-            { x: 'Top\n10%', y: 3.04, range: "0hr 02min ~ 0hr 09min", percent: 10, category: `${category} Usage`},
-            { x: 'Top\n20%', y: 2.96, range: "0hr 09min ~ 0hr 26min", percent: 20, category: `${category} Usage`},
-            { x: 'Top\n30%', y: 3.11, range: "0hr 27min ~ 0hr 41min", percent: 30, category: `${category} Usage`},
-            { x: 'Top\n40%', y: 2.76, range: "0hr 43min ~ 1hr 01min", percent: 40, category: `${category} Usage`},
-            { x: 'Top\n50%', y: 2.50, range: "1hr 02min ~ 1hr 28min", percent: 50, category: `${category} Usage`},
-            { x: 'Top\n60%', y: 2.21, range: "1hr 34min ~ 2hr 24min", percent: 60, category: `${category} Usage`},
-            { x: 'Top\n70%', y: 2.46, range: "2hr 24min ~ 3hr 04min", percent: 70, category: `${category} Usage`},
-            { x: 'Top\n80%', y: 2.66, range: "3hr 11min ~ 4hr 19min", percent: 80, category: `${category} Usage`},
-            { x: 'Top\n90%', y: 3.31, range: "5hr 05min ~ 6hr 53min", percent: 90, category: `${category} Usage`},
-            { x: 'Top\n100%',y: 0}
-        ];
-        userX=5;
-    }
     else if (category==="Age"){
-        console.log('hello')
         if(!data){
         data=[
             { x: "15", y: 0, range: "15 ~ 19", percent:'', category: 'Age'},
@@ -144,7 +126,7 @@ const CustomBarChart = ({ category, data, userX, userY }) => {
     }
     const XTick = category === "Age"
     ? [15, 20, 25, 30, 35, 40, 45, 50, 55,]
-    : [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+    : [90, 80, 70, 60, 50, 40, 30, 20, 10, 0]
     console.log(XTick)
     return (
       <VictoryChart
