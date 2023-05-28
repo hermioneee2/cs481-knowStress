@@ -7,7 +7,7 @@ import {
 
 function getTooltipText(category, range, percentile, stressLevel) {
     const usageTimeText = `${category}\n${range}\n`;
-    const percentileText = (percentile|percentile===0)? `(Top ${(percentile)?percentile:1} ~ ${percentile + 10} %)\n　\n` : "　\n";
+    const percentileText = (percentile|percentile===0)? `(Top ${percentile+1} ~ ${percentile + 10} %)\n　\n` : "　\n";
     const stressLevelText = `Average Stress Level\n${stressLevel}`;
   
     return `${usageTimeText}${percentileText}${stressLevelText}`;
