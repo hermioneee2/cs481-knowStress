@@ -14,15 +14,13 @@ function getTooltipText(category, range, percentile, stressLevel) {
 }
 
 const CustomBarChart = ({ category, data, userX, userY }) => {
-    let  isnull, labelText1, labelText2;
+    let labelText1, labelText2;
     labelText1 = "Least Usage";
     labelText2 = "Most Usage";
-    isnull=false;
+    console.log(category, data, userX, userY)
     if (category === "Total App Usage") {
-        userX=3;
     }
     else if (category==="Movement"){
-        userX=1;
         labelText1 = "Least Activity";
         labelText2 = "Most Activity";
     }
@@ -45,18 +43,6 @@ const CustomBarChart = ({ category, data, userX, userY }) => {
         labelText1 = "Least Sleep";
         labelText2 = "Most Sleep";
     }
-    else if (category==="Social Media"){
-        // userX=4;
-    }
-    else if (category==="Game"){
-        // userX=1;
-    }
-    else if (category==="Messenger"){
-        // userX=6;
-    }
-    else if (category==="Video/Contents"){
-        // userX=4;
-    }
     else if (category==="Browser"){
         //not exist yet, fake data
         data=[
@@ -74,14 +60,61 @@ const CustomBarChart = ({ category, data, userX, userY }) => {
         ];
         userX=5;
     }
-    else if (category==="Utility"){
-        // userX=6;
+    else if (category==="Social Media"){}
+    else if (category==="Game"){}
+    else if (category==="Messenger"){}
+    else if (category==="Video/Contents"){}
+    else if (category==="Utility"){}
+
+    else if(category==="Sleep Time"){
+        console.log(category, data)
+        //not exist yet, fake data
+        data=[
+            { x: 'Top\n1%', y: 3.71, range: "0hr 00min ~ 0hr 02min", percent: 0, category: `${category} Usage`},
+            { x: 'Top\n10%', y: 3.04, range: "0hr 02min ~ 0hr 09min", percent: 10, category: `${category} Usage`},
+            { x: 'Top\n20%', y: 2.96, range: "0hr 09min ~ 0hr 26min", percent: 20, category: `${category} Usage`},
+            { x: 'Top\n30%', y: 3.11, range: "0hr 27min ~ 0hr 41min", percent: 30, category: `${category} Usage`},
+            { x: 'Top\n40%', y: 2.76, range: "0hr 43min ~ 1hr 01min", percent: 40, category: `${category} Usage`},
+            { x: 'Top\n50%', y: 2.50, range: "1hr 02min ~ 1hr 28min", percent: 50, category: `${category} Usage`},
+            { x: 'Top\n60%', y: 2.21, range: "1hr 34min ~ 2hr 24min", percent: 60, category: `${category} Usage`},
+            { x: 'Top\n70%', y: 2.46, range: "2hr 24min ~ 3hr 04min", percent: 70, category: `${category} Usage`},
+            { x: 'Top\n80%', y: 2.66, range: "3hr 11min ~ 4hr 19min", percent: 80, category: `${category} Usage`},
+            { x: 'Top\n90%', y: 3.31, range: "5hr 05min ~ 6hr 53min", percent: 90, category: `${category} Usage`},
+            { x: 'Top\n100%',y: 0}
+        ];
+        userX=5;
+    }
+    else if (category==="Age"){
+        console.log('hello')
+        if(!data){
+        data=[
+            { x: "15", y: 0, range: "15 ~ 19", percent:'', category: 'Age'},
+            { x: "20", y: 0, range: "20 ~ 24", percent:'', category: 'Age'},
+            { x: "25", y: 0, range: "25 ~ 29", percent:'', category: 'Age'},
+            { x: "30", y: 0, range: "30 ~ 34", percent:'', category: 'Age'},
+            { x: "35", y: 0, range: "35 ~ 39", percent:'', category: 'Age'},
+            { x: "40", y: 0, range: "40 ~ 44", percent:'', category: 'Age'},
+            { x: "45", y: 0, range: "45 ~ 49", percent:'', category: 'Age'},
+            { x: "50", y: 0, range: "50 ~ 54", percent:'', category: 'Age'},
+        ];}
+        labelText1 = "";
+        labelText2 = "";
     }
     else{
         category="Age";
-        // userX = 2;
         labelText1 = "";
         labelText2 = "";
+        if(!data){
+            data=[
+                { x: "15", y: 0, range: "15 ~ 19", percent:'', category: 'Age'},
+                { x: "20", y: 0, range: "20 ~ 24", percent:'', category: 'Age'},
+                { x: "25", y: 0, range: "25 ~ 29", percent:'', category: 'Age'},
+                { x: "30", y: 0, range: "30 ~ 34", percent:'', category: 'Age'},
+                { x: "35", y: 0, range: "35 ~ 39", percent:'', category: 'Age'},
+                { x: "40", y: 0, range: "40 ~ 44", percent:'', category: 'Age'},
+                { x: "45", y: 0, range: "45 ~ 49", percent:'', category: 'Age'},
+                { x: "50", y: 0, range: "50 ~ 54", percent:'', category: 'Age'},
+            ];}
       }
 
     const CircleTick = (props) =>{
@@ -110,10 +143,10 @@ const CustomBarChart = ({ category, data, userX, userY }) => {
         return <circle cx={props.x1} cy={props.y1} r={'5px'} fill={'transparent'}/>
     }
     const XTick = category === "Age"
-    ? [15, 20, 25, 30, 35, 40, 45, 50]
+    ? [15, 20, 25, 30, 35, 40, 45, 50, 55,]
     : [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
-            
-    return (!isnull)&&(
+    console.log(XTick)
+    return (
       <VictoryChart
         responsive={false}
         width = {500}
