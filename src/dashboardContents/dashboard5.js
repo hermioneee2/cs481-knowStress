@@ -342,7 +342,7 @@ const Dashboard5 = () => {
             <br />
             <br />
             According to histogram, it seems that game playing time is not
-            directly really related with stress level.
+            directly related with stress level.
           </>
         );
       case "Messenger":
@@ -353,7 +353,7 @@ const Dashboard5 = () => {
             <br />
             <br />
             According to histogram, it seems that messenger usage time is not
-            directly really related with stress level.
+            directly related with stress level.
           </>
         );
       case "Video/Contents":
