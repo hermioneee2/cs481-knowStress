@@ -10,8 +10,17 @@ const Dashboard5 = () => {
   const newArray = [];
   const [arrColor, setArrColor] = useState([...newArray]);
   const [activeButton, setActiveButton] = useState("Age");
-  const [data, setData] = useState([]);
-  const [myX, setMyX] = useState(0);
+  const [data, setData] = useState([
+    { x: "15", y: 0, range: "15 ~ 19", percent:'', category: 'Age'},
+    { x: "20", y: 0, range: "20 ~ 24", percent:'', category: 'Age'},
+    { x: "25", y: 0, range: "25 ~ 29", percent:'', category: 'Age'},
+    { x: "30", y: 0, range: "30 ~ 34", percent:'', category: 'Age'},
+    { x: "35", y: 0, range: "35 ~ 39", percent:'', category: 'Age'},
+    { x: "40", y: 0, range: "40 ~ 44", percent:'', category: 'Age'},
+    { x: "45", y: 0, range: "45 ~ 49", percent:'', category: 'Age'},
+    { x: "50", y: 0, range: "50 ~ 54", percent:'', category: 'Age'},
+]);
+  const [myX, setMyX] = useState(3);
   const [myY, setMyY] = useState(3.41);
   const buttonStyle = ({ color, buttonId }) => {
     const isActive = buttonId === activeButton;
@@ -100,6 +109,7 @@ const Dashboard5 = () => {
         fetch(`https://riyuna.pythonanywhere.com/histogram?category=${queryString(activeButton)}`)
         .then((response) => response.json())
         .then((dt) =>{
+            console.log('updateGraph', queryString(activeButton), dt)
             const newData=[
                 { x: 'Top\n1%', y: dt["0%~10%"].stress, range: `${dt["0%~10%"].mintime} ~ ${dt["0%~10%"].maxtime}`, percent: 0, category: `${activeButton}`},
                 { x: 'Top\n10%', y: dt["10%~20%"].stress, range: `${dt["10%~20%"].mintime} ~ ${dt["10%~20%"].maxtime}`, percent: 10, category: `${activeButton}`},
@@ -122,14 +132,15 @@ const Dashboard5 = () => {
         fetch(`https://riyuna.pythonanywhere.com/histogram?category=${queryString(activeButton)}`)
         .then((response) => response.json())
         .then((dt) =>{
+            console.log('updateGraph', queryString(activeButton), dt)
             const newData=[
-                { x: "15", y: dt['15~19'], range: "15 ~ 19", category: `${activeButton}`},
-                { x: "20", y: dt['20~24'], range: "20 ~ 24", category: `${activeButton}`},
-                { x: "25", y: dt['25~29'], range: "25 ~ 29", category: `${activeButton}`},
-                { x: "30", y: dt['30~34'], range: "30 ~ 34", category: `${activeButton}`},
-                { x: "35", y: dt['35~39'], range: "35 ~ 39", category: `${activeButton}`},
-                { x: "40", y: dt['40~44'], range: "40 ~ 44", category: `${activeButton}`},
-                { x: "45", y: dt['45~49'], range: "45 ~ 49", category: `${activeButton}`},
+                { x: "15", y: dt['15~19'], range: "15 ~ 19", percent:'', category: `${activeButton}`},
+                { x: "20", y: dt['20~24'], range: "20 ~ 24", percent:'', category: `${activeButton}`},
+                { x: "25", y: dt['25~29'], range: "25 ~ 29", percent:'', category: `${activeButton}`},
+                { x: "30", y: dt['30~34'], range: "30 ~ 34", percent:'', category: `${activeButton}`},
+                { x: "35", y: dt['35~39'], range: "35 ~ 39", percent:'', category: `${activeButton}`},
+                { x: "40", y: dt['40~44'], range: "40 ~ 44", percent:'', category: `${activeButton}`},
+                { x: "45", y: dt['45~49'], range: "45 ~ 49", percent:'', category: `${activeButton}`},
                 { x: "50", y: 0, range: "50 ~ 54", category: `${activeButton}`},
             ];
             setData(newData);
@@ -269,6 +280,26 @@ const Dashboard5 = () => {
         );
     }
   };
+  useEffect(() => {
+  fetch(`https://riyuna.pythonanywhere.com/histogram?category=age`)
+  .then((response) => response.json())
+  .then(
+    (dt) =>{
+      const newData=[
+          { x: "15", y: dt['15~19'], range: "15 ~ 19", percent:'', category: `${activeButton}`},
+          { x: "20", y: dt['20~24'], range: "20 ~ 24", percent:'', category: `${activeButton}`},
+          { x: "25", y: dt['25~29'], range: "25 ~ 29", percent:'', category: `${activeButton}`},
+          { x: "30", y: dt['30~34'], range: "30 ~ 34", percent:'', category: `${activeButton}`},
+          { x: "35", y: dt['35~39'], range: "35 ~ 39", percent:'', category: `${activeButton}`},
+          { x: "40", y: dt['40~44'], range: "40 ~ 44", percent:'', category: `${activeButton}`},
+          { x: "45", y: dt['45~49'], range: "45 ~ 49", percent:'', category: `${activeButton}`},
+          { x: "50", y: 0, range: "50 ~ 54", percent:'', category: `${activeButton}`},
+      ];
+      setData(newData);
+      setMyX(dt['myX'])
+      setMyY(dt['myY'])
+  });
+}, []);
 
   useEffect(() => {
     const updatedList = [...arrColor];
