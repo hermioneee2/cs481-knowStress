@@ -11,15 +11,15 @@ const Dashboard5 = () => {
   const [arrColor, setArrColor] = useState([...newArray]);
   const [activeButton, setActiveButton] = useState("Age");
   const [data, setData] = useState([
-    { x: "15", y: 0, range: "15 ~ 19", percent:'', category: 'Age'},
-    { x: "20", y: 0, range: "20 ~ 24", percent:'', category: 'Age'},
-    { x: "25", y: 0, range: "25 ~ 29", percent:'', category: 'Age'},
-    { x: "30", y: 0, range: "30 ~ 34", percent:'', category: 'Age'},
-    { x: "35", y: 0, range: "35 ~ 39", percent:'', category: 'Age'},
-    { x: "40", y: 0, range: "40 ~ 44", percent:'', category: 'Age'},
-    { x: "45", y: 0, range: "45 ~ 49", percent:'', category: 'Age'},
-    { x: "50", y: 0, range: "50 ~ 54", percent:'', category: 'Age'},
-]);
+    { x: "15", y: 0, range: "15 ~ 19", percent: "", category: "Age" },
+    { x: "20", y: 0, range: "20 ~ 24", percent: "", category: "Age" },
+    { x: "25", y: 0, range: "25 ~ 29", percent: "", category: "Age" },
+    { x: "30", y: 0, range: "30 ~ 34", percent: "", category: "Age" },
+    { x: "35", y: 0, range: "35 ~ 39", percent: "", category: "Age" },
+    { x: "40", y: 0, range: "40 ~ 44", percent: "", category: "Age" },
+    { x: "45", y: 0, range: "45 ~ 49", percent: "", category: "Age" },
+    { x: "50", y: 0, range: "50 ~ 54", percent: "", category: "Age" },
+  ]);
   const [myX, setMyX] = useState(3);
   const [myY, setMyY] = useState(3.41);
   const buttonStyle = ({ color, buttonId }) => {
@@ -83,82 +83,207 @@ const Dashboard5 = () => {
     };
   };
   const changeColor = (buttonId) => {
-    setActiveButton(buttonId)
+    setActiveButton(buttonId);
   };
 
-
-
   const queryString = (activeButton) => {
-    switch (activeButton){
-        case "Movement":
-            return 'activity'
-        case "Sleep Time":
-        case "Age":
-            return activeButton.toLowerCase();
-        case "Total App Usage":
-            return 'total_app'
-        case "Video/Contents":
-            return "video_contents_app";
-        default:
-            return `${activeButton.toLowerCase()}_app`
+    switch (activeButton) {
+      case "Movement":
+        return "activity";
+      case "Sleep Time":
+      case "Age":
+        return activeButton.toLowerCase();
+      case "Total App Usage":
+        return "total_app";
+      case "Video/Contents":
+        return "video_contents_app";
+      default:
+        return `${activeButton.toLowerCase()}_app`;
     }
-  }
+  };
 
   const updateGraph = (activeButton) => {
-    if(['Social Media', 'Game', 'Messenger', 'Video/Contents', 'Utility', 'Movement', 'Total App Usage'].includes(activeButton)){
-        fetch(`https://riyuna.pythonanywhere.com/histogram?category=${queryString(activeButton)}`)
+    if (
+      [
+        "Social Media",
+        "Game",
+        "Messenger",
+        "Video/Contents",
+        "Utility",
+        "Movement",
+        "Total App Usage",
+      ].includes(activeButton)
+    ) {
+      fetch(
+        `https://riyuna.pythonanywhere.com/histogram?category=${queryString(
+          activeButton
+        )}`
+      )
         .then((response) => response.json())
-        .then((dt) =>{
-            console.log('updateGraph', queryString(activeButton), dt)
-            const newData=[
-                { x: 'Top\n1%', y: dt["0%~10%"].stress, range: `${dt["0%~10%"].mintime} ~ ${dt["0%~10%"].maxtime}`, percent: 0, category: `${activeButton}`},
-                { x: 'Top\n10%', y: dt["10%~20%"].stress, range: `${dt["10%~20%"].mintime} ~ ${dt["10%~20%"].maxtime}`, percent: 10, category: `${activeButton}`},
-                { x: 'Top\n20%', y: dt["20%~30%"].stress, range: `${dt["20%~30%"].mintime} ~ ${dt["20%~30%"].maxtime}`, percent: 20, category: `${activeButton}`},
-                { x: 'Top\n30%', y: dt["30%~40%"].stress, range: `${dt["30%~40%"].mintime} ~ ${dt["30%~40%"].maxtime}`, percent: 30, category: `${activeButton}`},
-                { x: 'Top\n40%', y: dt["40%~50%"].stress, range: `${dt["40%~50%"].mintime} ~ ${dt["40%~50%"].maxtime}`, percent: 40, category: `${activeButton}`},
-                { x: 'Top\n50%', y: dt["50%~60%"].stress, range: `${dt["50%~60%"].mintime} ~ ${dt["50%~60%"].maxtime}`, percent: 50, category: `${activeButton}`},
-                { x: 'Top\n60%', y: dt["60%~70%"].stress, range: `${dt["60%~70%"].mintime} ~ ${dt["60%~70%"].maxtime}`, percent: 60, category: `${activeButton}`},
-                { x: 'Top\n70%', y: dt["70%~80%"].stress, range: `${dt["70%~80%"].mintime} ~ ${dt["70%~80%"].maxtime}`, percent: 70, category: `${activeButton}`},
-                { x: 'Top\n80%', y: dt["80%~90%"].stress, range: `${dt["80%~90%"].mintime} ~ ${dt["80%~90%"].maxtime}`, percent: 80, category: `${activeButton}`},
-                { x: 'Top\n90%', y: dt["90%~100%"].stress, range: `${dt["90%~100%"].mintime} ~ ${dt["90%~100%"].maxtime}`, percent: 90, category: `${activeButton}`},
-                { x: 'Top\n100%',y: 0}
-            ];
-            setData(newData);
-            setMyX(dt['myX'])
-            setMyY(dt['myY'])
+        .then((dt) => {
+          console.log("updateGraph", queryString(activeButton), dt);
+          const newData = [
+            {
+              x: "Top\n1%",
+              y: dt["0%~10%"].stress,
+              range: `${dt["0%~10%"].mintime} ~ ${dt["0%~10%"].maxtime}`,
+              percent: 0,
+              category: `${activeButton}`,
+            },
+            {
+              x: "Top\n10%",
+              y: dt["10%~20%"].stress,
+              range: `${dt["10%~20%"].mintime} ~ ${dt["10%~20%"].maxtime}`,
+              percent: 10,
+              category: `${activeButton}`,
+            },
+            {
+              x: "Top\n20%",
+              y: dt["20%~30%"].stress,
+              range: `${dt["20%~30%"].mintime} ~ ${dt["20%~30%"].maxtime}`,
+              percent: 20,
+              category: `${activeButton}`,
+            },
+            {
+              x: "Top\n30%",
+              y: dt["30%~40%"].stress,
+              range: `${dt["30%~40%"].mintime} ~ ${dt["30%~40%"].maxtime}`,
+              percent: 30,
+              category: `${activeButton}`,
+            },
+            {
+              x: "Top\n40%",
+              y: dt["40%~50%"].stress,
+              range: `${dt["40%~50%"].mintime} ~ ${dt["40%~50%"].maxtime}`,
+              percent: 40,
+              category: `${activeButton}`,
+            },
+            {
+              x: "Top\n50%",
+              y: dt["50%~60%"].stress,
+              range: `${dt["50%~60%"].mintime} ~ ${dt["50%~60%"].maxtime}`,
+              percent: 50,
+              category: `${activeButton}`,
+            },
+            {
+              x: "Top\n60%",
+              y: dt["60%~70%"].stress,
+              range: `${dt["60%~70%"].mintime} ~ ${dt["60%~70%"].maxtime}`,
+              percent: 60,
+              category: `${activeButton}`,
+            },
+            {
+              x: "Top\n70%",
+              y: dt["70%~80%"].stress,
+              range: `${dt["70%~80%"].mintime} ~ ${dt["70%~80%"].maxtime}`,
+              percent: 70,
+              category: `${activeButton}`,
+            },
+            {
+              x: "Top\n80%",
+              y: dt["80%~90%"].stress,
+              range: `${dt["80%~90%"].mintime} ~ ${dt["80%~90%"].maxtime}`,
+              percent: 80,
+              category: `${activeButton}`,
+            },
+            {
+              x: "Top\n90%",
+              y: dt["90%~100%"].stress,
+              range: `${dt["90%~100%"].mintime} ~ ${dt["90%~100%"].maxtime}`,
+              percent: 90,
+              category: `${activeButton}`,
+            },
+            { x: "Top\n100%", y: 0 },
+          ];
+          setData(newData);
+          setMyX(dt["myX"]);
+          setMyY(dt["myY"]);
         });
-    }
-    else if(activeButton === 'Age'){
-        fetch(`https://riyuna.pythonanywhere.com/histogram?category=${queryString(activeButton)}`)
+    } else if (activeButton === "Age") {
+      fetch(
+        `https://riyuna.pythonanywhere.com/histogram?category=${queryString(
+          activeButton
+        )}`
+      )
         .then((response) => response.json())
-        .then((dt) =>{
-            console.log('updateGraph', queryString(activeButton), dt)
-            const newData=[
-                { x: "15", y: dt['15~19'], range: "15 ~ 19", percent:'', category: `${activeButton}`},
-                { x: "20", y: dt['20~24'], range: "20 ~ 24", percent:'', category: `${activeButton}`},
-                { x: "25", y: dt['25~29'], range: "25 ~ 29", percent:'', category: `${activeButton}`},
-                { x: "30", y: dt['30~34'], range: "30 ~ 34", percent:'', category: `${activeButton}`},
-                { x: "35", y: dt['35~39'], range: "35 ~ 39", percent:'', category: `${activeButton}`},
-                { x: "40", y: dt['40~44'], range: "40 ~ 44", percent:'', category: `${activeButton}`},
-                { x: "45", y: dt['45~49'], range: "45 ~ 49", percent:'', category: `${activeButton}`},
-                { x: "50", y: 0, range: "50 ~ 54", category: `${activeButton}`},
-            ];
-            setData(newData);
-            setMyX(dt['myX'])
-            setMyY(dt['myY'])
+        .then((dt) => {
+          console.log("updateGraph", queryString(activeButton), dt);
+          const newData = [
+            {
+              x: "15",
+              y: dt["15~19"],
+              range: "15 ~ 19",
+              percent: "",
+              category: `${activeButton}`,
+            },
+            {
+              x: "20",
+              y: dt["20~24"],
+              range: "20 ~ 24",
+              percent: "",
+              category: `${activeButton}`,
+            },
+            {
+              x: "25",
+              y: dt["25~29"],
+              range: "25 ~ 29",
+              percent: "",
+              category: `${activeButton}`,
+            },
+            {
+              x: "30",
+              y: dt["30~34"],
+              range: "30 ~ 34",
+              percent: "",
+              category: `${activeButton}`,
+            },
+            {
+              x: "35",
+              y: dt["35~39"],
+              range: "35 ~ 39",
+              percent: "",
+              category: `${activeButton}`,
+            },
+            {
+              x: "40",
+              y: dt["40~44"],
+              range: "40 ~ 44",
+              percent: "",
+              category: `${activeButton}`,
+            },
+            {
+              x: "45",
+              y: dt["45~49"],
+              range: "45 ~ 49",
+              percent: "",
+              category: `${activeButton}`,
+            },
+            { x: "50", y: 0, range: "50 ~ 54", category: `${activeButton}` },
+          ];
+          setData(newData);
+          setMyX(dt["myX"]);
+          setMyY(dt["myY"]);
         });
+    } else {
+      setData([]);
     }
-    else{setData([])}
-}
-    useEffect(() => {
-        updateGraph(activeButton);
-    }, [activeButton]);
-
+  };
+  useEffect(() => {
+    updateGraph(activeButton);
+  }, [activeButton]);
 
   const HistogramExplanation = activeButton ? (
-    <>Relationship between Stress Level and {activeButton}</>
+    <>
+      <span style={{ fontWeight: 400 }}>
+        Relationship between Stress Level and {activeButton}
+      </span>
+    </>
   ) : (
-    <>Relationship between Stress Level and Age</>
+    <>
+      <span style={{ fontWeight: 400 }}>
+        Relationship between Stress Level and Age
+      </span>
+    </>
   );
   const BarChartExplanationString = () => {
     switch (activeButton) {
@@ -169,8 +294,8 @@ const Dashboard5 = () => {
             the movement time.
             <br />
             <br />
-            According to histogram, it seems: movement is not really related
-            with stress level.
+            According to histogram, it seems that movement is not directly
+            related with stress level.
           </>
         );
       case "Sleep Time":
@@ -180,11 +305,22 @@ const Dashboard5 = () => {
             the sleep time.
             <br />
             <br />
-            According to histogram, it seems:{" "}
-            <b>
+            According to histogram, it seems that{" "}
+            <span style={{ fontWeight: 600 }}>
               too less or much sleeping is related with higher stress level.
-            </b>{" "}
-            Would you try proper sleep regularly?
+            </span>{" "}
+            Would you consider aiming for a sufficient amount of sleep?{" "}
+          </>
+        );
+      case "Total App Usage":
+        return (
+          <>
+            This histogram shows average stress level distribution according to
+            the usage time of all the apps in total.
+            <br />
+            <br />
+            According to histogram, it seems that total app usage time is not
+            directly related with stress level.
           </>
         );
       case "Social Media":
@@ -194,8 +330,8 @@ const Dashboard5 = () => {
             the usage time of social media apps.
             <br />
             <br />
-            According to histogram, it seems: social media usage time is not
-            really related with stress level.
+            According to histogram, it seems that social media usage time is not
+            directly related with stress level.
           </>
         );
       case "Game":
@@ -205,11 +341,8 @@ const Dashboard5 = () => {
             the game apps.
             <br />
             <br />
-            According to histogram, it seems:{" "}
-            <b>
-              the higher the game playing time, the higher the stress level.
-            </b>{" "}
-            Would you try reducing the gaming time?
+            According to histogram, it seems that game playing time is not
+            directly really related with stress level.
           </>
         );
       case "Messenger":
@@ -219,22 +352,22 @@ const Dashboard5 = () => {
             the messenger apps.
             <br />
             <br />
-            According to histogram, it seems: messenger usage time is not really
-            related with stress level.
+            According to histogram, it seems that messenger usage time is not
+            directly really related with stress level.
           </>
         );
       case "Video/Contents":
         return (
           <>
             This histogram shows average stress level distribution according to
-            the video/contents apps.
+            the apps related to video or contents.
             <br />
             <br />
-            According to histogram, it seems:{" "}
-            <b>
+            According to histogram, it seems that{" "}
+            <span style={{ fontWeight: 600 }}>
               the lower the video/contents using time, the higher the stress
               level.
-            </b>{" "}
+            </span>{" "}
             Would you try using some video/contents apps to reduce your stress?
           </>
         );
@@ -245,11 +378,11 @@ const Dashboard5 = () => {
             the browser apps.
             <br />
             <br />
-            According to histogram, it seems:{" "}
-            <b>
+            According to histogram, it seems that{" "}
+            <span style={{ fontWeight: 600 }}>
               too less or much browser using is related with higher stress
               level.
-            </b>{" "}
+            </span>{" "}
             Would you try to use web browsers properly?
           </>
         );
@@ -257,13 +390,13 @@ const Dashboard5 = () => {
         return (
           <>
             This histogram shows average stress level distribution according to
-            the browser apps.
+            the utility apps.
             <br />
             <br />
-            According to histogram, it seems:{" "}
-            <b>
-              the higher the utility using time, the higher the stress level.
-            </b>{" "}
+            According to histogram, it seems that{" "}
+            <span style={{ fontWeight: 600 }}>
+              low utility using time is related to low stress level.
+            </span>{" "}
             Would you try reducing the utility app using time?
           </>
         );
@@ -274,32 +407,81 @@ const Dashboard5 = () => {
             the age.
             <br />
             <br />
-            According to histogram, it seems:{" "}
-            <b>the higher the age, the higher the stress level.</b>
+            According to histogram, it seems that{" "}
+            <span style={{ fontWeight: 600 }}>
+              the higher the age, the higher the stress level.
+            </span>{" "}
           </>
         );
     }
   };
   useEffect(() => {
-  fetch(`https://riyuna.pythonanywhere.com/histogram?category=age`)
-  .then((response) => response.json())
-  .then(
-    (dt) =>{
-      const newData=[
-          { x: "15", y: dt['15~19'], range: "15 ~ 19", percent:'', category: `${activeButton}`},
-          { x: "20", y: dt['20~24'], range: "20 ~ 24", percent:'', category: `${activeButton}`},
-          { x: "25", y: dt['25~29'], range: "25 ~ 29", percent:'', category: `${activeButton}`},
-          { x: "30", y: dt['30~34'], range: "30 ~ 34", percent:'', category: `${activeButton}`},
-          { x: "35", y: dt['35~39'], range: "35 ~ 39", percent:'', category: `${activeButton}`},
-          { x: "40", y: dt['40~44'], range: "40 ~ 44", percent:'', category: `${activeButton}`},
-          { x: "45", y: dt['45~49'], range: "45 ~ 49", percent:'', category: `${activeButton}`},
-          { x: "50", y: 0, range: "50 ~ 54", percent:'', category: `${activeButton}`},
-      ];
-      setData(newData);
-      setMyX(dt['myX'])
-      setMyY(dt['myY'])
-  });
-}, []);
+    fetch(`https://riyuna.pythonanywhere.com/histogram?category=age`)
+      .then((response) => response.json())
+      .then((dt) => {
+        const newData = [
+          {
+            x: "15",
+            y: dt["15~19"],
+            range: "15 ~ 19",
+            percent: "",
+            category: `${activeButton}`,
+          },
+          {
+            x: "20",
+            y: dt["20~24"],
+            range: "20 ~ 24",
+            percent: "",
+            category: `${activeButton}`,
+          },
+          {
+            x: "25",
+            y: dt["25~29"],
+            range: "25 ~ 29",
+            percent: "",
+            category: `${activeButton}`,
+          },
+          {
+            x: "30",
+            y: dt["30~34"],
+            range: "30 ~ 34",
+            percent: "",
+            category: `${activeButton}`,
+          },
+          {
+            x: "35",
+            y: dt["35~39"],
+            range: "35 ~ 39",
+            percent: "",
+            category: `${activeButton}`,
+          },
+          {
+            x: "40",
+            y: dt["40~44"],
+            range: "40 ~ 44",
+            percent: "",
+            category: `${activeButton}`,
+          },
+          {
+            x: "45",
+            y: dt["45~49"],
+            range: "45 ~ 49",
+            percent: "",
+            category: `${activeButton}`,
+          },
+          {
+            x: "50",
+            y: 0,
+            range: "50 ~ 54",
+            percent: "",
+            category: `${activeButton}`,
+          },
+        ];
+        setData(newData);
+        setMyX(dt["myX"]);
+        setMyY(dt["myY"]);
+      });
+  }, []);
 
   useEffect(() => {
     const updatedList = [...arrColor];
@@ -466,18 +648,24 @@ const Dashboard5 = () => {
         </StepWrapper>
         <p
           style={{
-            margin: "10 0",
+            // margin: "10 0",
             fontFamily: "Open Sans",
             fontSize: "15px",
             fontWeight: 300,
-
+            marginTop: "30px",
+            marginBottom: "-30px",
             color: theme.colors.grayKS,
           }}
         >
           {HistogramExplanation}
         </p>
         <div style={{ height: "400px", width: "400px" }}>
-          <CustomBarChart category={activeButton} data={data} userX={myX} userY={myY} />
+          <CustomBarChart
+            category={activeButton}
+            data={data}
+            userX={myX}
+            userY={myY}
+          />
         </div>
         <div style={{ marginBottom: "0px" }}></div>
         <BarChartExplanation>
