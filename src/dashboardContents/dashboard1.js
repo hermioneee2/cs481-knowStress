@@ -64,7 +64,7 @@ const Dashboard1 = () => {
       {v.map((value, j) => (
         <div style={{display: 'block'}} key={j}>
           {value === -1 ? 
-          <DisabledByDefaultIcon fontSize={'inherit'}  sx={{color: alpha('#CDCDCD', 0.7), margin:-0.3,marginTop:-0.7, fontSize:'30px'}}/> 
+          <DisabledByDefaultIcon fontSize={'inherit'}  sx={{color: alpha('#CDCDCD', 0.5), margin:-0.3,marginTop:-0.7, fontSize:'30px'}}/> 
           : 
           <div>
              <Tooltip title={value.toFixed(1)}>
