@@ -330,8 +330,11 @@ const Dashboard5 = () => {
             the usage time of social media apps.
             <br />
             <br />
-            According to histogram, it seems that "an adequate amount of social
-            media usage is related to a lower stress level."
+            According to histogram, it seems that{" "}
+            <span style={{ fontWeight: 600 }}>
+              an adequate amount of social media usage is related to a lower
+              stress level.
+            </span>
           </>
         );
       case "Game":
