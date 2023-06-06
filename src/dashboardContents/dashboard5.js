@@ -124,67 +124,67 @@ const Dashboard5 = () => {
           console.log("updateGraph", queryString(activeButton), dt);
           const newData = [
             {
-                x: "Top\n100%",
-                y: dt["90%~100%"].stress,
-                range: `${dt["90%~100%"].mintime} ~ ${dt["90%~100%"].maxtime}`,
-                percent: 90,
-                category: `${activeButton}`,
+              x: "Top\n100%",
+              y: dt["90%~100%"].stress,
+              range: `${dt["90%~100%"].mintime} ~ ${dt["90%~100%"].maxtime}`,
+              percent: 90,
+              category: `${activeButton}`,
             },
             {
-                x: "Top\n90%",
-                y: dt["80%~90%"].stress,
-                range: `${dt["80%~90%"].mintime} ~ ${dt["80%~90%"].maxtime}`,
-                percent: 80,
-                category: `${activeButton}`,
+              x: "Top\n90%",
+              y: dt["80%~90%"].stress,
+              range: `${dt["80%~90%"].mintime} ~ ${dt["80%~90%"].maxtime}`,
+              percent: 80,
+              category: `${activeButton}`,
             },
             {
-                x: "Top\n80%",
-                y: dt["70%~80%"].stress,
-                range: `${dt["70%~80%"].mintime} ~ ${dt["70%~80%"].maxtime}`,
-                percent: 70,
-                category: `${activeButton}`,
+              x: "Top\n80%",
+              y: dt["70%~80%"].stress,
+              range: `${dt["70%~80%"].mintime} ~ ${dt["70%~80%"].maxtime}`,
+              percent: 70,
+              category: `${activeButton}`,
             },
             {
-                x: "Top\n70%",
-                y: dt["60%~70%"].stress,
-                range: `${dt["60%~70%"].mintime} ~ ${dt["60%~70%"].maxtime}`,
-                percent: 60,
-                category: `${activeButton}`,
+              x: "Top\n70%",
+              y: dt["60%~70%"].stress,
+              range: `${dt["60%~70%"].mintime} ~ ${dt["60%~70%"].maxtime}`,
+              percent: 60,
+              category: `${activeButton}`,
             },
             {
-                x: "Top\n60%",
-                y: dt["50%~60%"].stress,
-                range: `${dt["50%~60%"].mintime} ~ ${dt["50%~60%"].maxtime}`,
-                percent: 50,
-                category: `${activeButton}`,
+              x: "Top\n60%",
+              y: dt["50%~60%"].stress,
+              range: `${dt["50%~60%"].mintime} ~ ${dt["50%~60%"].maxtime}`,
+              percent: 50,
+              category: `${activeButton}`,
             },
             {
-                x: "Top\n50%",
-                y: dt["40%~50%"].stress,
-                range: `${dt["40%~50%"].mintime} ~ ${dt["40%~50%"].maxtime}`,
-                percent: 40,
-                category: `${activeButton}`,
+              x: "Top\n50%",
+              y: dt["40%~50%"].stress,
+              range: `${dt["40%~50%"].mintime} ~ ${dt["40%~50%"].maxtime}`,
+              percent: 40,
+              category: `${activeButton}`,
             },
             {
-                x: "Top\n40%",
-                y: dt["30%~40%"].stress,
-                range: `${dt["30%~40%"].mintime} ~ ${dt["30%~40%"].maxtime}`,
-                percent: 30,
-                category: `${activeButton}`,
+              x: "Top\n40%",
+              y: dt["30%~40%"].stress,
+              range: `${dt["30%~40%"].mintime} ~ ${dt["30%~40%"].maxtime}`,
+              percent: 30,
+              category: `${activeButton}`,
             },
             {
-                x: "Top\n30%",
-                y: dt["20%~30%"].stress,
-                range: `${dt["20%~30%"].mintime} ~ ${dt["20%~30%"].maxtime}`,
-                percent: 20,
-                category: `${activeButton}`,
+              x: "Top\n30%",
+              y: dt["20%~30%"].stress,
+              range: `${dt["20%~30%"].mintime} ~ ${dt["20%~30%"].maxtime}`,
+              percent: 20,
+              category: `${activeButton}`,
             },
             {
-                x: "Top\n20%",
-                y: dt["10%~20%"].stress,
-                range: `${dt["10%~20%"].mintime} ~ ${dt["10%~20%"].maxtime}`,
-                percent: 10,
-                category: `${activeButton}`,
+              x: "Top\n20%",
+              y: dt["10%~20%"].stress,
+              range: `${dt["10%~20%"].mintime} ~ ${dt["10%~20%"].maxtime}`,
+              percent: 10,
+              category: `${activeButton}`,
             },
             {
               x: "Top\n10%",
@@ -330,8 +330,8 @@ const Dashboard5 = () => {
             the usage time of social media apps.
             <br />
             <br />
-            According to histogram, it seems that social media usage time is not
-            directly related with stress level.
+            According to histogram, it seems that "an adequate amount of social
+            media usage is related to a lower stress level."
           </>
         );
       case "Game":
